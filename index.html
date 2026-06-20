@@ -66,16 +66,6 @@ section{padding:80px 24px}
 .rp-right{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
 .rp-badge{background:rgba(244,196,48,0.1);border:1px solid rgba(244,196,48,0.25);border-radius:8px;padding:10px 18px;font-size:12px;color:var(--gold);font-weight:600;text-align:center}
 .rp-badge strong{display:block;font-size:20px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px}
-.news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.news-embed{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden;grid-column:1/-1}
-.news-embed-header{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:2px;display:flex;align-items:center;gap:8px}
-.rss-item{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:flex-start;gap:14px}
-.rss-item:last-child{border-bottom:none}
-.rss-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:6px}
-.rss-text{font-size:13px;color:#ccc;line-height:1.5}
-.rss-text a{color:#fff;font-weight:600;text-decoration:none}
-.rss-text a:hover{color:var(--blue)}
-.rss-source{font-size:10px;color:#555;margin-top:3px}
 .social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
 .social-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:28px;transition:border-color .25s}
 .social-card:hover{border-color:rgba(255,255,255,0.15)}
@@ -131,7 +121,6 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
     <li><a href="#rankings">Rankings</a></li>
-    <li><a href="#news">News</a></li>
     <li><a href="#watch">Social</a></li>
   </ul>
   <a href="rankings.html" class="nav-cta">View Rankings</a>
@@ -200,20 +189,6 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   </div>
 </section>
 <div class="divider"></div>
-<section id="news">
-  <div class="section-inner">
-    <div class="section-tag">Fantasy News Feed</div>
-    <h2 class="section-title">STAY AHEAD OF<br>THE LEAGUE</h2>
-    <p class="section-desc">The latest fantasy football news from top sources. Never get blindsided by injuries or lineup changes.</p>
-    <div class="news-grid">
-      <div class="news-embed">
-        <div class="news-embed-header">&#x1F4E1; Live Feed</div>
-        <div id="rss-feed"><div class="rss-item"><div class="rss-dot"></div><div class="rss-text">Loading latest news&hellip;</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="divider"></div>
 <section id="watch">
   <div class="section-inner">
     <div class="section-tag">Watch &amp; Follow</div>
@@ -274,7 +249,6 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
     <nav class="footer-links">
       <a href="#features">Features</a>
       <a href="rankings.html">Rankings</a>
-      <a href="#news">News</a>
       <a href="https://x.com/fantasymaxxing" target="_blank">X</a>
       <a href="https://www.tiktok.com/@fantasymaxxing" target="_blank">TikTok</a>
       <a href="https://www.youtube.com/@FantasyMaxxing" target="_blank">YouTube</a>
@@ -283,35 +257,5 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   </div>
 </footer>
 <script async src="https://www.tiktok.com/embed.js"></script>
-<script>
-async function loadNews(){
-  const container=document.getElementById('rss-feed');
-  let items=[];
-  const feeds=[
-    {url:'https://www.rotoballer.com/feed',label:'RotoBaller'},
-    {url:'https://www.fantasypros.com/nfl/news/feed/',label:'FantasyPros'},
-    {url:'https://rotoworld.com/feed',label:'Rotoworld'}
-  ];
-  for(const feed of feeds){
-    try{
-      const r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed.url));
-      const d=await r.json();
-      if(d.items) items.push(...d.items.slice(0,3).map(i=>({...i,_source:feed.label})));
-    }catch(e){}
-  }
-  if(items.length===0){
-    container.innerHTML='<div class="rss-item"><div class="rss-dot" style="background:#e63946"></div><div class="rss-text">Could not load feed. Check back soon.</div></div>';
-    return;
-  }
-  items.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
-  container.innerHTML=items.slice(0,8).map(item=>{
-    const ago=Math.round((Date.now()-new Date(item.pubDate))/60000);
-    const time=ago<60?ago+'m ago':Math.round(ago/60)+'h ago';
-    const title=item.title.replace(/</g,'&lt;').replace(/>/g,'&gt;').substring(0,100);
-    return '<div class="rss-item"><div class="rss-dot"></div><div class="rss-text"><a href="'+item.link+'" target="_blank" rel="noopener">'+title+'</a><div class="rss-source">'+item._source+' &bull; '+time+'</div></div></div>';
-  }).join('');
-}
-loadNews();
-</script>
 </body>
 </html>
