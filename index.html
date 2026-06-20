@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FantasyMaxxing ÃÂ¢ÃÂÃÂ Your Fantasy Football Edge</title>
+<title>FantasyMaxxing &mdash; Your Fantasy Football Edge</title>
+<link rel="icon" type="image/png" href="/favicon.png"/>
+<link rel="apple-touch-icon" href="/favicon.png"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -65,15 +67,6 @@ section{padding:80px 24px}
 .rp-badge{background:rgba(244,196,48,0.1);border:1px solid rgba(244,196,48,0.25);border-radius:8px;padding:10px 18px;font-size:12px;color:var(--gold);font-weight:600;text-align:center}
 .rp-badge strong{display:block;font-size:20px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px}
 .news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.news-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px;transition:all .2s}
-.news-card:hover{background:rgba(255,255,255,0.05);border-color:rgba(29,161,242,0.15);transform:translateY(-2px)}
-.news-source{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--blue);margin-bottom:10px}
-.news-headline{font-weight:700;font-size:15px;line-height:1.4;margin-bottom:8px}
-.news-snippet{font-size:12px;color:var(--gray);line-height:1.55}
-.news-meta{margin-top:14px;display:flex;align-items:center;justify-content:space-between}
-.news-time{font-size:11px;color:#555}
-.news-link{font-size:12px;color:var(--blue);font-weight:600;text-decoration:none}
-.news-link:hover{text-decoration:underline}
 .news-embed{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden;grid-column:1/-1}
 .news-embed-header{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:2px;display:flex;align-items:center;gap:8px}
 .rss-item{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:flex-start;gap:14px}
@@ -83,12 +76,32 @@ section{padding:80px 24px}
 .rss-text a{color:#fff;font-weight:600;text-decoration:none}
 .rss-text a:hover{color:var(--blue)}
 .rss-source{font-size:10px;color:#555;margin-top:3px}
-.twitter-section{background:rgba(29,161,242,0.03);border:1px solid rgba(29,161,242,0.1);border-radius:20px;padding:40px;text-align:center}
-.twitter-section h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;margin-bottom:8px}
-.twitter-section p{color:var(--gray);font-size:14px;margin-bottom:28px}
-.twitter-handle{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:700;font-size:18px;text-decoration:none;padding:10px 22px;border:1px solid rgba(29,161,242,0.3);border-radius:50px;transition:all .2s}
-.twitter-handle:hover{background:rgba(29,161,242,0.08)}
-.tweet-embed-wrap{max-width:550px;margin:28px auto 0;text-align:left}
+.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.social-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:28px;transition:border-color .25s}
+.social-card:hover{border-color:rgba(255,255,255,0.15)}
+.yt-card{border-top:2px solid #ff0000}
+.tt-card{border-top:2px solid #69c9d0}
+.x-card{border-top:2px solid #1da1f2}
+.social-card-header{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.social-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.social-icon.yt{background:rgba(255,0,0,0.12);color:#ff4444}
+.social-icon.tt{background:rgba(105,201,208,0.12);color:#69c9d0}
+.social-icon.xsocial{background:rgba(29,161,242,0.12);color:#1da1f2}
+.social-name{font-weight:700;font-size:15px;line-height:1.2}
+.social-handle{font-size:12px;color:var(--gray)}
+.social-follow-btn{margin-left:auto;padding:7px 16px;border-radius:50px;font-size:12px;font-weight:700;text-decoration:none;transition:opacity .2s}
+.social-follow-btn:hover{opacity:.85}
+.yt-btn{background:#ff0000;color:#fff}
+.tt-btn{background:#69c9d0;color:#000}
+.x-btn{background:#1da1f2;color:#fff}
+.yt-coming{text-align:center;padding:24px 16px;background:rgba(255,0,0,0.04);border-radius:12px}
+.yt-coming-icon{font-size:40px;margin-bottom:12px}
+.yt-coming-text{font-weight:700;font-size:16px;margin-bottom:8px}
+.yt-coming-sub{font-size:13px;color:var(--gray);line-height:1.6;max-width:320px;margin:0 auto 16px}
+.tt-embed-wrap{margin-bottom:12px}
+.tt-embed-wrap .tiktok-embed{border-radius:12px;overflow:hidden}
+.social-more-link{font-size:13px;color:var(--blue);font-weight:600;text-decoration:none;display:inline-block;margin-top:8px}
+.social-more-link:hover{text-decoration:underline}
 .cta-banner{background:linear-gradient(135deg,var(--blue2),#0a5a8a);border-radius:20px;padding:52px 48px;text-align:center}
 .cta-banner h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,52px);letter-spacing:1px;margin-bottom:12px}
 .cta-banner p{color:rgba(255,255,255,0.75);font-size:15px;max-width:440px;margin:0 auto 32px;line-height:1.6}
@@ -110,88 +123,61 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
 .footer-inner{flex-direction:column;text-align:center}
 .footer-links{justify-content:center}
 }
-
-.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
-.social-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:28px;transition:border-color .25s}
-.social-card:hover{border-color:rgba(255,255,255,0.15)}
-.yt-card{border-top:2px solid #ff0000}
-.tt-card{border-top:2px solid #69c9d0}
-.x-card{border-top:2px solid #1da1f2}
-.social-card-header{display:flex;align-items:center;gap:12px;margin-bottom:22px}
-.social-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.social-icon.yt{background:rgba(255,0,0,0.12);color:#ff4444}
-.social-icon.tt{background:rgba(105,201,208,0.12);color:#69c9d0}
-.social-icon.xsocial{background:rgba(29,161,242,0.12);color:#1da1f2}
-.social-name{font-weight:700;font-size:15px;line-height:1.2}
-.social-handle{font-size:12px;color:var(--gray)}
-.social-follow-btn{margin-left:auto;padding:7px 16px;border-radius:50px;font-size:12px;font-weight:700;text-decoration:none;transition:opacity .2s;white-space:nowrap}
-.social-follow-btn:hover{opacity:.85}
-.yt-btn{background:#ff0000;color:#fff}
-.tt-btn{background:#69c9d0;color:#000}
-.x-btn{background:#1da1f2;color:#fff}
-.yt-coming{text-align:center;padding:24px 16px;background:rgba(255,0,0,0.04);border-radius:14px;border:1px solid rgba(255,0,0,0.1)}
-.yt-coming-icon{font-size:40px;margin-bottom:12px}
-.yt-coming-text{font-weight:700;font-size:16px;margin-bottom:8px}
-.yt-coming-sub{font-size:13px;color:var(--gray);line-height:1.6;max-width:320px;margin:0 auto}
-.tt-embed-wrap{margin-bottom:12px}
-.tt-embed-wrap .tiktok-embed{border-radius:12px;overflow:hidden}
-.social-more-link{font-size:13px;color:var(--blue);font-weight:600;text-decoration:none;display:inline-block;margin-top:8px}
-.social-more-link:hover{text-decoration:underline}
 </style>
-
-<link rel="icon" type="image/png" href="/favicon.png"/>
-<link rel="apple-touch-icon" href="/favicon.png"/>
 </head>
 <body>
 <nav>
   <a href="/" class="nav-logo">FANTASY<span>MAXXING</span></a>
   <ul class="nav-links">
-    <li><a href="#features">Why Us</a></li>
+    <li><a href="#features">Features</a></li>
     <li><a href="#rankings">Rankings</a></li>
     <li><a href="#news">News</a></li>
-    <li><a href="#watch">Watch</a></li>
-    <li><a href="#community">Community</a></li>
+    <li><a href="#watch">Social</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:14px">
-    <a href="https://www.youtube.com/@FantasyMaxxing" target="_blank" title="YouTube" style="color:#ff4444;display:flex;opacity:.75;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.75"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-    <a href="https://www.tiktok.com/@fantasymaxxing" target="_blank" title="TikTok" style="color:#69c9d0;display:flex;opacity:.75;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.75"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg></a>
-    <a href="https://x.com/fantasymaxxing" target="_blank" title="X" style="color:#1da1f2;display:flex;opacity:.75;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.75"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.245 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-    <a href="rankings.html" class="nav-cta">Rankings</a>
-  </div>
+  <a href="rankings.html" class="nav-cta">View Rankings</a>
 </nav>
-<div class="hero">
+<section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-badge">ÃÂ°ÃÂÃÂÃÂ Your Fantasy Football Edge</div>
+    <div class="hero-badge">Your Fantasy Football Edge</div>
     <h1 class="hero-title">FANTASY<span>MAXXING</span></h1>
     <div class="hero-sub">WE DON'T GUESS. WE MAXX.</div>
-    <p class="hero-desc">Draft advice, waiver pickups &amp; trade tips to keep you ahead of your league. <strong>We break down the game so you don't have to.</strong></p>
+    <p class="hero-desc">Draft advice, waiver pickups &amp; trade tips to keep you ahead of the competition every week of the NFL season.</p>
     <div class="hero-btns">
-      <a href="rankings.html" class="btn-primary">ÃÂ°ÃÂÃÂÃÂ 2026 PPR Rankings</a>
-      <a href="#features" class="btn-secondary">Learn More ÃÂ¢ÃÂÃÂ</a>
+      <a href="rankings.html" class="btn-primary">&#x1F3C6; 2026 PPR Rankings</a>
+      <a href="#features" class="btn-secondary">Learn More &#x2193;</a>
     </div>
     <div class="hero-stats">
-      <div><div class="hero-stat-num">200</div><div class="hero-stat-lbl">Players Ranked</div></div>
+      <div><div class="hero-stat-num">200+</div><div class="hero-stat-lbl">Players Ranked</div></div>
       <div><div class="hero-stat-num">PPR</div><div class="hero-stat-lbl">Scoring Format</div></div>
       <div><div class="hero-stat-num">2026</div><div class="hero-stat-lbl">Season Ready</div></div>
       <div><div class="hero-stat-num">FREE</div><div class="hero-stat-lbl">Always Free</div></div>
     </div>
   </div>
-</div>
+</section>
 <div class="divider"></div>
 <section id="features">
   <div class="section-inner">
     <div class="section-tag">Why FantasyMaxxing</div>
     <h2 class="section-title">TURNING CASUAL MANAGERS<br>INTO LEAGUE WINNERS</h2>
-    <p class="section-desc">Data-driven insights without the noise. Everything you need to dominate your league ÃÂ¢ÃÂÃÂ in one place.</p>
+    <p class="section-desc">Data-driven insights without the noise. Everything you need to dominate your league.</p>
     <div class="features">
-      <div class="feat-card blue"><div class="feat-icon blue">ÃÂ°ÃÂÃÂÃÂ</div><div class="feat-title">Top-200 PPR Rankings</div><div class="feat-desc">Sortable, filterable rankings for every position. Searchable by player or team, updated for the 2026 season.</div></div>
-      <div class="feat-card red"><div class="feat-icon red">ÃÂ°ÃÂÃÂÃÂ¯</div><div class="feat-title">Draft Strategy</div><div class="feat-desc">Know who to target, who to fade, and when to strike. Get your draft edge before your opponents even show up.</div></div>
-      <div class="feat-card gold"><div class="feat-icon gold">ÃÂ°ÃÂÃÂÃÂ¡</div><div class="feat-title">Waiver Wire Targets</div><div class="feat-desc">Weekly pickups, streaming plays, and hot-hand alerts. Never miss a free-agent move that wins your week.</div></div>
-      <div class="feat-card blue"><div class="feat-icon blue">ÃÂ°ÃÂÃÂÃÂ</div><div class="feat-title">Trade Analyzer</div><div class="feat-desc">Break down trades by value, need, and schedule. Make moves that build champions ÃÂ¢ÃÂÃÂ not just fill rosters.</div></div>
-      <div class="feat-card red"><div class="feat-icon red">ÃÂ°ÃÂÃÂÃÂ</div><div class="feat-title">Matchup Analysis</div><div class="feat-desc">Weekly start/sit breakdowns with opponent strength ratings. Know your edge before kickoff.</div></div>
-      <div class="feat-card gold"><div class="feat-icon gold">ÃÂ¢ÃÂÃÂ¡</div><div class="feat-title">Real-Time Updates</div><div class="feat-desc">Injury news, depth chart changes, and snap counts delivered fast. React before the rest of your league does.</div></div>
+      <div class="feat-card blue">
+        <div class="feat-icon blue">&#x1F4CA;</div>
+        <div class="feat-title">PPR Rankings</div>
+        <div class="feat-desc">Updated weekly PPR rankings covering every skill position. Sort, filter, and draft with confidence.</div>
+      </div>
+      <div class="feat-card red">
+        <div class="feat-icon red">&#x26A1;</div>
+        <div class="feat-title">Waiver Wire Alerts</div>
+        <div class="feat-desc">Be first to the wire. We surface breakout candidates and injury replacements before your league catches on.</div>
+      </div>
+      <div class="feat-card gold">
+        <div class="feat-icon gold">&#x1F4B0;</div>
+        <div class="feat-title">Trade Analyzer</div>
+        <div class="feat-desc">Never get fleeced again. Our value-based trade breakdowns help you win deals and strengthen your roster.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -200,14 +186,14 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   <div class="section-inner">
     <div class="rankings-promo">
       <div class="rp-left">
-        <div class="label">2026 PPR RANKINGS ÃÂ¢ÃÂÃÂ TOP 200</div>
+        <div class="label">2026 PPR RANKINGS &mdash; TOP 200</div>
         <h2>YOUR COMPLETE<br>DRAFT BOARD<br><span style="color:var(--blue)">IS READY.</span></h2>
-        <p style="margin-bottom:24px">Every skill position ranked and filtered. Sort by overall rank, fantasy points, yards, or touchdowns. Filter by QB, RB, WR, or TE.</p>
-        <a href="rankings.html" class="btn-primary">ÃÂ°ÃÂÃÂÃÂ Open Full Rankings ÃÂ¢ÃÂÃÂ</a>
+        <p style="margin-bottom:24px">Every skill position ranked and filtered. Sort by overall, position, or tier. Updated through the preseason.</p>
+        <a href="rankings.html" class="btn-primary">&#x1F525; Open Full Rankings &#x2192;</a>
       </div>
       <div class="rp-right">
         <div class="rp-badge"><strong>TOP 200</strong>PPR PLAYERS RANKED</div>
-        <div class="rp-badge"><strong>QB ÃÂÃÂ· RB ÃÂÃÂ· WR ÃÂÃÂ· TE</strong>ALL POSITIONS COVERED</div>
+        <div class="rp-badge"><strong>QB &bull; RB &bull; WR &bull; TE</strong>ALL POSITIONS</div>
         <div class="rp-badge"><strong>FREE</strong>NO PAYWALL EVER</div>
       </div>
     </div>
@@ -218,127 +204,85 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   <div class="section-inner">
     <div class="section-tag">Fantasy News Feed</div>
     <h2 class="section-title">STAY AHEAD OF<br>THE LEAGUE</h2>
-    <p class="section-desc">The latest fantasy football news from top sources. Never get blindsided by an injury or depth chart change.</p>
+    <p class="section-desc">The latest fantasy football news from top sources. Never get blindsided by injuries or lineup changes.</p>
     <div class="news-grid">
       <div class="news-embed">
-        <div class="news-embed-header">ÃÂ°ÃÂÃÂÃÂ¡ Live Fantasy News</div>
-        <div id="rss-feed"><div class="rss-item"><div class="rss-dot"></div><div class="rss-text">Loading latest fantasy newsÃÂ¢ÃÂÃÂ¦<div class="rss-source">Fetching from top sources</div></div></div></div>
-      </div>
-      <div class="news-card"><div class="news-source">ÃÂ°ÃÂÃÂÃÂ Snap Counts</div><div class="news-headline">Track who's seeing the field ÃÂ¢ÃÂÃÂ and who isn't</div><div class="news-snippet">Snap count data reveals real opportunity. Players with high snap rates and targets are the foundation of winning fantasy rosters.</div><div class="news-meta"><span class="news-time">Updated weekly</span><a href="rankings.html" class="news-link">See Rankings ÃÂ¢ÃÂÃÂ</a></div></div>
-      <div class="news-card"><div class="news-source">ÃÂ°ÃÂÃÂÃÂ° Trade Value</div><div class="news-headline">Buy low, sell high ÃÂ¢ÃÂÃÂ know exactly when</div><div class="news-snippet">Schedule-aware trade values help you identify the perfect window to buy an underperformer or sell a hot-streak player at peak value.</div><div class="news-meta"><span class="news-time">2026 Season</span><a href="rankings.html" class="news-link">See Rankings ÃÂ¢ÃÂÃÂ</a></div></div>
-      <div class="news-card"><div class="news-source">ÃÂ°ÃÂÃÂÃÂ¨ Injury Watch</div><div class="news-headline">React fast to injury news before your league does</div><div class="news-snippet">Follow @fantasymaxxing on X for real-time alerts on every practice report and status update that matters.</div><div class="news-meta"><span class="news-time">Real-time</span><a href="https://x.com/fantasymaxxing" target="_blank" class="news-link">Follow on X ÃÂ¢ÃÂÃÂ</a></div></div>
-    </div>
-  </div>
-</section>
-<div class="divider"></div>
-<section id="community">
-  <div class="section-inner">
-    <div class="section-tag">Community</div>
-    <h2 class="section-title">JOIN THE CONVERSATION</h2>
-    <p class="section-desc">Get daily analysis, hot takes, and winning advice directly on X. Be the first to know when rankings update.</p>
-    <div class="twitter-section">
-      <h3>FOLLOW @FANTASYMAXXING</h3>
-      <p>Draft advice, waiver pickups &amp; trade tips ÃÂ¢ÃÂÃÂ every week of the NFL season.</p>
-      <a href="https://x.com/fantasymaxxing" target="_blank" class="twitter-handle">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.245 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        @fantasymaxxing
-      </a>
-      <div class="tweet-embed-wrap">
-        <a class="twitter-timeline" data-theme="dark" data-tweet-limit="3" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/fantasymaxxing">Tweets by fantasymaxxing</a>
+        <div class="news-embed-header">&#x1F4E1; Live Feed</div>
+        <div id="rss-feed"><div class="rss-item"><div class="rss-dot"></div><div class="rss-text">Loading latest news&hellip;</div></div></div>
       </div>
     </div>
   </div>
 </section>
-<div class="divider"></div>
 <div class="divider"></div>
 <section id="watch">
   <div class="section-inner">
-    <div class="section-tag">Watch & Follow</div>
+    <div class="section-tag">Watch &amp; Follow</div>
     <h2 class="section-title">CONTENT ON EVERY<br>PLATFORM</h2>
-    <p class="section-desc">Fantasy breakdowns, player analysis, and winning tips Ã¢ÂÂ wherever you consume content.</p>
+    <p class="section-desc">Fantasy breakdowns, player analysis, and winning tips across YouTube, TikTok, and X.</p>
     <div class="social-grid">
-
-      <!-- YouTube -->
       <div class="social-card yt-card">
         <div class="social-card-header">
-          <div class="social-icon yt"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
-          <div>
-            <div class="social-name">YouTube</div>
-            <div class="social-handle">@FantasyMaxxing</div>
-          </div>
+          <div class="social-icon yt"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6a3 3 0 0 0-2.1 2.1C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1C4.5 20.5 12 20.5 12 20.5s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></div>
+          <div><div class="social-name">YouTube</div><div class="social-handle">@FantasyMaxxing</div></div>
           <a href="https://www.youtube.com/@FantasyMaxxing" target="_blank" class="social-follow-btn yt-btn">Subscribe</a>
         </div>
         <div class="yt-coming">
-          <div class="yt-coming-icon">Ã°ÂÂÂ¬</div>
+          <div class="yt-coming-icon">&#x1F3A5;</div>
           <div class="yt-coming-text">Video content dropping soon</div>
-          <div class="yt-coming-sub">In-depth player breakdowns, draft guides, and weekly waiver wire analysis Ã¢ÂÂ subscribe so you don't miss the first drop.</div>
-          <a href="https://www.youtube.com/@FantasyMaxxing" target="_blank" class="btn-primary" style="display:inline-block;margin-top:18px;font-size:13px;padding:10px 24px">Ã°ÂÂÂ Subscribe on YouTube</a>
+          <div class="yt-coming-sub">In-depth player breakdowns, draft guides, and weekly waiver wire shows.</div>
+          <a href="https://www.youtube.com/@FantasyMaxxing" target="_blank" class="btn-primary" style="font-size:13px;padding:10px 20px">Subscribe for Updates</a>
         </div>
       </div>
-
-      <!-- TikTok -->
       <div class="social-card tt-card">
         <div class="social-card-header">
-          <div class="social-icon tt"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg></div>
-          <div>
-            <div class="social-name">TikTok</div>
-            <div class="social-handle">@fantasymaxxing</div>
-          </div>
+          <div class="social-icon tt"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M19.6 3.3A4.9 4.9 0 0 1 14.8 0h-3.4v16.4a2.9 2.9 0 0 1-2.9 2.5 2.9 2.9 0 0 1-2.9-2.9 2.9 2.9 0 0 1 2.9-2.9c.3 0 .5 0 .8.1V9.7a6.3 6.3 0 0 0-.8-.1 6.3 6.3 0 0 0-6.3 6.3 6.3 6.3 0 0 0 6.3 6.3 6.3 6.3 0 0 0 6.3-6.3V8.1a8.2 8.2 0 0 0 4.8 1.5V6.2a4.9 4.9 0 0 1-3-.9z"/></svg></div>
+          <div><div class="social-name">TikTok</div><div class="social-handle">@fantasymaxxing</div></div>
           <a href="https://www.tiktok.com/@fantasymaxxing" target="_blank" class="social-follow-btn tt-btn">Follow</a>
         </div>
         <div class="tt-embed-wrap">
-          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@fantasymaxxing/video/7648705687115025678" data-video-id="7648705687115025678" style="max-width:605px;min-width:325px;">
+          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@fantasymaxxing/video/7519872773327595806" data-video-id="7519872773327595806" style="max-width:605px;min-width:325px">
             <section><a target="_blank" href="https://www.tiktok.com/@fantasymaxxing">@fantasymaxxing</a></section>
           </blockquote>
-          <a href="https://www.tiktok.com/@fantasymaxxing" target="_blank" class="social-more-link">See all videos on TikTok Ã¢ÂÂ</a>
         </div>
+        <a href="https://www.tiktok.com/@fantasymaxxing" target="_blank" class="social-more-link">View more on TikTok &#x2192;</a>
       </div>
-
-      <!-- X / Twitter -->
       <div class="social-card x-card">
         <div class="social-card-header">
-          <div class="social-icon xsocial"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.245 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
-          <div>
-            <div class="social-name">X / Twitter</div>
-            <div class="social-handle">@fantasymaxxing</div>
-          </div>
+          <div class="social-icon xsocial"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+          <div><div class="social-name">X (Twitter)</div><div class="social-handle">@fantasymaxxing</div></div>
           <a href="https://x.com/fantasymaxxing" target="_blank" class="social-follow-btn x-btn">Follow</a>
         </div>
-        <div class="tweet-embed-wrap" style="text-align:left">
-          <a class="twitter-timeline" data-theme="dark" data-tweet-limit="3" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/fantasymaxxing">Tweets by fantasymaxxing</a>
-        </div>
-        <a href="https://x.com/fantasymaxxing" target="_blank" class="social-more-link">See all posts on X Ã¢ÂÂ</a>
+        <p style="font-size:14px;color:var(--gray);margin-bottom:16px">Draft advice, waiver pickups &amp; trade tips every week of the NFL season.</p>
+        <a href="https://x.com/fantasymaxxing" target="_blank" class="social-more-link">Follow on X &#x2192;</a>
       </div>
-
     </div>
   </div>
 </section>
 <div class="divider"></div>
-<section>
+<section style="padding:80px 24px">
   <div class="section-inner">
     <div class="cta-banner">
       <h2>READY TO MAXX YOUR TEAM?</h2>
-      <p>Check the 2026 PPR Top-200 rankings ÃÂ¢ÃÂÃÂ sorted, filtered, and built to win.</p>
-      <a href="rankings.html" class="btn-primary" style="font-size:16px;padding:16px 40px">ÃÂ°ÃÂÃÂÃÂ View Full Rankings ÃÂ¢ÃÂÃÂ</a>
+      <p>Your 2026 PPR draft board is live. 200+ players ranked, filtered by position, completely free.</p>
+      <a href="rankings.html" class="btn-primary" style="font-size:16px;padding:16px 40px">View Full Rankings &#x2192;</a>
     </div>
   </div>
 </section>
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">FANTASY<span>MAXXING</span></div>
-    <div class="footer-links">
+    <nav class="footer-links">
+      <a href="#features">Features</a>
       <a href="rankings.html">Rankings</a>
-      <a href="https://x.com/fantasymaxxing" target="_blank">X / Twitter</a>
-      <a href="https://www.youtube.com/@FantasyMaxxing" target="_blank">YouTube</a>
-      <a href="https://www.tiktok.com/@fantasymaxxing" target="_blank">TikTok</a>
       <a href="#news">News</a>
-      <a href="#features">About</a>
-    </div>
+      <a href="https://x.com/fantasymaxxing" target="_blank">X</a>
+      <a href="https://www.tiktok.com/@fantasymaxxing" target="_blank">TikTok</a>
+      <a href="https://www.youtube.com/@FantasyMaxxing" target="_blank">YouTube</a>
+    </nav>
+    <div class="footer-copy">&copy; 2026 FantasyMaxxing. All rights reserved.</div>
   </div>
-  <div class="footer-copy">ÃÂÃÂ© 2026 FantasyMaxxing ÃÂÃÂ· We Don't Guess. We Maxx.</div>
 </footer>
 <script async src="https://www.tiktok.com/embed.js"></script>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
 async function loadNews(){
   const container=document.getElementById('rss-feed');
@@ -350,13 +294,13 @@ async function loadNews(){
   ];
   for(const feed of feeds){
     try{
-      const r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed.url)+'&count=3');
+      const r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed.url));
       const d=await r.json();
       if(d.items) items.push(...d.items.slice(0,3).map(i=>({...i,_source:feed.label})));
     }catch(e){}
   }
   if(items.length===0){
-    container.innerHTML='<div class="rss-item"><div class="rss-dot" style="background:#e63946"></div><div class="rss-text">Follow <a href="https://x.com/fantasymaxxing" target="_blank">@fantasymaxxing</a> on X for the latest fantasy updates.<div class="rss-source">Live feed</div></div></div>';
+    container.innerHTML='<div class="rss-item"><div class="rss-dot" style="background:#e63946"></div><div class="rss-text">Could not load feed. Check back soon.</div></div>';
     return;
   }
   items.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
@@ -364,7 +308,7 @@ async function loadNews(){
     const ago=Math.round((Date.now()-new Date(item.pubDate))/60000);
     const time=ago<60?ago+'m ago':Math.round(ago/60)+'h ago';
     const title=item.title.replace(/</g,'&lt;').replace(/>/g,'&gt;').substring(0,100);
-    return '<div class="rss-item"><div class="rss-dot"></div><div class="rss-text"><a href="'+item.link+'" target="_blank" rel="noopener">'+title+'</a><div class="rss-source">'+item._source+' ÃÂÃÂ· '+time+'</div></div></div>';
+    return '<div class="rss-item"><div class="rss-dot"></div><div class="rss-text"><a href="'+item.link+'" target="_blank" rel="noopener">'+title+'</a><div class="rss-source">'+item._source+' &bull; '+time+'</div></div></div>';
   }).join('');
 }
 loadNews();
