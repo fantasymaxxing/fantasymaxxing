@@ -2,11 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8"/>
-<meta http-equiv="refresh" content="0; url=/rankings"/>
-<link rel="canonical" href="/rankings"/>
+<meta http-equiv="refresh" content="0; url=/rankings/"/>
+<link rel="canonical" href="/rankings/"/>
 <title>Redirecting...</title>
 </head>
 <body>
-<script>window.location.replace('/rankings');</script>
+<script>
+if(window.location.pathname !== '/rankings/'){
+  window.location.replace('/rankings/');
+}
+</script>
 </body>
 </html>
