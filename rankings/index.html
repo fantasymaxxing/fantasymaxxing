@@ -64,6 +64,8 @@ body{font-family:'DM Sans',sans-serif;background:#fafaf8;padding:24px 16px}
 .note-icon:hover+.note-tip,.note-tip:hover{display:block}
 .note-tip{display:none;position:absolute;background:#1a1a2e;color:#fff;font-size:11px;padding:8px 10px;border-radius:6px;max-width:240px;z-index:100;line-height:1.5;margin-top:4px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
 .name-wrap{position:relative;display:flex;align-items:center}
+.video-link{display:inline-flex;align-items:center;gap:3px;font-size:10px;color:#ff0000;font-weight:600;text-decoration:none;margin-top:2px}
+.video-link:hover{text-decoration:underline}
 @media(max-width:600px){
 .logo{font-size:28px}
 .subtitle{font-size:13px}
@@ -129,7 +131,7 @@ Updated: <span id="updated"></span>
 // Top 18 locked per reference doc. 19-250 rebuilt from ESPN/FantasyPros/CBS consensus positioning.
 // note field = analyst insight shown on hover (red ! badge)
 const DATA=[
-{r:1, n:"Jahmyr Gibbs",p:"RB",t:"DET",gp:17,pts:312.4,yds:1890,td:22,opp:247, note:"Unstoppable late last season (30+ PPR pts/game stretches). Only real concern is a shakier O-line (new RT, backup C)."},
+{r:1, n:"Jahmyr Gibbs",p:"RB",t:"DET",gp:17,pts:312.4,yds:1890,td:22,opp:247, note:"Unstoppable late last season (30+ PPR pts/game stretches). Only real concern is a shakier O-line (new RT, backup C).", video:"https://youtu.be/QdNO9twnT-o"},
 {r:2, n:"Bijan Robinson",p:"RB",t:"ATL",gp:16,pts:289.6,yds:1720,td:14,opp:268, note:"New coach Kevin Stefanski historically features his backs. Better raw receiver (10.4 YPC) than Gibbs last year \u2014 some analysts now have him ahead of Gibbs."},
 {r:3, n:"Ja'Marr Chase",p:"WR",t:"CIN",gp:16,pts:301.2,yds:1708,td:17,opp:151, note:"Highest ceiling in the field \u2014 2024 Triple Crown winner (17 TD, 1700 yds). Tied to Joe Burrow's health; averaged 23+ PPR pts/gm in his best year."},
 {r:4, n:"Puka Nacua",p:"WR",t:"LAR",gp:16,pts:261.8,yds:1486,td:9,opp:148, note:"Most efficient receiver in the NFL. TD regression risk \u2014 9 of his 10 TDs last year came with DeVonta Adams healthy on the field."},
@@ -425,12 +427,14 @@ const oppLbl=OPP[p.p]||"OPP";
 const tdPct=Math.round((p.td/maxTd)*100);
 const bg=i%2===0?"#fff":"#fafaf8";
 const noteHtml=p.note?`<span class="note-icon" title="${p.note.replace(/"/g,"'")}">!</span>`:"";
+const videoHtml=p.video?`<a href="${p.video}" target="_blank" rel="noopener" class="video-link">&#9654; Watch</a>`:"";
 return `<div class="row" style="background:${bg}" onmouseover="this.style.background='#eef3ff'" onmouseout="this.style.background='${bg}'">
 <div><span class="rank-num ${rankClass}">${p.r}</span></div>
 <div class="name-wrap">
 <div>
 <div class="player-name">${p.n}</div>
 <div class="player-team">${p.t}${noteHtml}</div>
+${videoHtml}
 </div>
 </div>
 <div><span class="pos-badge" style="background:${pc.bg};color:${pc.tx};border:1px solid ${pc.bd}">${p.p}</span></div>
