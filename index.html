@@ -66,6 +66,14 @@ section{padding:80px 24px}
 .rp-right{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
 .rp-badge{background:rgba(244,196,48,0.1);border:1px solid rgba(244,196,48,0.25);border-radius:8px;padding:10px 18px;font-size:12px;color:var(--gold);font-weight:600;text-align:center}
 .rp-badge strong{display:block;font-size:20px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px}
+.boards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:28px}
+.board-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:28px;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}
+.board-card:hover{border-color:rgba(29,161,242,0.4);transform:translateY(-3px)}
+.board-tag{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:var(--blue);margin-bottom:6px}
+.board-num{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;color:#fff}
+.board-num span{color:var(--gold);font-size:18px;letter-spacing:1px;margin-left:6px}
+.board-desc{font-size:13px;color:var(--gray);line-height:1.6;margin:12px 0 20px;flex:1}
+.board-card .btn-primary{align-self:flex-start;font-size:13px;padding:11px 22px}
 .social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
 .social-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:28px;transition:border-color .25s}
 .social-card:hover{border-color:rgba(255,255,255,0.15)}
@@ -135,7 +143,8 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
     <p class="hero-desc">Draft advice, waiver pickups &amp; trade tips to keep you ahead of the competition every week of the NFL season.</p>
     <div class="hero-btns">
       <a href="rankings.html" class="btn-primary">&#x1F3C6; 2026 PPR Rankings</a>
-      <a href="#features" class="btn-secondary">Learn More &#x2193;</a>
+      <a href="rankings-nonppr/" class="btn-secondary">Non-PPR Top 250</a>
+      <a href="rankings-bestball/" class="btn-secondary">Best Ball Top 100</a>
     </div>
     <div class="hero-stats">
       <div><div class="hero-stat-num">250+</div><div class="hero-stat-lbl">Players Ranked</div></div>
@@ -178,16 +187,32 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
       <div class="rp-left">
         <div class="label">2026 RANKINGS &mdash; PPR &bull; NON-PPR &bull; BEST BALL</div>
         <h2>YOUR COMPLETE<br>DRAFT BOARDS<br><span style="color:var(--blue)">ARE READY.</span></h2>
-        <p style="margin-bottom:24px">AI-compiled from the top 10 fantasy football ranking sources into one consensus board &mdash; with analyst notes on all 250 players. Sort, search, and filter by position. Updated through the preseason.</p>
-        <a href="rankings.html" class="btn-primary">&#x1F525; PPR Top 250 &#x2192;</a>
-        <a href="rankings-nonppr/" class="btn-secondary" style="margin-left:10px">Non-PPR Top 250</a>
-        <a href="rankings-bestball/" class="btn-secondary" style="margin-left:10px">Best Ball Top 100</a>
+        <p style="margin-bottom:24px">Our AI compiles consensus rankings from the top 10 fantasy football sources &mdash; CBS, ESPN, Yahoo, Rotoworld, Footballguys, FantasyPros, Draft Sharks, RotoWire, and live Underdog draft-market data &mdash; and re-checks them <strong style="color:#fff">every single day</strong>, so your board never goes stale. Analyst notes on every player.</p>
       </div>
       <div class="rp-right">
-        <div class="rp-badge"><strong>TOP 250</strong>PPR &amp; NON-PPR BOARDS</div>
-        <div class="rp-badge"><strong>TOP 100</strong>BEST BALL (HALF-PPR)</div>
         <div class="rp-badge"><strong>10 SOURCES</strong>AI-COMPILED CONSENSUS</div>
+        <div class="rp-badge"><strong>DAILY</strong>UPDATED EVERY DAY</div>
         <div class="rp-badge"><strong>FREE</strong>NO PAYWALL EVER</div>
+      </div>
+    </div>
+    <div class="boards-grid">
+      <div class="board-card">
+        <div class="board-tag">FULL PPR</div>
+        <div class="board-num">TOP 250<span>OVERALL</span></div>
+        <div class="board-desc">The flagship board. Every skill position ranked 1&ndash;250 for point-per-reception leagues, with analyst notes and video breakdowns on key players.</div>
+        <a href="rankings.html" class="btn-primary">Open PPR Rankings &#x2192;</a>
+      </div>
+      <div class="board-card">
+        <div class="board-tag">NON-PPR / STANDARD</div>
+        <div class="board-num">TOP 250<span>OVERALL</span></div>
+        <div class="board-desc">Standard scoring changes everything &mdash; workhorse RBs rise, catch-only players fall. Ranked separately, not just copied from PPR.</div>
+        <a href="rankings-nonppr/" class="btn-primary">Open Non-PPR Rankings &#x2192;</a>
+      </div>
+      <div class="board-card">
+        <div class="board-tag">BEST BALL &bull; HALF-PPR</div>
+        <div class="board-num">TOP 100<span>OVERALL</span></div>
+        <div class="board-desc">Built for Underdog-style drafts using live market ADP plus expert consensus. Ceiling-weighted the way best ball should be.</div>
+        <a href="rankings-bestball/" class="btn-primary">Open Best Ball Rankings &#x2192;</a>
       </div>
     </div>
   </div>
@@ -244,7 +269,7 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   <div class="section-inner">
     <div class="cta-banner">
       <h2>READY TO MAXX YOUR TEAM?</h2>
-      <p>Your 2026 draft boards are live &mdash; PPR, Non-PPR, and Best Ball. AI-compiled from the top 10 fantasy football ranking sources, with notes on every player. Completely free.</p>
+      <p>Your 2026 draft boards are live &mdash; PPR, Non-PPR, and Best Ball. AI-compiled from the top 10 fantasy football ranking sources and updated every day, with notes on every player. Completely free.</p>
       <a href="rankings.html" class="btn-primary" style="font-size:16px;padding:16px 40px">View Full Rankings &#x2192;</a>
     </div>
   </div>
