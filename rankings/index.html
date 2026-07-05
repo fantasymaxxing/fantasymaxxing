@@ -83,10 +83,11 @@ body{font-family:'DM Sans',sans-serif;background:#fafaf8;padding:24px 16px}
 .print-btn:hover{opacity:.85}
 @media print{
 body{background:#fff;padding:0}
+#app{max-width:6.4in;margin:0 auto}
 .controls,.sort-row,.summary{display:none}
 .header a{display:none!important}
 .note-icon,.note-tip,.video-link{display:none!important}
-.table-wrap{border:none;border-radius:0;overflow:visible}
+.table-wrap{border:1px solid #bbb;border-radius:10px;overflow:visible}
 .table-head{background:#fff!important;color:#000;border-bottom:2px solid #000;min-width:0;padding:4px 6px;font-size:8px}
 .row{min-width:0;padding:1px 6px;border-top:1px solid #ccc;break-inside:avoid;background:#fff!important}
 .table-head,.row{grid-template-columns:34px 1fr 40px 28px 64px 64px 36px 56px}
@@ -94,7 +95,8 @@ body{background:#fff;padding:0}
 .bar-val{min-width:auto;text-align:left;font-size:9px;color:#000}
 .player-name{font-size:9.5px;color:#000}.player-team{font-size:7.5px;color:#555;margin-top:0}
 .rank-num{font-size:10px;color:#333}.rank-num.elite,.rank-num.top{font-size:11px;color:#000}
-.pos-badge{border:1px solid #999!important;background:#fff!important;color:#000!important;padding:0 3px;font-size:7.5px;border-radius:3px}
+.pos-badge{padding:0 3px;font-size:7.5px;border-radius:3px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.row,.rank-num.elite{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .gp-val,.td-val,.opp-val{font-size:9px;color:#000}.opp-lbl{font-size:6.5px;color:#666}
 .logo{font-size:22px}.subtitle{font-size:11px}.header{padding-bottom:8px;margin-bottom:8px;border-bottom-width:2px}
 .meta{font-size:8px}.meta strong{font-size:8px}
