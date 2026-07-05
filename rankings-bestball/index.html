@@ -71,6 +71,12 @@ body{font-family:'DM Sans',sans-serif;background:#fafaf8;padding:24px 16px}
 .subtitle{font-size:13px}
 .summary{grid-template-columns:repeat(2,1fr)}
 }
+.stat-toggle{display:inline-flex;border-radius:8px;overflow:hidden;border:1.5px solid #1a1a2e;flex-shrink:0}
+.stat-toggle button{padding:8px 14px;font-size:12px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;background:#fff;color:#555;transition:all .15s;white-space:nowrap}
+.stat-toggle button.active{background:#1a1a2e;color:#fff}
+.stat-toggle button.proj.active{background:linear-gradient(135deg,#e63946,#f4a300);color:#fff}
+.new-chip{display:inline-block;background:#f4c430;color:#1a1a2e;font-size:9px;font-weight:800;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:middle;letter-spacing:.5px;animation:chip-pulse 1.6s ease-in-out infinite}
+@keyframes chip-pulse{0%,100%{opacity:1}50%{opacity:.45}}
 .export-btn{margin-left:10px;padding:6px 14px;font-size:12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid #1e7e34;background:#217346;color:#fff;font-weight:600;white-space:nowrap;transition:opacity .15s}
 .export-btn:hover{opacity:.85}
 </style>
@@ -83,7 +89,7 @@ body{font-family:'DM Sans',sans-serif;background:#fafaf8;padding:24px 16px}
 <div class="subtitle">2026 BEST BALL (HALF-PPR) RANKINGS — TOP 100</div> <a href="/" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#e63946;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;text-decoration:none;border-radius:4px;">&#8592; Home</a> <a href="/rankings/" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#1a1a2e;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;text-decoration:none;border-radius:4px;">PPR Top 250</a> <a href="/rankings-nonppr/" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#1a1a2e;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;text-decoration:none;border-radius:4px;">Non-PPR Top 250</a>
 </div>
 <div class="meta">
-<strong>Stats: 2025 NFL Season</strong>
+<strong id="stat-src">Stats: 2025 NFL Season</strong>
 Updated: <span id="updated"></span>
 </div>
 </div>
@@ -97,6 +103,7 @@ Updated: <span id="updated"></span>
 <button class="pos-btn" data-pos="WR">WR</button>
 <button class="pos-btn" data-pos="TE">TE</button>
 </div>
+<div class="stat-toggle" id="stat-toggle"><button class="active" data-mode="last">2025 STATS</button><button class="proj" data-mode="proj">2026 PROJECTIONS<span class="new-chip">NEW</span></button></div>
 </div>
 
 <div class="sort-row">
@@ -134,106 +141,106 @@ Updated: <span id="updated"></span>
 // Best ball top 100 anchored on FantasyPros Best Ball ECR + Underdog market ADP (half-PPR).
 // note field = analyst insight shown on hover
 const DATA=[
-{r:1, n:"Jahmyr Gibbs",p:"RB",t:"DET",gp:17,pts:286.4,yds:1890,td:22,opp:247, note:"Unstoppable late last season (30+ PPR pts/game stretches). Only real concern is a shakier O-line (new RT, backup C).", video:"https://youtu.be/QdNO9twnT-o"},
-{r:2, n:"Bijan Robinson",p:"RB",t:"ATL",gp:16,pts:260.6,yds:1720,td:14,opp:268, note:"New coach Kevin Stefanski historically features his backs. Better raw receiver (10.4 YPC) than Gibbs last year — some analysts now have him ahead of Gibbs."},
-{r:3, n:"Ja'Marr Chase",p:"WR",t:"CIN",gp:16,pts:248.7,yds:1708,td:17,opp:151, note:"Highest ceiling in the field — 2024 Triple Crown winner (17 TD, 1700 yds). Tied to Joe Burrow's health; averaged 23+ PPR pts/gm in his best year."},
-{r:4, n:"Puka Nacua",p:"WR",t:"LAR",gp:16,pts:210.3,yds:1486,td:9,opp:148, note:"Most efficient receiver in the NFL. TD regression risk — 9 of his 10 TDs last year came with DeVonta Adams healthy on the field."},
-{r:5, n:"Jaxon Smith-Njigba",p:"WR",t:"SEA",gp:17,pts:224.4,yds:1560,td:10,opp:162, note:"2024 NFL Offensive Player of the Year with a 35% target share. New OC brings uncertainty, but he's still Seattle's whole passing offense."},
-{r:6, n:"Amon-Ra St. Brown",p:"WR",t:"DET",gp:17,pts:212.2,yds:1388,td:11,opp:155, note:"The safest player in round one. Four straight seasons averaging 18+ PPR pts/gm; elite volume and red-zone role with almost no downside."},
-{r:7, n:"Jonathan Taylor",p:"RB",t:"IND",gp:18,pts:309.5,yds:2020,td:18,opp:291, note:"Rushing/TD machine (20 TD last year). Indy lost its top WR in the offseason — more checkdowns could push him toward 50 catches."},
-{r:8, n:"Christian McCaffrey",p:"RB",t:"SF",gp:17,pts:301.2,yds:2180,td:21,opp:319, note:"Still elite talent, but turns 30 this season coming off 450 touches. Injury history (2020, 2024) makes him the biggest round-one boom-or-bust."},
-{r:9, n:"James Cook",p:"RB",t:"BUF",gp:17,pts:275.6,yds:1780,td:16,opp:256, note:"Nearly matched Jonathan Taylor's workload last year (326-carry pace) and gets heavy goal-line work in one of the league's top offenses."},
-{r:10, n:"Ashton Jeanty",p:"RB",t:"LV",gp:17,pts:248.4,yds:1680,td:14,opp:289, note:"Rough rookie year (RB15/gm, 3.7 YPC) but gets major O-line and coaching upgrades — buy-low if the new system clicks. Market has him back in round one."},
-{r:11, n:"CeeDee Lamb",p:"WR",t:"DAL",gp:15,pts:177.1,yds:1290,td:8,opp:139, note:"17+ pts/gm ceiling if Dak stays healthy. Scored just 5 TDs on a 156-target pace last year — due for positive TD regression."},
-{r:12, n:"Chase Brown",p:"RB",t:"CIN",gp:17,pts:207.8,yds:1480,td:11,opp:238, note:"Bell-cow when trusted — averaged 21.6 PPR pts/gm over his final 10 games last season once he took over Cincinnati's backfield."},
-{r:13, n:"Justin Jefferson",p:"WR",t:"MIN",gp:17,pts:204.8,yds:1480,td:10,opp:150, note:"Consensus split. Averaged 16.3 PPR pts/gm in games Carson Wentz started — production hinges on a Kyler Murray bounce-back."},
-{r:14, n:"Omarion Hampton",p:"RB",t:"LAC",gp:17,pts:223.7,yds:1520,td:12,opp:262, note:"Underdog drafters take him in round two (ADP 14 overall). Elite workload profile in a Harbaugh offense built to run; ankle injury behind him."},
-{r:15, n:"Brock Bowers",p:"TE",t:"LV",gp:17,pts:169.4,yds:1190,td:8,opp:142, note:"Best pass-catching TE in football — nearly 100 catches despite bad QB play. Footballguys has him a top-8 overall pick; positional edge is massive."},
-{r:16, n:"Devon Achane",p:"RB",t:"MIA",gp:15,pts:227.8,yds:1640,td:13,opp:224, note:"RB5 in PPR last year despite a bottom-5 offense. New play-caller and QB situation could mean a real target decline in 2026."},
-{r:17, n:"Drake London",p:"WR",t:"ATL",gp:17,pts:196.6,yds:1340,td:9,opp:145, note:"Atlanta's clear #1 target on a fast-rising offense. Was a top-3 fantasy WR through his first 9 games last year before injury."},
-{r:18, n:"A.J. Brown",p:"WR",t:"NE",gp:13,pts:152.7,yds:1040,td:8,opp:122, note:"Traded to New England to be Drake Maye's alpha — Footballguys has him a top-15 pick. Bet on target volume he never saw in Philly's run-first attack."},
-{r:19, n:"Kenneth Walker III",p:"RB",t:"KC",gp:15,pts:196.2,yds:1320,td:10,opp:228, note:"Signed with Kansas City — first true lead back of the Mahomes era. Explosive but has never played 17 games; Berry ranks him a top-15 pick."},
-{r:20, n:"Nico Collins",p:"WR",t:"HOU",gp:15,pts:215.8,yds:1420,td:10,opp:158, note:"Alpha of the Houston passing game — top-5 in yards per route two straight years. Only knock is he's missed multiple games in back-to-back seasons."},
-{r:21, n:"Saquon Barkley",p:"RB",t:"PHI",gp:17,pts:256.7,yds:1680,td:14,opp:278, note:"Bounced back from a down 2025 with a monster playoff run. Age-29 season on huge career mileage, but every source still has him a top-16 pick."},
-{r:22, n:"Derrick Henry",p:"RB",t:"BAL",gp:17,pts:238.6,yds:1540,td:14,opp:265, note:"Ageless — RB7/gm last season. Losing key O-line pieces and a coordinator change are the real risks heading into 2026."},
-{r:23, n:"Trey McBride",p:"TE",t:"ARI",gp:17,pts:174.3,yds:1220,td:9,opp:148, note:"Target monster (145+ two straight years) who finally found the end zone in 2025. He and Bowers are a clear tier above every other TE."},
-{r:24, n:"George Pickens",p:"WR",t:"DAL",gp:16,pts:186.4,yds:1320,td:9,opp:138, note:"Big ADP riser after a strong debut season with Dallas. Risk: true 1B next to CeeDee Lamb — teammate WRs rarely both go top-12."},
-{r:25, n:"Javonte Williams",p:"RB",t:"DAL",gp:16,pts:152.8,yds:1060,td:8,opp:196, note:"Career year in Dallas (RB16 overall) and re-signed as the clear starter. The market keeps drafting him round three — believe the role."},
-{r:26, n:"DeVonta Smith",p:"WR",t:"PHI",gp:17,pts:167.8,yds:1210,td:8,opp:136, note:"Steps into the Eagles' clear WR1 role with A.J. Brown gone — Yahoo's analysts have him a top-25 player. Target ceiling he's never had before."},
-{r:27, n:"Breece Hall",p:"RB",t:"NYJ",gp:16,pts:167.9,yds:1220,td:8,opp:242, note:"Bounce-back candidate — Footballguys and Berry both have him ~RB13. The Jets' new staff has committed to him as a three-down back."},
-{r:28, n:"Jeremiyah Love",p:"RB",t:"ARI",gp:16,pts:184.1,yds:1260,td:11,opp:219, note:"Now in Arizona and the market loves the fit — Underdog ADP 24. Home-run speed with a rising target role; classic year-two rookie breakout profile."},
-{r:29, n:"Zay Flowers",p:"WR",t:"BAL",gp:17,pts:172.9,yds:1220,td:8,opp:138, note:"Baltimore's target leader in back-to-back years. The passing volume caps his ceiling, but the floor is rock solid with Lamar."},
-{r:30, n:"Chris Olave",p:"WR",t:"NO",gp:16,pts:162.7,yds:1180,td:7,opp:132, note:"Finally a full healthy season in 2025 — quietly a top-12 WR from October on. Tyler Shough stabilizing the QB spot is the swing factor."},
-{r:31, n:"Rashee Rice",p:"WR",t:"KC",gp:14,pts:174.9,yds:1210,td:11,opp:133, note:"Mahomes' clear WR1 when on the field — elite YAC profile and 11 TDs in 14 games last year. Durability is the only thing keeping him out of round one."},
-{r:32, n:"Josh Allen",p:"QB",t:"BUF",gp:17,pts:418.4,yds:4820,td:42,opp:524, note:"The QB1 by a wide gap — 40+ total TDs in five of six seasons. If you draft a QB early, this is the one worth the price."},
-{r:33, n:"Kyren Williams",p:"RB",t:"LAR",gp:16,pts:217.4,yds:1440,td:13,opp:244, note:"TD machine (13 last year) who never leaves the field. Blake Corum ate into early-down work late in 2025 — watch that split in camp."},
-{r:34, n:"Colston Loveland",p:"TE",t:"CHI",gp:17,pts:133.4,yds:920,td:7,opp:118, note:"ESPN calls him the highest-ceiling pass-catcher in Chicago. Year-two TE breakouts are the classic profile — clear TE3 with top-two upside."},
-{r:35, n:"Garrett Wilson",p:"WR",t:"NYJ",gp:17,pts:161.1,yds:1180,td:8,opp:144, note:"Karabell has him WR9 — a huge believer call. Four straight 1,000-yard seasons through constant QB chaos; Geno Smith is at least stable."},
-{r:36, n:"Tee Higgins",p:"WR",t:"CIN",gp:12,pts:159.6,yds:1040,td:10,opp:108, note:"Re-signed in Cincinnati and still a WR1 per-game scorer (10 TDs in 12 games). You're just betting on him finally playing a full season."},
-{r:37, n:"Jaylen Waddle",p:"WR",t:"DEN",gp:16,pts:144.9,yds:1060,td:7,opp:128, note:"Traded to Denver — instantly Bo Nix's WR1 with Sutton aging. Footballguys is highest (WR14); speed merchant in a Payton offense that schemes touches."},
-{r:38, n:"Tetairoa McMillan",p:"WR",t:"CAR",gp:17,pts:148.6,yds:1080,td:7,opp:126, note:"Led all rookies in targets last year and Carolina added nothing to compete with him. Bryce Young's growth is the ceiling question."},
-{r:39, n:"Emeka Egbuka",p:"WR",t:"TB",gp:17,pts:155.4,yds:1140,td:7,opp:128, note:"Elite rookie season (86 catches) and Evans/Godwin are both gone from his target tree. CBS has him a top-32 player; volume is coming."},
-{r:40, n:"Travis Etienne",p:"RB",t:"NO",gp:16,pts:156.4,yds:1120,td:7,opp:208, note:"Signed with the Saints and Berry jumped him to RB15. Fresh legs, a pass-catching role, and no committee ahead of him in New Orleans."},
-{r:41, n:"Malik Nabers",p:"WR",t:"NYG",gp:17,pts:186.6,yds:1380,td:10,opp:152, note:"Fully back from the 2025 knee injury — RotoWire ranks him WR15 or better. A 150-target lock whenever he's on the field, now with Dart ascending."},
-{r:42, n:"Ladd McConkey",p:"WR",t:"LAC",gp:16,pts:140.1,yds:1040,td:6,opp:122, note:"Herbert's most-trusted target — 85+ catches in each of his first two years. More of a floor pick than a ceiling one at this price."},
-{r:43, n:"Luther Burden III",p:"WR",t:"CHI",gp:17,pts:150.2,yds:1080,td:7,opp:132, note:"Slot weapon who led Chicago in catches as a rookie. Ben Johnson's offense creates a St. Brown-style role for him — target volume is safe."},
-{r:44, n:"Terry McLaurin",p:"WR",t:"WAS",gp:17,pts:155.8,yds:1120,td:7,opp:134, note:"Six straight 1,000-yard seasons and Jayden Daniels keeps ascending. Age 31, but there's zero sign of decline in the target data."},
-{r:45, n:"Josh Jacobs",p:"RB",t:"GB",gp:17,pts:228.8,yds:1510,td:12,opp:252, note:"Double-digit TDs in both Green Bay seasons. Field Yates is highest on him (RB7); the range of outcomes is unusually tight for a 28-year-old back."},
-{r:46, n:"Mike Evans",p:"WR",t:"SF",gp:17,pts:133.4,yds:960,td:8,opp:122, note:"Signed with San Francisco chasing a ring — Purdy's new red-zone weapon. The 1,000-yard streak ended, but 8 TDs a year is still his baseline."},
-{r:47, n:"D.J. Moore",p:"WR",t:"BUF",gp:17,pts:143.4,yds:1080,td:7,opp:136, note:"Traded to Buffalo — the first true WR1 of the Josh Allen era. Berry has him 51st overall; the target upside here is enormous."},
-{r:48, n:"Bucky Irving",p:"RB",t:"TB",gp:17,pts:163.1,yds:1180,td:7,opp:218, note:"Footballguys ranks him RB19 with room for more — the passing-down role is his and Rachaad White is gone to Washington."},
-{r:49, n:"Drake Maye",p:"QB",t:"NE",gp:17,pts:352.4,yds:4380,td:28,opp:542, note:"Year-three leap incoming — now he gets A.J. Brown too. Karabell ranks him QB3; the rushing production makes the floor real."},
-{r:50, n:"Lamar Jackson",p:"QB",t:"BAL",gp:16,pts:398.6,yds:5120,td:38,opp:484, note:"Back-to-back top-2 QB finishes. Yahoo and Yates rank him a top-32 overall pick — the rushing floor makes him matchup-proof."},
-{r:51, n:"Davante Adams",p:"WR",t:"LAR",gp:14,pts:131.6,yds:940,td:7,opp:118, note:"Still a red-zone monster (7 TDs in 14 games) in the Rams' offense. Age-33 season — draft him for TDs, not 1,400 yards."},
-{r:52, n:"Jameson Williams",p:"WR",t:"DET",gp:16,pts:146.4,yds:1020,td:7,opp:118, note:"Averaged over 16 yards a catch for the third straight year. The big-play dependence makes him streaky week to week — great best ball pick."},
-{r:53, n:"David Montgomery",p:"RB",t:"HOU",gp:16,pts:147.4,yds:980,td:8,opp:188, note:"Signed with Houston to be the early-down/goal-line back. TD-dependent profile, but this offense scores — 8+ TDs feels like his floor."},
-{r:54, n:"Christian Watson",p:"WR",t:"GB",gp:15,pts:121.9,yds:840,td:6,opp:108, note:"Career year once he finally stayed healthy — 6 TDs and 17+ yards a catch. Golden and Reed cap the target share; classic boom-bust WR3."},
-{r:55, n:"Carnell Tate",p:"WR",t:"TEN",gp:17,pts:111.6,yds:800,td:5,opp:104, note:"Titans rookie who won the WR1 job by November. Cam Ward's favorite target down the stretch — the arrow points straight up."},
-{r:56, n:"Tyler Warren",p:"TE",t:"IND",gp:17,pts:130.4,yds:920,td:6,opp:114, note:"Colts force-fed him 110+ targets as a rookie — the Daniel Jones connection was real. Clear top-5 TE with every source in agreement."},
-{r:57, n:"Cam Skattebo",p:"RB",t:"NYG",gp:17,pts:172.3,yds:1180,td:9,opp:214, note:"Fully recovered from the ankle injury and the Giants fed him 20+ touches/game down the stretch. Physical three-down profile; Boone's favorite sleeper."},
-{r:58, n:"TreVeyon Henderson",p:"RB",t:"NE",gp:15,pts:141.6,yds:980,td:7,opp:188, note:"Explosive change-of-pace back who earned more work every month. Stevenson still takes goal-line carries — upside pick, not a safe one."},
-{r:59, n:"Joe Burrow",p:"QB",t:"CIN",gp:16,pts:368.2,yds:4620,td:34,opp:518, note:"When healthy, he's thrown for 4,500+ and 34+ TDs — Chase and Higgins are both back. The QB3/4 by consensus; health is the only question."},
-{r:60, n:"D'Andre Swift",p:"RB",t:"CHI",gp:15,pts:155.9,yds:1080,td:7,opp:214, note:"Ben Johnson kept him at 15+ touches/game all season. Monangai looms for early downs, but the receiving role keeps his PPR value stable."},
-{r:61, n:"Jayden Daniels",p:"QB",t:"WAS",gp:17,pts:382.4,yds:4890,td:32,opp:508, note:"Konami-code QB — 800+ rushing yards in back-to-back seasons. Yates ranks him QB3; the ceiling is weekly league-winner stuff."},
-{r:62, n:"Quinshon Judkins",p:"RB",t:"CLE",gp:17,pts:185.8,yds:1240,td:9,opp:228, note:"Cleveland's clear early-down hammer with a second-year leap coming. Fannin and Sampson cap the passing-game work — better in non-PPR."},
-{r:63, n:"Jalen Hurts",p:"QB",t:"PHI",gp:15,pts:338.4,yds:4280,td:34,opp:488, note:"The tush push lives — double-digit rushing TDs every season. Losing A.J. Brown hurts the passing volume, but the rushing floor holds."},
-{r:64, n:"Bhayshul Tuten",p:"RB",t:"JAC",gp:15,pts:131.4,yds:880,td:6,opp:172, note:"Explosive sophomore back — 5.1 YPC as a rookie. Jacksonville's backfield is his to lose; Yahoo's staff is notably high (54th overall)."},
-{r:65, n:"Rome Odunze",p:"WR",t:"CHI",gp:17,pts:127.1,yds:920,td:6,opp:118, note:"Year-three breakout candidate in Ben Johnson's offense. The talent has never been the question — it's the crowded Bears target tree."},
-{r:66, n:"Jordyn Tyson",p:"WR",t:"NO",gp:17,pts:108.4,yds:780,td:5,opp:102, note:"Saints rookie who took over WR2 duties opposite Olave by midseason. Boone ranks him 65th overall — big believer bet on year two."},
-{r:67, n:"Jadarian Price",p:"RB",t:"SEA",gp:14,pts:124.6,yds:820,td:5,opp:162, note:"Traded to Seattle and immediately took the lead role in OTAs. Every source has him climbing — ADP 62 and rising; the breakout is priced in."},
-{r:68, n:"Marvin Harrison Jr.",p:"WR",t:"ARI",gp:15,pts:127.4,yds:900,td:6,opp:114, note:"The pedigree keeps him drafted top-80 — the production says WR3 so far. Year three is the make-or-break season for the profile."},
-{r:69, n:"Alec Pierce",p:"WR",t:"IND",gp:17,pts:134.3,yds:940,td:6,opp:118, note:"Led the NFL in yards per catch and kept the deep role with Daniel Jones re-signed. Weekly volatility is the tradeoff for the ceiling games."},
-{r:70, n:"Tucker Kraft",p:"TE",t:"GB",gp:17,pts:115.2,yds:800,td:6,opp:104, note:"Fully back from the ACL and Green Bay's offense runs through play-action to the TE. Every source has him top-8 at the position."},
-{r:71, n:"Justin Herbert",p:"QB",t:"LAC",gp:16,pts:318.4,yds:4120,td:28,opp:508, note:"Rushing uptick (400+ yards) plus the usual elite arm production. Consensus QB7-8 — the safest of the non-elite QB tier."},
-{r:72, n:"D.K. Metcalf",p:"WR",t:"PIT",gp:16,pts:125.6,yds:900,td:6,opp:116, note:"Second year in Pittsburgh with Aaron Rodgers back — the deep ball connection was real late in 2025. Volume is WR3; the TDs make him WR2."},
-{r:73, n:"Caleb Williams",p:"QB",t:"CHI",gp:16,pts:298.8,yds:3820,td:24,opp:492, note:"Year two under Ben Johnson is the breakout bet everyone's making. Cut sacks and turnovers in half after October — QB7-8 by consensus."},
-{r:74, n:"Tony Pollard",p:"RB",t:"TEN",gp:17,pts:152.3,yds:1040,td:7,opp:204, note:"Three straight 1,000-yard seasons and Tennessee's offense improved around him. Spears behind him; unsexy but reliable RB2 volume."},
-{r:75, n:"Brian Thomas Jr.",p:"WR",t:"JAC",gp:16,pts:120.8,yds:860,td:6,opp:110, note:"The 2024 breakout stalled in a broken Jaguars passing game. Every source still ranks him top-40 at WR on talent — a bounce-back bet."},
-{r:76, n:"Dak Prescott",p:"QB",t:"DAL",gp:15,pts:298.4,yds:3820,td:26,opp:462, note:"Lamb plus Pickens is the best WR duo he's ever had. Boring QB10 pricing for a guy who's finished top-5 twice in four years."},
-{r:77, n:"Jaylen Warren",p:"RB",t:"PIT",gp:17,pts:128.9,yds:920,td:5,opp:186, note:"Finally the lead back in Pittsburgh and Footballguys jumped him to RB23. Efficient every year of his career; volume was the only missing piece."},
-{r:78, n:"Sam LaPorta",p:"TE",t:"DET",gp:17,pts:122.6,yds:860,td:6,opp:108, note:"Still Goff's most-trusted red-zone option. Detroit's target tree is crowded, but 70 catches and 6+ TDs is a stable TE1 floor."},
-{r:79, n:"Parker Washington",p:"WR",t:"JAC",gp:17,pts:113.9,yds:840,td:5,opp:108, note:"Quietly led Jacksonville in receptions. Boone is highest on him (66th overall); the slot role in a healthier offense has real PPR juice."},
-{r:80, n:"Courtland Sutton",p:"WR",t:"DEN",gp:17,pts:130.8,yds:940,td:6,opp:120, note:"Bo Nix's red-zone security blanket, though Waddle's arrival cuts into targets. Age 30 — the floor is fine, the ceiling is capped now."},
-{r:81, n:"Brock Purdy",p:"QB",t:"SF",gp:16,pts:302.4,yds:3980,td:28,opp:472, note:"Career-best TD total now that the weapons are healthy — and Evans arrived. Karabell ranks him QB7; efficiency is elite even if volume isn't."},
-{r:82, n:"Rico Dowdle",p:"RB",t:"PIT",gp:16,pts:127.3,yds:860,td:5,opp:172, note:"Signed with Pittsburgh after a 1,000-yard year. Splits work with Jaylen Warren — the ambiguity is why he's still cheap in drafts."},
-{r:83, n:"Makai Lemon",p:"WR",t:"PHI",gp:17,pts:95.9,yds:720,td:4,opp:98, note:"Traded to Philadelphia to fill the A.J. Brown void. Boone ranks him 61st overall — the slot role next to DeVonta is a real opportunity."},
-{r:84, n:"Kyle Pitts",p:"TE",t:"ATL",gp:16,pts:120.6,yds:820,td:6,opp:110, note:"Career-best TD total under the new staff and re-signed in Atlanta. The talent-vs-production gap finally started closing in 2025."},
-{r:85, n:"Harold Fannin Jr.",p:"TE",t:"CLE",gp:17,pts:106.4,yds:740,td:5,opp:96, note:"Broke rookie TE reception records in 2025. Yates ranks him TE5; he's essentially a big slot receiver in Cleveland's offense."},
-{r:86, n:"Rhamondre Stevenson",p:"RB",t:"NE",gp:16,pts:127.1,yds:880,td:5,opp:178, note:"The Patriots' goal-line and early-down back in a rising offense. Henderson caps the ceiling, but the TD role is valuable."},
-{r:87, n:"Jaxson Dart",p:"QB",t:"NYG",gp:17,pts:278.4,yds:3540,td:22,opp:518, note:"Electric rookie year — 500+ rushing yards and the Giants won games late. Karabell ranks him QB9; classic year-two rusher-QB breakout profile."},
-{r:88, n:"RJ Harvey",p:"RB",t:"DEN",gp:14,pts:123.3,yds:840,td:6,opp:168, note:"Denver's most explosive back but Payton keeps rotating three of them. The talent says RB2; the usage says RB3 — frustrating but cheap."},
-{r:89, n:"Chris Godwin",p:"WR",t:"TB",gp:12,pts:94.6,yds:720,td:5,opp:98, note:"Re-signed in Tampa and healthy again — still a catch machine when active. Egbuka is the WR1 now; Godwin is the PPR floor play."},
-{r:90, n:"Trevor Lawrence",p:"QB",t:"JAC",gp:14,pts:262.6,yds:3340,td:22,opp:468, note:"Liam Coen's offense finally built around him — career-best efficiency when healthy. QB9-10 consensus with a top-5 ceiling."},
-{r:91, n:"Patrick Mahomes",p:"QB",t:"KC",gp:17,pts:308.6,yds:4020,td:30,opp:498, note:"The rushing came back (400+ yards) and Rice/Worthy give him juice again. Consensus QB10-13 — the discount era continues."},
-{r:92, n:"Josh Downs",p:"WR",t:"IND",gp:17,pts:98.9,yds:780,td:4,opp:108, note:"Daniel Jones' security blanket — top-10 in the league in catches from the slot. Pure PPR profile; almost no TD equity."},
-{r:93, n:"Wan'Dale Robinson",p:"WR",t:"TEN",gp:16,pts:88.6,yds:700,td:4,opp:98, note:"Signed with Tennessee and immediately led the team in catches during OTAs hype season. Target volume follows him — low ceiling, high floor."},
-{r:94, n:"Jordan Addison",p:"WR",t:"MIN",gp:17,pts:117.4,yds:860,td:6,opp:110, note:"Steady 850/6 producer as the WR2 behind Jefferson. Kyler's arrival should raise the whole passing game's floor."},
-{r:95, n:"Chuba Hubbard",p:"RB",t:"CAR",gp:17,pts:139.8,yds:960,td:6,opp:192, note:"Quietly a top-24 back two years running. Carolina drafted no one to replace him — boring, secure volume at a fair price."},
-{r:96, n:"Bo Nix",p:"QB",t:"DEN",gp:17,pts:298.4,yds:3780,td:26,opp:488, note:"Two straight top-12 finishes and now Waddle joins Sutton. Payton QBs always outproduce their draft cost — QB12-14 consensus."},
-{r:97, n:"KC Concepcion",p:"WR",t:"CLE",gp:17,pts:99.6,yds:740,td:5,opp:102, note:"Cleveland's rookie slot spark plug — return-game juice and 60+ catches. The Browns' passing volume makes the role bigger than it looks."},
-{r:98, n:"Michael Pittman Jr.",p:"WR",t:"PIT",gp:17,pts:109.6,yds:840,td:5,opp:112, note:"Signed with the Steelers — Footballguys loves the fit (WR26). Chain-mover who gives Rodgers the possession target he's always leaned on."},
-{r:99, n:"Michael Wilson",p:"WR",t:"ARI",gp:16,pts:108.4,yds:780,td:5,opp:106, note:"Career-best year while MHJ drew coverage. Kyler's departure to Minnesota means Brissett/Beck — temper the target quality expectations."},
-{r:100, n:"Travis Kelce",p:"TE",t:"KC",gp:17,pts:111.6,yds:800,td:5,opp:108, note:"One more year — announced this is the last ride. The 100-catch days are gone, but Mahomes still finds him 70+ times with red-zone looks."}
+{r:1, n:"Jahmyr Gibbs",p:"RB",t:"DET",gp:17,pts:286.4,yds:1890,td:22,opp:247,ppts:337.0,pyds:1961,ptd:18,popp:274, note:"Unstoppable late last season (30+ PPR pts/game stretches). Only real concern is a shakier O-line (new RT, backup C).", video:"https://youtu.be/QdNO9twnT-o"},
+{r:2, n:"Bijan Robinson",p:"RB",t:"ATL",gp:16,pts:260.6,yds:1720,td:14,opp:268,ppts:330.0,pyds:2164,ptd:13,popp:290, note:"New coach Kevin Stefanski historically features his backs. Better raw receiver (10.4 YPC) than Gibbs last year — some analysts now have him ahead of Gibbs."},
+{r:3, n:"Ja'Marr Chase",p:"WR",t:"CIN",gp:16,pts:248.7,yds:1708,td:17,opp:151,ppts:275.0,pyds:1527,ptd:11,popp:186, note:"Highest ceiling in the field — 2024 Triple Crown winner (17 TD, 1700 yds). Tied to Joe Burrow's health; averaged 23+ PPR pts/gm in his best year."},
+{r:4, n:"Puka Nacua",p:"WR",t:"LAR",gp:16,pts:210.3,yds:1486,td:9,opp:148,ppts:294.5,pyds:1713,ptd:11,popp:188, note:"Most efficient receiver in the NFL. TD regression risk — 9 of his 10 TDs last year came with DeVonta Adams healthy on the field."},
+{r:5, n:"Jaxon Smith-Njigba",p:"WR",t:"SEA",gp:17,pts:224.4,yds:1560,td:10,opp:162,ppts:279.5,pyds:1652,ptd:10,popp:176, note:"2024 NFL Offensive Player of the Year with a 35% target share. New OC brings uncertainty, but he's still Seattle's whole passing offense."},
+{r:6, n:"Amon-Ra St. Brown",p:"WR",t:"DET",gp:17,pts:212.2,yds:1388,td:11,opp:155,ppts:260.9,pyds:1402,ptd:11,popp:180, note:"The safest player in round one. Four straight seasons averaging 18+ PPR pts/gm; elite volume and red-zone role with almost no downside."},
+{r:7, n:"Jonathan Taylor",p:"RB",t:"IND",gp:18,pts:309.5,yds:2020,td:18,opp:291,ppts:287.7,pyds:1836,ptd:14,popp:327, note:"Rushing/TD machine (20 TD last year). Indy lost its top WR in the offseason — more checkdowns could push him toward 50 catches."},
+{r:8, n:"Christian McCaffrey",p:"RB",t:"SF",gp:17,pts:301.2,yds:2180,td:21,opp:319,ppts:302.9,pyds:1822,ptd:14,popp:277, note:"Still elite talent, but turns 30 this season coming off 450 touches. Injury history (2020, 2024) makes him the biggest round-one boom-or-bust."},
+{r:9, n:"James Cook",p:"RB",t:"BUF",gp:17,pts:275.6,yds:1780,td:16,opp:256,ppts:253.7,pyds:1685,ptd:12,popp:287, note:"Nearly matched Jonathan Taylor's workload last year (326-carry pace) and gets heavy goal-line work in one of the league's top offenses."},
+{r:10, n:"Ashton Jeanty",p:"RB",t:"LV",gp:17,pts:248.4,yds:1680,td:14,opp:289,ppts:245.9,pyds:1504,ptd:11,popp:284, note:"Rough rookie year (RB15/gm, 3.7 YPC) but gets major O-line and coaching upgrades — buy-low if the new system clicks. Market has him back in round one."},
+{r:11, n:"CeeDee Lamb",p:"WR",t:"DAL",gp:15,pts:177.1,yds:1290,td:8,opp:139,ppts:224.5,pyds:1311,ptd:8,popp:150, note:"17+ pts/gm ceiling if Dak stays healthy. Scored just 5 TDs on a 156-target pace last year — due for positive TD regression."},
+{r:12, n:"Chase Brown",p:"RB",t:"CIN",gp:17,pts:207.8,yds:1480,td:11,opp:238,ppts:245.6,pyds:1470,ptd:11,popp:239, note:"Bell-cow when trusted — averaged 21.6 PPR pts/gm over his final 10 games last season once he took over Cincinnati's backfield."},
+{r:13, n:"Justin Jefferson",p:"WR",t:"MIN",gp:17,pts:204.8,yds:1480,td:10,opp:150,ppts:220.0,pyds:1307,ptd:7,popp:152, note:"Consensus split. Averaged 16.3 PPR pts/gm in games Carson Wentz started — production hinges on a Kyler Murray bounce-back."},
+{r:14, n:"Omarion Hampton",p:"RB",t:"LAC",gp:17,pts:223.7,yds:1520,td:12,opp:262,ppts:237.8,pyds:1429,ptd:12,popp:250, note:"Underdog drafters take him in round two (ADP 14 overall). Elite workload profile in a Harbaugh offense built to run; ankle injury behind him."},
+{r:15, n:"Brock Bowers",p:"TE",t:"LV",gp:17,pts:169.4,yds:1190,td:8,opp:142,ppts:195.7,pyds:1025,ptd:8,popp:148, note:"Best pass-catching TE in football — nearly 100 catches despite bad QB play. Footballguys has him a top-8 overall pick; positional edge is massive."},
+{r:16, n:"Devon Achane",p:"RB",t:"MIA",gp:15,pts:227.8,yds:1640,td:13,opp:224,ppts:275.4,pyds:1779,ptd:11,popp:247, note:"RB5 in PPR last year despite a bottom-5 offense. New play-caller and QB situation could mean a real target decline in 2026."},
+{r:17, n:"Drake London",p:"WR",t:"ATL",gp:17,pts:196.6,yds:1340,td:9,opp:145,ppts:238.5,pyds:1331,ptd:9,popp:156, note:"Atlanta's clear #1 target on a fast-rising offense. Was a top-3 fantasy WR through his first 9 games last year before injury."},
+{r:18, n:"A.J. Brown",p:"WR",t:"NE",gp:13,pts:152.7,yds:1040,td:8,opp:122,ppts:212.8,pyds:1234,ptd:8,popp:136, note:"Traded to New England to be Drake Maye's alpha — Footballguys has him a top-15 pick. Bet on target volume he never saw in Philly's run-first attack."},
+{r:19, n:"Kenneth Walker III",p:"RB",t:"KC",gp:15,pts:196.2,yds:1320,td:10,opp:228,ppts:229.6,pyds:1515,ptd:10,popp:258, note:"Signed with Kansas City — first true lead back of the Mahomes era. Explosive but has never played 17 games; Berry ranks him a top-15 pick."},
+{r:20, n:"Nico Collins",p:"WR",t:"HOU",gp:15,pts:215.8,yds:1420,td:10,opp:158,ppts:207.1,pyds:1221,ptd:8,popp:127, note:"Alpha of the Houston passing game — top-5 in yards per route two straight years. Only knock is he's missed multiple games in back-to-back seasons."},
+{r:21, n:"Saquon Barkley",p:"RB",t:"PHI",gp:17,pts:256.7,yds:1680,td:14,opp:278,ppts:245.0,pyds:1641,ptd:10,popp:296, note:"Bounced back from a down 2025 with a monster playoff run. Age-29 season on huge career mileage, but every source still has him a top-16 pick."},
+{r:22, n:"Derrick Henry",p:"RB",t:"BAL",gp:17,pts:238.6,yds:1540,td:14,opp:265,ppts:263.9,pyds:1740,ptd:14,popp:314, note:"Ageless — RB7/gm last season. Losing key O-line pieces and a coordinator change are the real risks heading into 2026."},
+{r:23, n:"Trey McBride",p:"TE",t:"ARI",gp:17,pts:174.3,yds:1220,td:9,opp:148,ppts:207.2,pyds:1099,ptd:7,popp:175, note:"Target monster (145+ two straight years) who finally found the end zone in 2025. He and Bowers are a clear tier above every other TE."},
+{r:24, n:"George Pickens",p:"WR",t:"DAL",gp:16,pts:186.4,yds:1320,td:9,opp:138,ppts:210.9,pyds:1202,ptd:8,popp:127, note:"Big ADP riser after a strong debut season with Dallas. Risk: true 1B next to CeeDee Lamb — teammate WRs rarely both go top-12."},
+{r:25, n:"Javonte Williams",p:"RB",t:"DAL",gp:16,pts:152.8,yds:1060,td:8,opp:196,ppts:214.4,pyds:1335,ptd:12,popp:258, note:"Career year in Dallas (RB16 overall) and re-signed as the clear starter. The market keeps drafting him round three — believe the role."},
+{r:26, n:"DeVonta Smith",p:"WR",t:"PHI",gp:17,pts:167.8,yds:1210,td:8,opp:136,ppts:192.7,pyds:1134,ptd:6,popp:134, note:"Steps into the Eagles' clear WR1 role with A.J. Brown gone — Yahoo's analysts have him a top-25 player. Target ceiling he's never had before."},
+{r:27, n:"Breece Hall",p:"RB",t:"NYJ",gp:16,pts:167.9,yds:1220,td:8,opp:242,ppts:230.0,pyds:1571,ptd:9,popp:259, note:"Bounce-back candidate — Footballguys and Berry both have him ~RB13. The Jets' new staff has committed to him as a three-down back."},
+{r:28, n:"Jeremiyah Love",p:"RB",t:"ARI",gp:16,pts:184.1,yds:1260,td:11,opp:219,ppts:228.7,pyds:1498,ptd:9,popp:239, note:"Now in Arizona and the market loves the fit — Underdog ADP 24. Home-run speed with a rising target role; classic year-two rookie breakout profile."},
+{r:29, n:"Zay Flowers",p:"WR",t:"BAL",gp:17,pts:172.9,yds:1220,td:8,opp:138,ppts:202.5,pyds:1227,ptd:7,popp:126, note:"Baltimore's target leader in back-to-back years. The passing volume caps his ceiling, but the floor is rock solid with Lamar."},
+{r:30, n:"Chris Olave",p:"WR",t:"NO",gp:16,pts:162.7,yds:1180,td:7,opp:132,ppts:210.3,pyds:1169,ptd:8,popp:145, note:"Finally a full healthy season in 2025 — quietly a top-12 WR from October on. Tyler Shough stabilizing the QB spot is the swing factor."},
+{r:31, n:"Rashee Rice",p:"WR",t:"KC",gp:14,pts:174.9,yds:1210,td:11,opp:133,ppts:223.7,pyds:1125,ptd:11,popp:152, note:"Mahomes' clear WR1 when on the field — elite YAC profile and 11 TDs in 14 games last year. Durability is the only thing keeping him out of round one."},
+{r:32, n:"Josh Allen",p:"QB",t:"BUF",gp:17,pts:418.4,yds:4820,td:42,opp:524,ppts:372.1,pyds:4398,ptd:39,popp:492, note:"The QB1 by a wide gap — 40+ total TDs in five of six seasons. If you draft a QB early, this is the one worth the price."},
+{r:33, n:"Kyren Williams",p:"RB",t:"LAR",gp:16,pts:217.4,yds:1440,td:13,opp:244,ppts:225.9,pyds:1378,ptd:12,popp:245, note:"TD machine (13 last year) who never leaves the field. Blake Corum ate into early-down work late in 2025 — watch that split in camp."},
+{r:34, n:"Colston Loveland",p:"TE",t:"CHI",gp:17,pts:133.4,yds:920,td:7,opp:118,ppts:169.2,pyds:907,ptd:7,popp:119, note:"ESPN calls him the highest-ceiling pass-catcher in Chicago. Year-two TE breakouts are the classic profile — clear TE3 with top-two upside."},
+{r:35, n:"Garrett Wilson",p:"WR",t:"NYJ",gp:17,pts:161.1,yds:1180,td:8,opp:144,ppts:196.6,pyds:1111,ptd:6,popp:150, note:"Karabell has him WR9 — a huge believer call. Four straight 1,000-yard seasons through constant QB chaos; Geno Smith is at least stable."},
+{r:36, n:"Tee Higgins",p:"WR",t:"CIN",gp:12,pts:159.6,yds:1040,td:10,opp:108,ppts:185.8,pyds:965,ptd:9,popp:109, note:"Re-signed in Cincinnati and still a WR1 per-game scorer (10 TDs in 12 games). You're just betting on him finally playing a full season."},
+{r:37, n:"Jaylen Waddle",p:"WR",t:"DEN",gp:16,pts:144.9,yds:1060,td:7,opp:128,ppts:167.2,pyds:973,ptd:6,popp:112, note:"Traded to Denver — instantly Bo Nix's WR1 with Sutton aging. Footballguys is highest (WR14); speed merchant in a Payton offense that schemes touches."},
+{r:38, n:"Tetairoa McMillan",p:"WR",t:"CAR",gp:17,pts:148.6,yds:1080,td:7,opp:126,ppts:188.2,pyds:1122,ptd:6,popp:120, note:"Led all rookies in targets last year and Carolina added nothing to compete with him. Bryce Young's growth is the ceiling question."},
+{r:39, n:"Emeka Egbuka",p:"WR",t:"TB",gp:17,pts:155.4,yds:1140,td:7,opp:128,ppts:177.4,pyds:1021,ptd:7,popp:103, note:"Elite rookie season (86 catches) and Evans/Godwin are both gone from his target tree. CBS has him a top-32 player; volume is coming."},
+{r:40, n:"Travis Etienne",p:"RB",t:"NO",gp:16,pts:156.4,yds:1120,td:7,opp:208,ppts:212.6,pyds:1417,ptd:8,popp:252, note:"Signed with the Saints and Berry jumped him to RB15. Fresh legs, a pass-catching role, and no committee ahead of him in New Orleans."},
+{r:41, n:"Malik Nabers",p:"WR",t:"NYG",gp:17,pts:186.6,yds:1380,td:10,opp:152,ppts:186.7,pyds:1022,ptd:8,popp:116, note:"Fully back from the 2025 knee injury — RotoWire ranks him WR15 or better. A 150-target lock whenever he's on the field, now with Dart ascending."},
+{r:42, n:"Ladd McConkey",p:"WR",t:"LAC",gp:16,pts:140.1,yds:1040,td:6,opp:122,ppts:174.0,pyds:977,ptd:6,popp:118, note:"Herbert's most-trusted target — 85+ catches in each of his first two years. More of a floor pick than a ceiling one at this price."},
+{r:43, n:"Luther Burden III",p:"WR",t:"CHI",gp:17,pts:150.2,yds:1080,td:7,opp:132,ppts:170.0,pyds:996,ptd:6,popp:112, note:"Slot weapon who led Chicago in catches as a rookie. Ben Johnson's offense creates a St. Brown-style role for him — target volume is safe."},
+{r:44, n:"Terry McLaurin",p:"WR",t:"WAS",gp:17,pts:155.8,yds:1120,td:7,opp:134,ppts:178.7,pyds:983,ptd:8,popp:110, note:"Six straight 1,000-yard seasons and Jayden Daniels keeps ascending. Age 31, but there's zero sign of decline in the target data."},
+{r:45, n:"Josh Jacobs",p:"RB",t:"GB",gp:17,pts:228.8,yds:1510,td:12,opp:252,ppts:238.9,pyds:1445,ptd:13,popp:289, note:"Double-digit TDs in both Green Bay seasons. Field Yates is highest on him (RB7); the range of outcomes is unusually tight for a 28-year-old back."},
+{r:46, n:"Mike Evans",p:"WR",t:"SF",gp:17,pts:133.4,yds:960,td:8,opp:122,ppts:163.9,pyds:915,ptd:7,popp:100, note:"Signed with San Francisco chasing a ring — Purdy's new red-zone weapon. The 1,000-yard streak ended, but 8 TDs a year is still his baseline."},
+{r:47, n:"D.J. Moore",p:"WR",t:"BUF",gp:17,pts:143.4,yds:1080,td:7,opp:136,ppts:170.5,pyds:950,ptd:7,popp:106, note:"Traded to Buffalo — the first true WR1 of the Josh Allen era. Berry has him 51st overall; the target upside here is enormous."},
+{r:48, n:"Bucky Irving",p:"RB",t:"TB",gp:17,pts:163.1,yds:1180,td:7,opp:218,ppts:208.1,pyds:1386,ptd:9,popp:262, note:"Footballguys ranks him RB19 with room for more — the passing-down role is his and Rachaad White is gone to Washington."},
+{r:49, n:"Drake Maye",p:"QB",t:"NE",gp:17,pts:352.4,yds:4380,td:28,opp:542,ppts:326.9,pyds:4569,ptd:32,popp:504, note:"Year-three leap incoming — now he gets A.J. Brown too. Karabell ranks him QB3; the rushing production makes the floor real."},
+{r:50, n:"Lamar Jackson",p:"QB",t:"BAL",gp:16,pts:398.6,yds:5120,td:38,opp:484,ppts:324.6,pyds:4289,ptd:32,popp:449, note:"Back-to-back top-2 QB finishes. Yahoo and Yates rank him a top-32 overall pick — the rushing floor makes him matchup-proof."},
+{r:51, n:"Davante Adams",p:"WR",t:"LAR",gp:14,pts:131.6,yds:940,td:7,opp:118,ppts:187.6,pyds:926,ptd:10,popp:105, note:"Still a red-zone monster (7 TDs in 14 games) in the Rams' offense. Age-33 season — draft him for TDs, not 1,400 yards."},
+{r:52, n:"Jameson Williams",p:"WR",t:"DET",gp:16,pts:146.4,yds:1020,td:7,opp:118,ppts:185.2,pyds:1107,ptd:7,popp:99, note:"Averaged over 16 yards a catch for the third straight year. The big-play dependence makes him streaky week to week — great best ball pick."},
+{r:53, n:"David Montgomery",p:"RB",t:"HOU",gp:16,pts:147.4,yds:980,td:8,opp:188,ppts:176.5,pyds:1163,ptd:8,popp:226, note:"Signed with Houston to be the early-down/goal-line back. TD-dependent profile, but this offense scores — 8+ TDs feels like his floor."},
+{r:54, n:"Christian Watson",p:"WR",t:"GB",gp:15,pts:121.9,yds:840,td:6,opp:108,ppts:162.9,pyds:910,ptd:7,popp:86, note:"Career year once he finally stayed healthy — 6 TDs and 17+ yards a catch. Golden and Reed cap the target share; classic boom-bust WR3."},
+{r:55, n:"Carnell Tate",p:"WR",t:"TEN",gp:17,pts:111.6,yds:800,td:5,opp:104,ppts:148.4,pyds:906,ptd:5,popp:102, note:"Titans rookie who won the WR1 job by November. Cam Ward's favorite target down the stretch — the arrow points straight up."},
+{r:56, n:"Tyler Warren",p:"TE",t:"IND",gp:17,pts:130.4,yds:920,td:6,opp:114,ppts:160.2,pyds:871,ptd:5,popp:128, note:"Colts force-fed him 110+ targets as a rookie — the Daniel Jones connection was real. Clear top-5 TE with every source in agreement."},
+{r:57, n:"Cam Skattebo",p:"RB",t:"NYG",gp:17,pts:172.3,yds:1180,td:9,opp:214,ppts:221.2,pyds:1380,ptd:11,popp:244, note:"Fully recovered from the ankle injury and the Giants fed him 20+ touches/game down the stretch. Physical three-down profile; Boone's favorite sleeper."},
+{r:58, n:"TreVeyon Henderson",p:"RB",t:"NE",gp:15,pts:141.6,yds:980,td:7,opp:188,ppts:182.6,pyds:1147,ptd:9,popp:190, note:"Explosive change-of-pace back who earned more work every month. Stevenson still takes goal-line carries — upside pick, not a safe one."},
+{r:59, n:"Joe Burrow",p:"QB",t:"CIN",gp:16,pts:368.2,yds:4620,td:34,opp:518,ppts:310.6,pyds:4348,ptd:35,popp:590, note:"When healthy, he's thrown for 4,500+ and 34+ TDs — Chase and Higgins are both back. The QB3/4 by consensus; health is the only question."},
+{r:60, n:"D'Andre Swift",p:"RB",t:"CHI",gp:15,pts:155.9,yds:1080,td:7,opp:214,ppts:205.2,pyds:1353,ptd:9,popp:233, note:"Ben Johnson kept him at 15+ touches/game all season. Monangai looms for early downs, but the receiving role keeps his PPR value stable."},
+{r:61, n:"Jayden Daniels",p:"QB",t:"WAS",gp:17,pts:382.4,yds:4890,td:32,opp:508,ppts:324.5,pyds:4383,ptd:29,popp:495, note:"Konami-code QB — 800+ rushing yards in back-to-back seasons. Yates ranks him QB3; the ceiling is weekly league-winner stuff."},
+{r:62, n:"Quinshon Judkins",p:"RB",t:"CLE",gp:17,pts:185.8,yds:1240,td:9,opp:228,ppts:198.2,pyds:1323,ptd:9,popp:289, note:"Cleveland's clear early-down hammer with a second-year leap coming. Fannin and Sampson cap the passing-game work — better in non-PPR."},
+{r:63, n:"Jalen Hurts",p:"QB",t:"PHI",gp:15,pts:338.4,yds:4280,td:34,opp:488,ppts:322.5,pyds:4032,ptd:33,popp:488, note:"The tush push lives — double-digit rushing TDs every season. Losing A.J. Brown hurts the passing volume, but the rushing floor holds."},
+{r:64, n:"Bhayshul Tuten",p:"RB",t:"JAC",gp:15,pts:131.4,yds:880,td:6,opp:172,ppts:194.0,pyds:1214,ptd:10,popp:243, note:"Explosive sophomore back — 5.1 YPC as a rookie. Jacksonville's backfield is his to lose; Yahoo's staff is notably high (54th overall)."},
+{r:65, n:"Rome Odunze",p:"WR",t:"CHI",gp:17,pts:127.1,yds:920,td:6,opp:118,ppts:178.4,pyds:982,ptd:8,popp:98, note:"Year-three breakout candidate in Ben Johnson's offense. The talent has never been the question — it's the crowded Bears target tree."},
+{r:66, n:"Jordyn Tyson",p:"WR",t:"NO",gp:17,pts:108.4,yds:780,td:5,opp:102,ppts:140.9,pyds:860,ptd:4,popp:97, note:"Saints rookie who took over WR2 duties opposite Olave by midseason. Boone ranks him 65th overall — big believer bet on year two."},
+{r:67, n:"Jadarian Price",p:"RB",t:"SEA",gp:14,pts:124.6,yds:820,td:5,opp:162,ppts:174.5,pyds:1132,ptd:9,popp:215, note:"Traded to Seattle and immediately took the lead role in OTAs. Every source has him climbing — ADP 62 and rising; the breakout is priced in."},
+{r:68, n:"Marvin Harrison Jr.",p:"WR",t:"ARI",gp:15,pts:127.4,yds:900,td:6,opp:114,ppts:163.8,pyds:945,ptd:6,popp:103, note:"The pedigree keeps him drafted top-80 — the production says WR3 so far. Year three is the make-or-break season for the profile."},
+{r:69, n:"Alec Pierce",p:"WR",t:"IND",gp:17,pts:134.3,yds:940,td:6,opp:118,ppts:175.2,pyds:1049,ptd:7,popp:98, note:"Led the NFL in yards per catch and kept the deep role with Daniel Jones re-signed. Weekly volatility is the tradeoff for the ceiling games."},
+{r:70, n:"Tucker Kraft",p:"TE",t:"GB",gp:17,pts:115.2,yds:800,td:6,opp:104,ppts:139.4,pyds:749,ptd:6,popp:89, note:"Fully back from the ACL and Green Bay's offense runs through play-action to the TE. Every source has him top-8 at the position."},
+{r:71, n:"Justin Herbert",p:"QB",t:"LAC",gp:16,pts:318.4,yds:4120,td:28,opp:508,ppts:300.2,pyds:4318,ptd:28,popp:530, note:"Rushing uptick (400+ yards) plus the usual elite arm production. Consensus QB7-8 — the safest of the non-elite QB tier."},
+{r:72, n:"D.K. Metcalf",p:"WR",t:"PIT",gp:16,pts:125.6,yds:900,td:6,opp:116,ppts:162.7,pyds:927,ptd:6,popp:99, note:"Second year in Pittsburgh with Aaron Rodgers back — the deep ball connection was real late in 2025. Volume is WR3; the TDs make him WR2."},
+{r:73, n:"Caleb Williams",p:"QB",t:"CHI",gp:16,pts:298.8,yds:3820,td:24,opp:492,ppts:299.8,pyds:4226,ptd:30,popp:555, note:"Year two under Ben Johnson is the breakout bet everyone's making. Cut sacks and turnovers in half after October — QB7-8 by consensus."},
+{r:74, n:"Tony Pollard",p:"RB",t:"TEN",gp:17,pts:152.3,yds:1040,td:7,opp:204,ppts:175.1,pyds:1253,ptd:6,popp:239, note:"Three straight 1,000-yard seasons and Tennessee's offense improved around him. Spears behind him; unsexy but reliable RB2 volume."},
+{r:75, n:"Brian Thomas Jr.",p:"WR",t:"JAC",gp:16,pts:120.8,yds:860,td:6,opp:110,ppts:147.3,pyds:856,ptd:6,popp:86, note:"The 2024 breakout stalled in a broken Jaguars passing game. Every source still ranks him top-40 at WR on talent — a bounce-back bet."},
+{r:76, n:"Dak Prescott",p:"QB",t:"DAL",gp:15,pts:298.4,yds:3820,td:26,opp:462,ppts:306.0,pyds:4467,ptd:33,popp:582, note:"Lamb plus Pickens is the best WR duo he's ever had. Boring QB10 pricing for a guy who's finished top-5 twice in four years."},
+{r:77, n:"Jaylen Warren",p:"RB",t:"PIT",gp:17,pts:128.9,yds:920,td:5,opp:186,ppts:171.5,pyds:1146,ptd:6,popp:188, note:"Finally the lead back in Pittsburgh and Footballguys jumped him to RB23. Efficient every year of his career; volume was the only missing piece."},
+{r:78, n:"Sam LaPorta",p:"TE",t:"DET",gp:17,pts:122.6,yds:860,td:6,opp:108,ppts:148.0,pyds:809,ptd:6,popp:107, note:"Still Goff's most-trusted red-zone option. Detroit's target tree is crowded, but 70 catches and 6+ TDs is a stable TE1 floor."},
+{r:79, n:"Parker Washington",p:"WR",t:"JAC",gp:17,pts:113.9,yds:840,td:5,opp:108,ppts:148.2,pyds:858,ptd:6,popp:94, note:"Quietly led Jacksonville in receptions. Boone is highest on him (66th overall); the slot role in a healthier offense has real PPR juice."},
+{r:80, n:"Courtland Sutton",p:"WR",t:"DEN",gp:17,pts:130.8,yds:940,td:6,opp:120,ppts:169.9,pyds:903,ptd:8,popp:107, note:"Bo Nix's red-zone security blanket, though Waddle's arrival cuts into targets. Age 30 — the floor is fine, the ceiling is capped now."},
+{r:81, n:"Brock Purdy",p:"QB",t:"SF",gp:16,pts:302.4,yds:3980,td:28,opp:472,ppts:306.2,pyds:4424,ptd:32,popp:543, note:"Career-best TD total now that the weapons are healthy — and Evans arrived. Karabell ranks him QB7; efficiency is elite even if volume isn't."},
+{r:82, n:"Rico Dowdle",p:"RB",t:"PIT",gp:16,pts:127.3,yds:860,td:5,opp:172,ppts:169.0,pyds:1119,ptd:7,popp:208, note:"Signed with Pittsburgh after a 1,000-yard year. Splits work with Jaylen Warren — the ambiguity is why he's still cheap in drafts."},
+{r:83, n:"Makai Lemon",p:"WR",t:"PHI",gp:17,pts:95.9,yds:720,td:4,opp:98,ppts:137.9,pyds:828,ptd:5,popp:90, note:"Traded to Philadelphia to fill the A.J. Brown void. Boone ranks him 61st overall — the slot role next to DeVonta is a real opportunity."},
+{r:84, n:"Kyle Pitts",p:"TE",t:"ATL",gp:16,pts:120.6,yds:820,td:6,opp:110,ppts:156.4,pyds:883,ptd:5,popp:122, note:"Career-best TD total under the new staff and re-signed in Atlanta. The talent-vs-production gap finally started closing in 2025."},
+{r:85, n:"Harold Fannin Jr.",p:"TE",t:"CLE",gp:17,pts:106.4,yds:740,td:5,opp:96,ppts:151.5,pyds:816,ptd:5,popp:121, note:"Broke rookie TE reception records in 2025. Yates ranks him TE5; he's essentially a big slot receiver in Cleveland's offense."},
+{r:86, n:"Rhamondre Stevenson",p:"RB",t:"NE",gp:16,pts:127.1,yds:880,td:5,opp:178,ppts:167.3,pyds:1043,ptd:8,popp:169, note:"The Patriots' goal-line and early-down back in a rising offense. Henderson caps the ceiling, but the TD role is valuable."},
+{r:87, n:"Jaxson Dart",p:"QB",t:"NYG",gp:17,pts:278.4,yds:3540,td:22,opp:518,ppts:311.5,pyds:4142,ptd:29,popp:510, note:"Electric rookie year — 500+ rushing yards and the Giants won games late. Karabell ranks him QB9; classic year-two rusher-QB breakout profile."},
+{r:88, n:"RJ Harvey",p:"RB",t:"DEN",gp:14,pts:123.3,yds:840,td:6,opp:168,ppts:155.7,pyds:853,ptd:8,popp:134, note:"Denver's most explosive back but Payton keeps rotating three of them. The talent says RB2; the usage says RB3 — frustrating but cheap."},
+{r:89, n:"Chris Godwin",p:"WR",t:"TB",gp:12,pts:94.6,yds:720,td:5,opp:98,ppts:145.9,pyds:803,ptd:5,popp:108, note:"Re-signed in Tampa and healthy again — still a catch machine when active. Egbuka is the WR1 now; Godwin is the PPR floor play."},
+{r:90, n:"Trevor Lawrence",p:"QB",t:"JAC",gp:14,pts:262.6,yds:3340,td:22,opp:468,ppts:304.0,pyds:4214,ptd:32,popp:546, note:"Liam Coen's offense finally built around him — career-best efficiency when healthy. QB9-10 consensus with a top-5 ceiling."},
+{r:91, n:"Patrick Mahomes",p:"QB",t:"KC",gp:17,pts:308.6,yds:4020,td:30,opp:498,ppts:302.3,pyds:4208,ptd:30,popp:552, note:"The rushing came back (400+ yards) and Rice/Worthy give him juice again. Consensus QB10-13 — the discount era continues."},
+{r:92, n:"Josh Downs",p:"WR",t:"IND",gp:17,pts:98.9,yds:780,td:4,opp:108,ppts:135.1,pyds:721,ptd:4,popp:118, note:"Daniel Jones' security blanket — top-10 in the league in catches from the slot. Pure PPR profile; almost no TD equity."},
+{r:93, n:"Wan'Dale Robinson",p:"WR",t:"TEN",gp:16,pts:88.6,yds:700,td:4,opp:98,ppts:147.3,pyds:843,ptd:4,popp:128, note:"Signed with Tennessee and immediately led the team in catches during OTAs hype season. Target volume follows him — low ceiling, high floor."},
+{r:94, n:"Jordan Addison",p:"WR",t:"MIN",gp:17,pts:117.4,yds:860,td:6,opp:110,ppts:139.6,pyds:784,ptd:6,popp:84, note:"Steady 850/6 producer as the WR2 behind Jefferson. Kyler's arrival should raise the whole passing game's floor."},
+{r:95, n:"Chuba Hubbard",p:"RB",t:"CAR",gp:17,pts:139.8,yds:960,td:6,opp:192,ppts:169.1,pyds:1101,ptd:7,popp:209, note:"Quietly a top-24 back two years running. Carolina drafted no one to replace him — boring, secure volume at a fair price."},
+{r:96, n:"Bo Nix",p:"QB",t:"DEN",gp:17,pts:298.4,yds:3780,td:26,opp:488,ppts:297.7,pyds:4085,ptd:30,popp:555, note:"Two straight top-12 finishes and now Waddle joins Sutton. Payton QBs always outproduce their draft cost — QB12-14 consensus."},
+{r:97, n:"KC Concepcion",p:"WR",t:"CLE",gp:17,pts:99.6,yds:740,td:5,opp:102,ppts:117.4,pyds:730,ptd:3,popp:86, note:"Cleveland's rookie slot spark plug — return-game juice and 60+ catches. The Browns' passing volume makes the role bigger than it looks."},
+{r:98, n:"Michael Pittman Jr.",p:"WR",t:"PIT",gp:17,pts:109.6,yds:840,td:5,opp:112,ppts:150.9,pyds:812,ptd:5,popp:125, note:"Signed with the Steelers — Footballguys loves the fit (WR26). Chain-mover who gives Rodgers the possession target he's always leaned on."},
+{r:99, n:"Michael Wilson",p:"WR",t:"ARI",gp:16,pts:108.4,yds:780,td:5,opp:106,ppts:140.5,pyds:811,ptd:4,popp:102, note:"Career-best year while MHJ drew coverage. Kyler's departure to Minnesota means Brissett/Beck — temper the target quality expectations."},
+{r:100, n:"Travis Kelce",p:"TE",t:"KC",gp:17,pts:111.6,yds:800,td:5,opp:108,ppts:147.2,pyds:784,ptd:5,popp:118, note:"One more year — announced this is the last ride. The 100-catch days are gone, but Mahomes still finds him 70+ times with red-zone looks."}
 ];
 
 const PC={
@@ -243,9 +250,11 @@ WR:{bg:"#e3f2fd",tx:"#0d47a1",bd:"#42a5f5"},
 TE:{bg:"#f3e5f5",tx:"#4a148c",bd:"#ab47bc"},
 };
 const OPP={QB:"ATT",RB:"CAR",WR:"TGT",TE:"TGT"};
-const maxPts=Math.max(...DATA.map(d=>d.pts));
-const maxYds=Math.max(...DATA.map(d=>d.yds));
-const maxTd=Math.max(...DATA.map(d=>d.td));
+let statMode="last";
+function MV(p){return statMode==="proj"?{gp:17,pts:p.ppts,yds:p.pyds,td:p.ptd,opp:p.popp}:{gp:p.gp,pts:p.pts,yds:p.yds,td:p.td,opp:p.opp};}
+let maxPts,maxYds,maxTd;
+function updateMaxes(){maxPts=Math.max(...DATA.map(d=>MV(d).pts));maxYds=Math.max(...DATA.map(d=>MV(d).yds));maxTd=Math.max(...DATA.map(d=>MV(d).td));}
+updateMaxes();
 
 let currentPos="ALL", currentSort="rank", currentSearch="";
 
@@ -261,9 +270,9 @@ const rows=DATA
 .sort((a,b)=>
 currentSort==="name"?a.n.localeCompare(b.n):
 currentSort==="pos"?a.p.localeCompare(b.p):
-currentSort==="pts"?b.pts-a.pts:
-currentSort==="yds"?b.yds-a.yds:
-currentSort==="td"?b.td-a.td:
+currentSort==="pts"?MV(b).pts-MV(a).pts:
+currentSort==="yds"?MV(b).yds-MV(a).yds:
+currentSort==="td"?MV(b).td-MV(a).td:
 a.r-b.r);
 
 document.getElementById("count").textContent=rows.length+" players";
@@ -276,9 +285,10 @@ return;
 document.getElementById("table-body").innerHTML=rows.map((p,i)=>{
 const pc=PC[p.p]||{bg:"#f5f5f5",tx:"#333",bd:"#ccc"};
 const rankClass=p.r<=10?"elite":p.r<=25?"top":"";
-const gpClass=p.gp>=16?"":"injured";
+const v=MV(p);
+const gpClass=v.gp>=16?"":"injured";
 const oppLbl=OPP[p.p]||"OPP";
-const tdPct=Math.round((p.td/maxTd)*100);
+const tdPct=Math.round((v.td/maxTd)*100);
 const bg=i%2===0?"#fff":"#fafaf8";
 const noteHtml=p.note?`<span class="note-icon" title="${p.note.replace(/"/g,"'")}">!</span>`:"";
 const videoHtml=p.video?`<a href="${p.video}" target="_blank" rel="noopener" class="video-link">&#9654; Watch</a>`:"";
@@ -292,11 +302,11 @@ ${videoHtml}
 </div>
 </div>
 <div><span class="pos-badge" style="background:${pc.bg};color:${pc.tx};border:1px solid ${pc.bd}">${p.p}</span></div>
-<div class="gp-val ${gpClass}">${p.gp}</div>
-${bar(p.pts,maxPts,"#e63946")}
-${bar(p.yds,maxYds,"#1a73e8")}
-<div class="td-cell"><div class="td-track"><div class="bar-fill" style="width:${tdPct}%;background:#27ae60"></div></div><span class="td-val">${p.td}</span></div>
-<div class="opp-cell"><span class="opp-lbl">${oppLbl}</span><span class="opp-val">${p.opp}</span></div>
+<div class="gp-val ${gpClass}">${v.gp}</div>
+${bar(v.pts,maxPts,"#e63946")}
+${bar(v.yds,maxYds,"#1a73e8")}
+<div class="td-cell"><div class="td-track"><div class="bar-fill" style="width:${tdPct}%;background:#27ae60"></div></div><span class="td-val">${v.td}</span></div>
+<div class="opp-cell"><span class="opp-lbl">${oppLbl}</span><span class="opp-val">${v.opp}</span></div>
 </div>`;
 }).join("");
 }
@@ -305,7 +315,7 @@ function renderSummary(){
 document.getElementById("summary").innerHTML=["QB","RB","WR","TE"].map(p=>{
 const pc=PC[p];
 const group=DATA.filter(d=>d.p===p);
-const avg=(group.reduce((a,d)=>a+d.pts,0)/group.length).toFixed(1);
+const avg=(group.reduce((a,d)=>a+MV(d).pts,0)/group.length).toFixed(1);
 return `<div class="sum-card" style="background:${pc.bg};border:1px solid ${pc.bd}" onclick="setPos('${p}')">
 <div class="sum-num" style="color:${pc.tx}">${group.length}</div>
 <div class="sum-pos" style="color:${pc.tx}">${p}s ranked</div>
@@ -339,13 +349,19 @@ render();
 });
 });
 
+document.querySelectorAll("#stat-toggle button").forEach(b=>b.addEventListener("click",()=>{
+statMode=b.dataset.mode;
+document.querySelectorAll("#stat-toggle button").forEach(x=>x.classList.toggle("active",x===b));
+document.getElementById("stat-src").textContent=statMode==="proj"?"Projections: 2026 Season":"Stats: 2025 NFL Season";
+updateMaxes();render();renderSummary();
+}));
 function exportCSV(){
 const rows=DATA
 .filter(p=>(currentPos==="ALL"||p.p===currentPos)&&(p.n.toLowerCase().includes(currentSearch)||p.t.toLowerCase().includes(currentSearch)))
 .sort((a,b)=>currentSort==="name"?a.n.localeCompare(b.n):currentSort==="pos"?a.p.localeCompare(b.p):currentSort==="pts"?b.pts-a.pts:currentSort==="yds"?b.yds-a.yds:currentSort==="td"?b.td-a.td:a.r-b.r);
 const esc=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
-const head=["Rank","Player","Team","Pos","GP","Half-PPR Pts","Total Yards","TDs","CAR/TGT/ATT","Analyst Note"];
-const lines=[head.map(esc).join(",")].concat(rows.map(p=>[p.r,p.n,p.t,p.p,p.gp,p.pts,p.yds,p.td,p.opp,p.note||""].map(esc).join(",")));
+const head=["Rank","Player","Team","Pos","2025 GP","2025 Half-PPR Pts","2025 Total Yards","2025 TDs","2025 CAR/TGT/ATT","2026 Proj Half-PPR Pts","2026 Proj Total Yards","2026 Proj TDs","2026 Proj CAR/TGT/ATT","Analyst Note"];
+const lines=[head.map(esc).join(",")].concat(rows.map(p=>[p.r,p.n,p.t,p.p,p.gp,p.pts,p.yds,p.td,p.opp,p.ppts,p.pyds,p.ptd,p.popp,p.note||""].map(esc).join(",")));
 const blob=new Blob(["\uFEFF"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
 const a=document.createElement("a");a.href=URL.createObjectURL(blob);
 a.download="fantasymaxxing-2026-bestball-top100.csv";
