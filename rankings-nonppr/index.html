@@ -79,6 +79,27 @@ body{font-family:'DM Sans',sans-serif;background:#fafaf8;padding:24px 16px}
 @keyframes chip-pulse{0%,100%{opacity:1}50%{opacity:.45}}
 .export-btn{margin-left:10px;padding:6px 14px;font-size:12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid #1e7e34;background:#217346;color:#fff;font-weight:600;white-space:nowrap;transition:opacity .15s}
 .export-btn:hover{opacity:.85}
+.print-btn{margin-left:8px;padding:6px 14px;font-size:12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid #1a1a2e;background:#1a1a2e;color:#fff;font-weight:600;white-space:nowrap;transition:opacity .15s}
+.print-btn:hover{opacity:.85}
+@media print{
+body{background:#fff;padding:0}
+.controls,.sort-row,.summary{display:none}
+.header a{display:none!important}
+.note-icon,.note-tip,.video-link{display:none!important}
+.table-wrap{border:none;border-radius:0;overflow:visible}
+.table-head{background:#fff!important;color:#000;border-bottom:2px solid #000;min-width:0;padding:4px 6px;font-size:8px}
+.row{min-width:0;padding:1px 6px;border-top:1px solid #ccc;break-inside:avoid;background:#fff!important}
+.table-head,.row{grid-template-columns:34px 1fr 40px 28px 64px 64px 36px 56px}
+.bar-track,.td-track{display:none}
+.bar-val{min-width:auto;text-align:left;font-size:9px;color:#000}
+.player-name{font-size:9.5px;color:#000}.player-team{font-size:7.5px;color:#555;margin-top:0}
+.rank-num{font-size:10px;color:#333}.rank-num.elite,.rank-num.top{font-size:11px;color:#000}
+.pos-badge{border:1px solid #999!important;background:#fff!important;color:#000!important;padding:0 3px;font-size:7.5px;border-radius:3px}
+.gp-val,.td-val,.opp-val{font-size:9px;color:#000}.opp-lbl{font-size:6.5px;color:#666}
+.logo{font-size:22px}.subtitle{font-size:11px}.header{padding-bottom:8px;margin-bottom:8px;border-bottom-width:2px}
+.meta{font-size:8px}.meta strong{font-size:8px}
+.footer{font-size:8px;color:#666;margin-top:6px}
+}
 </style>
 </head>
 <body>
@@ -116,6 +137,7 @@ Updated: <span id="updated"></span>
 <button class="sort-btn" data-sort="pos">Position</button>
 <span class="count" id="count">250 players</span>
 <button class="export-btn" id="export-btn" title="Download the current view as a spreadsheet (opens in Excel)">&#11015;&#65039; Export to Excel</button>
+<button class="print-btn" id="print-btn" title="Print this board or save it as a PDF cheat sheet for draft day">&#128424;&#65039; Print / PDF</button>
 </div>
 
 <div class="table-wrap">
@@ -518,6 +540,7 @@ a.download="fantasymaxxing-2026-nonppr-top250.csv";
 document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(a.href);
 }
 document.getElementById("export-btn").addEventListener("click",exportCSV);
+document.getElementById("print-btn").addEventListener("click",()=>window.print());
 
 render();
 renderSummary();
