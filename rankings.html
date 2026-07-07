@@ -165,7 +165,7 @@ Updated: <span id="updated"></span>
 
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
-// Gibbs #1 / Bijan #2 locked. 3-250 built from 10-source consensus (CBS, ESPN, Yahoo, FBG, FantasyPros, Underdog ADP, Draft Sharks, RotoWire, NBC/Berry).
+// Gibbs #1 / Bijan #2 locked. 3-250 built from 11-source consensus (CBS, ESPN, Yahoo, FBG, FantasyPros, Underdog ADP, Draft Sharks, RotoWire, NBC/Berry, Harris Football).
 // note field = analyst insight shown on hover
 const DATA=[
 {r:1, n:"Jahmyr Gibbs",p:"RB",t:"DET",bye:6,gp:17,pts:312.4,yds:1890,td:22,opp:247,ppts:372.5,pyds:1961,ptd:18,popp:274, note:"Unstoppable late last season (30+ PPR pts/game stretches). Only real concern is a shakier O-line (new RT, backup C).", video:"https://youtu.be/QdNO9twnT-o"},
@@ -239,8 +239,8 @@ const DATA=[
 {r:69, n:"Harold Fannin Jr.",p:"TE",t:"CLE",bye:11,gp:17,pts:138.4,yds:740,td:5,opp:96,ppts:191.0,pyds:816,ptd:5,popp:121, note:"Broke rookie TE reception records in 2025. Yates ranks him TE5; he's essentially a big slot receiver in Cleveland's offense."},
 {r:70, n:"Tony Pollard",p:"RB",t:"TEN",bye:9,gp:17,pts:172.8,yds:1040,td:7,opp:204,ppts:191.1,pyds:1253,ptd:6,popp:239, note:"Three straight 1,000-yard seasons and Tennessee's offense improved around him. Spears behind him; unsexy but reliable RB2 volume."},
 {r:71, n:"Alec Pierce",p:"WR",t:"IND",bye:13,gp:17,pts:162.8,yds:940,td:6,opp:118,ppts:207.2,pyds:1049,ptd:7,popp:98, note:"Led the NFL in yards per catch and kept the deep role with Daniel Jones re-signed. Weekly volatility is the tradeoff for the ceiling games."},
-{r:72, n:"Sam LaPorta",p:"TE",t:"DET",bye:6,gp:17,pts:158.6,yds:860,td:6,opp:108,ppts:183.0,pyds:809,ptd:6,popp:107, note:"Still Goff's most-trusted red-zone option. Detroit's target tree is crowded, but 70 catches and 6+ TDs is a stable TE1 floor."},
-{r:73, n:"Tucker Kraft",p:"TE",t:"GB",bye:11,gp:17,pts:148.2,yds:800,td:6,opp:104,ppts:168.4,pyds:749,ptd:6,popp:89, note:"Fully back from the ACL and Green Bay's offense runs through play-action to the TE. Every source has him top-8 at the position."},
+{r:72, n:"Tucker Kraft",p:"TE",t:"GB",bye:11,gp:17,pts:148.2,yds:800,td:6,opp:104,ppts:168.4,pyds:749,ptd:6,popp:89, note:"Fully back from the ACL and Green Bay's offense runs through play-action to the TE. Every source has him top-8 at the position."},
+{r:73, n:"Sam LaPorta",p:"TE",t:"DET",bye:6,gp:17,pts:158.6,yds:860,td:6,opp:108,ppts:183.0,pyds:809,ptd:6,popp:107, note:"Still Goff's most-trusted red-zone option. Detroit's target tree is crowded, but 70 catches and 6+ TDs is a stable TE1 floor."},
 {r:74, n:"Kyle Pitts",p:"TE",t:"ATL",bye:11,gp:16,pts:152.6,yds:820,td:6,opp:110,ppts:195.9,pyds:883,ptd:5,popp:122, note:"Career-best TD total under the new staff and re-signed in Atlanta. The talent-vs-production gap finally started closing in 2025."},
 {r:75, n:"Rhamondre Stevenson",p:"RB",t:"NE",bye:11,gp:16,pts:148.6,yds:880,td:5,opp:178,ppts:185.8,pyds:1043,ptd:8,popp:169, note:"The Patriots' goal-line and early-down back in a rising offense. Henderson caps the ceiling, but the TD role is valuable."},
 {r:76, n:"D.K. Metcalf",p:"WR",t:"PIT",bye:9,gp:16,pts:158.6,yds:900,td:6,opp:116,ppts:194.7,pyds:927,ptd:6,popp:99, note:"Second year in Pittsburgh with Aaron Rodgers back — the deep ball connection was real late in 2025. Volume is WR3; the TDs make him WR2."},
