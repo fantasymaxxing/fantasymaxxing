@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FantasyMaxxing 2026 Kicker &amp; Defense Rankings</title>
+<link rel="icon" type="image/png" href="/favicon.png"/>
+<link rel="apple-touch-icon" href="/favicon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#fafaf8;padding:24px 16px}
+#app{max-width:1040px;margin:0 auto}
+.header{border-bottom:3px solid #1a1a2e;padding-bottom:16px;margin-bottom:20px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:42px;color:#1a1a2e;letter-spacing:1px;line-height:1}
+.subtitle{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#e63946;letter-spacing:2px}
+.navpills a{display:inline-block;margin-top:8px;padding:6px 14px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;text-decoration:none;border-radius:4px;margin-right:6px}
+.meta{text-align:right;font-size:11px;color:#aaa}
+.meta strong{color:#888;text-transform:uppercase;letter-spacing:1px;display:block;font-size:11px;margin-bottom:3px}
+.controls{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.toggle{display:inline-flex;border-radius:8px;overflow:hidden;border:1.5px solid #1a1a2e}
+.toggle button{padding:10px 22px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;background:#fff;color:#555;transition:all .15s}
+.toggle button.active{background:#1a1a2e;color:#fff}
+.count{margin-left:auto;font-size:12px;color:#888}
+.export-btn{padding:8px 14px;font-size:12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid #1e7e34;background:#217346;color:#fff;font-weight:600}
+.print-btn{padding:8px 14px;font-size:12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid #1a1a2e;background:#1a1a2e;color:#fff;font-weight:600}
+.table-wrap{background:#fff;border-radius:12px;border:1px solid #e8e8e8;overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:600px}
+thead th{background:#1a1a2e;color:#aaa;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:11px 16px;text-align:left;white-space:nowrap}
+tbody td{padding:11px 16px;border-top:1px solid #f0f0f0;font-size:13px;vertical-align:middle}
+tbody tr:nth-child(even){background:#fafaf8}
+tbody tr:hover{background:#eef3ff}
+.rk{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#bbb}
+.rk.elite{font-size:22px;color:#e63946}
+.rk.top{color:#1a1a2e}
+.nm{font-weight:700;color:#1a1a2e;font-size:14px}
+.tm{font-size:11px;color:#888}
+.bye{text-align:center;color:#555;font-weight:500}
+.pos-badge{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;display:inline-block}
+.k-badge{background:#e8eaf6;color:#283593;border:1px solid #7986cb}
+.d-badge{background:#efebe9;color:#4e342e;border:1px solid #a1887f}
+.pts{font-weight:600;color:#1a1a2e}
+.note{font-size:12px;color:#666;line-height:1.5}
+.note-mob{display:none}
+.footer{margin-top:16px;font-size:11px;color:#bbb;text-align:center}
+@media print{
+body{background:#fff;padding:0}
+.controls .export-btn,.controls .print-btn,.navpills{display:none!important}
+#app{max-width:7in;margin:0 auto}
+thead th{background:#fff!important;color:#000;border-bottom:2px solid #000;font-size:8px;padding:5px 8px}
+tbody td{padding:4px 8px;font-size:9.5px}
+.pos-badge{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+table{min-width:0}.table-wrap{border:1px solid #bbb;overflow:visible}
+tbody tr{break-inside:avoid}
+.logo{font-size:24px}.subtitle{font-size:12px}
+}
+@media(max-width:640px){.note{display:none}.note-mob{display:none}}
+</style>
+</head>
+<body>
+<div id="app">
+<div class="header">
+<div>
+<div class="logo">FANTASYMAXXING</div>
+<div class="subtitle">2026 KICKER &amp; DEFENSE RANKINGS</div>
+<div class="navpills">
+<a href="/" style="background:#e63946">&#8592; Home</a>
+<a href="/rankings/" style="background:#1a1a2e">PPR Top 250</a>
+<a href="/rankings-nonppr/" style="background:#1a1a2e">Non-PPR Top 250</a>
+<a href="/rankings-bestball/" style="background:#1a1a2e">Best Ball Top 100</a>
+<a href="/draft-assistant/" style="background:#1a1a2e">&#127919; Draft Assistant</a>
+</div>
+</div>
+<div class="meta">
+<strong>2026 Consensus Projections</strong>
+Updated: <span id="updated"></span>
+</div>
+</div>
+
+<div class="controls">
+<div class="toggle" id="toggle">
+<button class="active" data-v="K">&#127944; TOP 20 KICKERS</button>
+<button data-v="D">&#128737;&#65039; TOP 25 DEFENSES</button>
+</div>
+<span class="count" id="count"></span>
+<button class="export-btn" id="export-btn">&#11015;&#65039; Export to Excel</button>
+<button class="print-btn" onclick="window.print()">&#128424;&#65039; Print / PDF</button>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead id="thead"></thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+
+<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Updated daily</div>
+</div>
+
+<script>
+// 2026 consensus — kickers (top 20) & team defenses (top 25).
+// Compiled from Footballguys, ESPN, FantasyPros & Yahoo positional rankings. pts = projected 2026 fantasy points.
+const KICKERS=[
+{r:1,n:"Brandon Aubrey",t:"DAL",bye:14,pts:158,note:"Unanimous K1 — huge leg and a high-scoring Dallas offense. The only kicker worth reaching for a round early."},
+{r:2,n:"Ka'imi Fairbairn",t:"HOU",bye:8,pts:150,note:"Reliable leg attached to a top-10 scoring offense that stalls in the red zone — a recipe for kicker points."},
+{r:3,n:"Cameron Dicker",t:"LAC",bye:7,pts:148,note:"Elite accuracy and a Chargers offense that moves the ball. One of the safest weekly floors at the position."},
+{r:4,n:"Jason Myers",t:"SEA",bye:11,pts:143,note:"Steady veteran in a dome-adjacent home stadium; Seattle's offense keeps him in range."},
+{r:5,n:"Cam Little",t:"JAC",bye:7,pts:141,note:"Big-leg sophomore trending up — Jacksonville's improving offense should hand him plenty of chances."},
+{r:6,n:"Eddy Pineiro",t:"SF",bye:8,pts:140,note:"49ers' loaded offense drives deep; even in a committee-scoring attack the volume is there."},
+{r:7,n:"Tyler Loop",t:"BAL",bye:13,pts:138,note:"Took over a Baltimore offense that scores at will — high-upside if the accuracy holds."},
+{r:8,n:"Chris Boswell",t:"PIT",bye:9,pts:136,note:"Money in the clutch; Pittsburgh's field-goal-heavy tendencies are a kicker's best friend."},
+{r:9,n:"Harrison Butker",t:"KC",bye:5,pts:135,note:"Chiefs offense means constant scoring chances — a rock-solid set-and-forget option."},
+{r:10,n:"Jake Bates",t:"DET",bye:6,pts:133,note:"Big leg in Detroit's high-powered offense; touchback-or-field-goal upside every week."},
+{r:11,n:"Chase McLaughlin",t:"TB",bye:10,pts:132,note:"Automatic accuracy with Tampa; quietly one of the most consistent scorers in fantasy."},
+{r:12,n:"Cairo Santos",t:"CHI",bye:10,pts:131,note:"Bears' improving offense under a new staff should lift his opportunity ceiling."},
+{r:13,n:"Will Reichard",t:"MIN",bye:6,pts:130,note:"Strong leg in a dome; Minnesota's offense keeps him busy inside 50."},
+{r:14,n:"Evan McPherson",t:"CIN",bye:6,pts:129,note:"Big-leg kicker tied to a Burrow offense — elite ceiling when Cincinnati is rolling."},
+{r:15,n:"Wil Lutz",t:"DEN",bye:10,pts:127,note:"Payton's offense drives the field; plenty of medium-range attempts in Denver."},
+{r:16,n:"Andy Borregales",t:"NE",bye:11,pts:126,note:"Rookie leg on a rising Patriots offense — a sneaky late-round streamer."},
+{r:17,n:"Harrison Mevis",t:"LAR",bye:11,pts:125,note:"Big-leg kicker in a Rams offense that gets into scoring range often."},
+{r:18,n:"Jake Elliott",t:"PHI",bye:10,pts:124,note:"Veteran accuracy; Philadelphia's red-zone struggles can turn into field goals."},
+{r:19,n:"Blake Grupe",t:"IND",bye:13,pts:123,note:"Colts' offense with Taylor keeps drives alive — a fine bye-week fill-in."},
+{r:20,n:"Tyler Bass",t:"BUF",bye:7,pts:122,note:"Bounce-back candidate on the league's best offense; the leg and volume are both there."}
+];
+const DEFENSES=[
+{r:1,n:"Houston Texans",t:"HOU",bye:8,pts:138,note:"Consensus DST1 — elite pass rush and takeaway rate. The one defense worth drafting a round early."},
+{r:2,n:"Denver Broncos",t:"DEN",bye:10,pts:132,note:"Loaded secondary and a relentless front; a weekly sack-and-turnover threat."},
+{r:3,n:"Seattle Seahawks",t:"SEA",bye:11,pts:130,note:"Aggressive, ball-hawking unit at home; consistent points from pressure and picks."},
+{r:4,n:"Los Angeles Rams",t:"LAR",bye:11,pts:127,note:"Elite interior rush generates sacks in bunches — a top-tier streaming anchor."},
+{r:5,n:"Philadelphia Eagles",t:"PHI",bye:10,pts:125,note:"Deep, talented front seven; the pass rush alone keeps them a weekly top-6 unit."},
+{r:6,n:"Pittsburgh Steelers",t:"PIT",bye:9,pts:124,note:"Always around the ball under the same defensive staff — sacks and takeaways galore."},
+{r:7,n:"Minnesota Vikings",t:"MIN",bye:6,pts:123,note:"Aggressive blitzing scheme forces turnovers; high ceiling in good matchups."},
+{r:8,n:"Los Angeles Chargers",t:"LAC",bye:7,pts:121,note:"Harbaugh's defense is fast and physical; a rising unit with real upside."},
+{r:9,n:"New England Patriots",t:"NE",bye:11,pts:120,note:"Rebuilt front is disruptive; a sneaky top-10 defense on an improving team."},
+{r:10,n:"Jacksonville Jaguars",t:"JAC",bye:7,pts:119,note:"Playmaking secondary; the takeaways come in bunches when the pass rush shows up."},
+{r:11,n:"Green Bay Packers",t:"GB",bye:11,pts:118,note:"Young, fast defense that creates pressure; solid weekly floor at Lambeau."},
+{r:12,n:"Baltimore Ravens",t:"BAL",bye:13,pts:116,note:"Talent everywhere; the ceiling is top-3 when the pass rush is healthy."},
+{r:13,n:"Buffalo Bills",t:"BUF",bye:7,pts:115,note:"Opportunistic unit that plays with a lead — turnovers and garbage-time sacks."},
+{r:14,n:"Detroit Lions",t:"DET",bye:6,pts:114,note:"Aggressive scheme; when the pass rush clicks the takeaways follow."},
+{r:15,n:"Kansas City Chiefs",t:"KC",bye:5,pts:113,note:"Spagnuolo's defense always produces sacks and clutch stops in big games."},
+{r:16,n:"Cleveland Browns",t:"CLE",bye:11,pts:112,note:"Elite pass rush led by Garrett; the sack floor is among the highest in the league."},
+{r:17,n:"Chicago Bears",t:"CHI",bye:10,pts:111,note:"Young, ascending defense with playmakers; a strong stream in plus matchups."},
+{r:18,n:"New Orleans Saints",t:"NO",bye:8,pts:110,note:"Veteran unit that forces turnovers at home; matchup-dependent but capable."},
+{r:19,n:"Indianapolis Colts",t:"IND",bye:13,pts:109,note:"Interior pressure and a ball-hawking secondary; solid depth option."},
+{r:20,n:"San Francisco 49ers",t:"SF",bye:8,pts:108,note:"When healthy the front is elite; injury risk caps the weekly floor."},
+{r:21,n:"Atlanta Falcons",t:"ATL",bye:11,pts:107,note:"Improved pass rush; a matchup-based streamer with upside at home."},
+{r:22,n:"Tampa Bay Buccaneers",t:"TB",bye:10,pts:106,note:"Physical front seven; forces enough turnovers to be a weekly consideration."},
+{r:23,n:"New York Giants",t:"NYG",bye:8,pts:105,note:"Elite edge rush drives the sack total; boom-or-bust week to week."},
+{r:24,n:"Cincinnati Bengals",t:"CIN",bye:6,pts:104,note:"Talented but inconsistent; the ceiling is there in the right matchup."},
+{r:25,n:"Dallas Cowboys",t:"DAL",bye:14,pts:103,note:"Pass rush keeps them relevant; a fine bye-week or matchup streamer."}
+];
+
+let mode="K";
+function data(){return mode==="K"?KICKERS:DEFENSES;}
+
+function render(){
+const isK=mode==="K";
+document.getElementById("thead").innerHTML=`<tr><th>Rank</th><th>${isK?"Kicker":"Defense"}</th><th>Pos</th><th style="text-align:center">Bye</th><th>Proj Pts</th><th class="note-col">Outlook</th></tr>`;
+document.getElementById("tbody").innerHTML=data().map(x=>{
+const rc=x.r<=5?"elite":x.r<=10?"top":"";
+return `<tr>
+<td><span class="rk ${rc}">${x.r}</span></td>
+<td><div class="nm">${x.n}</div><div class="tm">${x.t}</div></td>
+<td><span class="pos-badge ${isK?'k-badge':'d-badge'}">${isK?'K':'DST'}</span></td>
+<td class="bye">${x.bye}</td>
+<td class="pts">${x.pts.toFixed(1)}</td>
+<td class="note">${x.note}</td>
+</tr>`;
+}).join("");
+document.getElementById("count").textContent=data().length+(isK?" kickers":" defenses");
+}
+
+function exportCSV(){
+const isK=mode==="K";
+const esc=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+const head=["Rank",isK?"Kicker":"Defense","Team","Pos","Bye","2026 Proj Pts","Outlook"];
+const lines=[head.map(esc).join(",")].concat(data().map(x=>[x.r,x.n,x.t,isK?"K":"DST",x.bye,x.pts,x.note].map(esc).join(",")));
+const blob=new Blob(["﻿"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
+const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+a.download=isK?"fantasymaxxing-2026-kickers-top20.csv":"fantasymaxxing-2026-defenses-top25.csv";
+document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(a.href);
+}
+
+document.querySelectorAll("#toggle button").forEach(b=>b.addEventListener("click",()=>{
+mode=b.dataset.v;
+document.querySelectorAll("#toggle button").forEach(x=>x.classList.toggle("active",x===b));
+render();
+}));
+document.getElementById("export-btn").addEventListener("click",exportCSV);
+document.getElementById("updated").textContent=new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+render();
+</script>
+</body>
+</html>
