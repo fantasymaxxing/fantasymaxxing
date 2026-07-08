@@ -59,6 +59,14 @@ section{padding:80px 24px}
 .feat-icon.gold{background:rgba(244,196,48,0.12)}
 .feat-title{font-weight:700;font-size:16px;margin-bottom:8px}
 .feat-desc{font-size:13px;color:var(--gray);line-height:1.6}
+.news-list{list-style:none;max-width:820px;border-top:1px solid rgba(255,255,255,0.09)}
+.news-item{border-bottom:1px solid rgba(255,255,255,0.07);padding:19px 4px;display:flex;gap:16px}
+.ni-num{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#4a5563;min-width:26px;text-align:right;line-height:1.25}
+.ni-main{flex:1}
+.ni-head{font-size:18px;font-weight:700;color:#fff;line-height:1.35;margin-bottom:5px}
+.ni-team{color:var(--blue)}
+.ni-body{font-size:15px;color:#aeb8c4;line-height:1.6}
+@media(max-width:600px){.news-item{gap:12px}.ni-num{font-size:19px;min-width:20px}.ni-head{font-size:16px}.ni-body{font-size:14px}}
 .rankings-promo{background:linear-gradient(135deg,rgba(29,161,242,0.08) 0%,rgba(13,15,26,1) 60%);border:1px solid rgba(29,161,242,0.2);border-radius:24px;padding:52px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
 .rp-left .label{font-family:'Bebas Neue',sans-serif;font-size:11px;color:var(--blue);letter-spacing:3px;margin-bottom:8px}
 .rp-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,48px);margin-bottom:12px;line-height:1.05}
@@ -128,7 +136,7 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
 <nav>
   <a href="/" class="nav-logo">FANTASY<span>MAXXING</span></a>
   <ul class="nav-links">
-    <li><a href="#features">Features</a></li>
+    <li><a href="#news">News</a></li>
     <li><a href="#rankings">Rankings</a></li>
     <li><a href="#draft-assistant">Draft Assistant</a></li>
     <li><a href="#watch">Social</a></li>
@@ -158,28 +166,63 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   </div>
 </section>
 <div class="divider"></div>
-<section id="features">
+<section id="news">
   <div class="section-inner">
-    <div class="section-tag">Why FantasyMaxxing</div>
-    <h2 class="section-title">TURNING CASUAL MANAGERS<br>INTO LEAGUE WINNERS</h2>
-    <p class="section-desc">Data-driven insights without the noise. Everything you need to dominate your league.</p>
-    <div class="features">
-      <div class="feat-card blue">
-        <div class="feat-icon blue">&#x1F4CA;</div>
-        <div class="feat-title">AI-Compiled Rankings</div>
-        <div class="feat-desc">Our AI compiles consensus rankings from the top 11 fantasy football sources &mdash; CBS, ESPN, Yahoo, Rotoworld, Footballguys, FantasyPros, Draft Sharks, RotoWire, Harris Football, and live Underdog draft data &mdash; into one board, in PPR, Non-PPR, and Best Ball flavors.</div>
-      </div>
-      <div class="feat-card red">
-        <div class="feat-icon red">&#x26A1;</div>
-        <div class="feat-title">Waiver Wire Alerts</div>
-        <div class="feat-desc">Be first to the wire. We surface breakout candidates and injury replacements before your league catches on.</div>
-      </div>
-      <div class="feat-card gold">
-        <div class="feat-icon gold">&#x1F4B0;</div>
-        <div class="feat-title">Trade Analyzer</div>
-        <div class="feat-desc">Never get fleeced again. Our value-based trade breakdowns help you win deals and strengthen your roster.</div>
-      </div>
-    </div>
+    <div class="section-tag">Updated Jul 7</div>
+    <h2 class="section-title">NEWS &amp; NOTES</h2>
+    <ol class="news-list">
+
+      <li class="news-item"><span class="ni-num">1</span><div class="ni-main">
+        <div class="ni-head"><span class="ni-team">KC:</span> Mahomes on track for full training camp</div>
+        <div class="ni-body">Patrick Mahomes is trending toward full 11-on-11 work to open camp, easing any Week 1 worry. The thing to watch is whether last year's career-high rushing &mdash; a big driver of his fantasy value &mdash; sticks around now that he's healthy.</div>
+      </div></li>
+
+      <li class="news-item"><span class="ni-num">2</span><div class="ni-main">
+        <div class="ni-head"><span class="ni-team">NO:</span> Travis Etienne lands the full-volume role</div>
+        <div class="ni-body">Etienne left Jacksonville for New Orleans and is expected to handle "full volume" out of the Saints' backfield, putting him back in every-down territory after splitting time last year.</div>
+      </div></li>
+
+      <li class="news-item"><span class="ni-num">3</span><div class="ni-main">
+        <div class="ni-head"><span class="ni-team">JAX:</span> Bhayshul Tuten takes over the Jaguars backfield</div>
+        <div class="ni-body">With Etienne gone, the second-year back sits atop the depth chart and has been flashing explosive plays in camp while Chris Rodriguez misses time. His 4.32 speed and short-yardage punch give him real upside in Liam Coen's offense.</div>
+      </div></li>
+
+      <li class="news-item"><span class="ni-num">4</span><div class="ni-main">
+        <div class="ni-head"><span class="ni-team">NE:</span> A.J. Brown and Drake Maye click early</div>
+        <div class="ni-body">The two have shown immediate chemistry this offseason, and Brown's presence should keep boxes lighter for the whole New England offense &mdash; including rookie back TreVeyon Henderson, whose improved pass protection is earning him more snaps.</div>
+      </div></li>
+
+      <li class="news-item"><span class="ni-num">5</span><div class="ni-main">
+        <div class="ni-head"><span class="ni-team">NYG:</span> Cam Skattebo set to lead the Giants backfield</div>
+        <div class="ni-body">Coming off his injury recovery, Skattebo is slated as New York's lead runner in 2026, with Tyrone Tracy and Devin Singletary working behind him. Head coach Jim Harbaugh has called him a top-tier back.</div>
+      </div></li>
+
+      <li class="news-item"><span class="ni-num">6</span><div class="ni-main">
+        <div class="ni-head"><span class="ni-team">HOU:</span> David Montgomery inherits a clean goal-line role</div>
+        <div class="ni-body">Montgomery moves to Houston as the early-down and short-yardage back with no real competition for touchdowns near the end zone. The one swing factor is a Texans offensive line that struggled to run-block last season.</div>
+      </div></li>
+
+      <li class="news-item"><span class="ni-num">7</span><div class="ni-main">
+        <div class="ni-head"><span class="ni-team">BAL:</span> Lamar Jackson raves about Zay Flowers</div>
+        <div class="ni-body">Jackson called Flowers' value "out of this world" this offseason. He's already an entrenched target hog in Baltimore &mdash; the one thing that could push him into the elite tier is a jump in touchdowns.</div>
+      </div></li>
+
+      <li class="news-item"><span class="ni-num">8</span><div class="ni-main">
+        <div class="ni-head"><span class="ni-team">DET:</span> New coordinator points to a Sam LaPorta bounce-back</div>
+        <div class="ni-body">Detroit brought in Drew Petzig &mdash; the play-caller who made Trey McBride a target monster in Arizona. That scheme change sets up a bigger role for LaPorta, who's been highly efficient whenever he's healthy.</div>
+      </div></li>
+
+      <li class="news-item"><span class="ni-num">9</span><div class="ni-main">
+        <div class="ni-head"><span class="ni-team">CLE:</span> Harold Fannin Jr. keeps flashing in Cleveland</div>
+        <div class="ni-body">The Browns lean on their tight ends, and Fannin backed up a strong rookie year (11.7 PPR points per game) even after the team added receivers. He tied rookie Christian McCaffrey for the most 5+ yard gains after contact by any player under 22 since 2015.</div>
+      </div></li>
+
+      <li class="news-item"><span class="ni-num">10</span><div class="ni-main">
+        <div class="ni-head"><span class="ni-team">BAL:</span> Isaiah Likely lined up for a bigger role</div>
+        <div class="ni-body">New play-caller Matt Nagy is expected to feature his move tight end more often. Likely has already topped 12.5 PPR points in eight of his nine career games with at least six targets &mdash; the volume just needs to follow.</div>
+      </div></li>
+
+    </ol>
   </div>
 </section>
 <div class="divider"></div>
@@ -309,12 +352,6 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   <div class="footer-inner">
     <div class="footer-logo">FANTASY<span>MAXXING</span></div>
     <nav class="footer-links">
-      <a href="#features">Features</a>
-      <a href="draft-assistant/">Draft Assistant</a>
-      <a href="rankings.html">PPR Rankings</a>
-      <a href="rankings-nonppr/">Non-PPR</a>
-      <a href="rankings-bestball/">Best Ball</a>
-      <a href="kickers-defenses/">K &amp; DST</a>
       <a href="https://x.com/fantasymaxxing" target="_blank">X</a>
       <a href="https://www.tiktok.com/@fantasymaxxing" target="_blank">TikTok</a>
       <a href="https://www.youtube.com/@FantasyMaxxing" target="_blank">YouTube</a>
