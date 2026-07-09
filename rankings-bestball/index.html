@@ -79,6 +79,7 @@ body{font-family:'DM Sans',sans-serif;background:#fafaf8;padding:24px 16px}
 .stat-toggle button.proj.active{background:linear-gradient(135deg,#e63946,#f4a300);color:#fff}
 .new-chip{display:inline-block;background:#f4c430;color:#1a1a2e;font-size:9px;font-weight:800;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:middle;letter-spacing:.5px;animation:chip-pulse 1.6s ease-in-out infinite}
 @keyframes chip-pulse{0%,100%{opacity:1}50%{opacity:.45}}
+.rook-badge{display:inline-block;background:#1a1a2e;color:#f4c430;font-size:9px;font-weight:800;border-radius:3px;padding:1px 4px;margin-left:5px;vertical-align:middle;letter-spacing:.5px}
 .export-btn{margin-left:10px;padding:6px 14px;font-size:12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid #1e7e34;background:#217346;color:#fff;font-weight:600;white-space:nowrap;transition:opacity .15s}
 .export-btn:hover{opacity:.85}
 .print-btn{margin-left:8px;padding:6px 14px;font-size:12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid #1a1a2e;background:#1a1a2e;color:#fff;font-weight:600;white-space:nowrap;transition:opacity .15s}
@@ -192,7 +193,7 @@ const DATA=[
 {r:22, n:"Nico Collins",p:"WR",t:"HOU",bye:8,gp:15,pts:215.8,yds:1420,td:10,opp:158,ppts:207.2,pyds:1221,ptd:8,popp:127, note:"Alpha of the Houston passing game — top-5 in yards per route two straight years. Only knock is he's missed multiple games in back-to-back seasons."},
 {r:23, n:"George Pickens",p:"WR",t:"DAL",bye:14,gp:16,pts:186.4,yds:1320,td:9,opp:138,ppts:210.9,pyds:1203,ptd:8,popp:127, note:"Big ADP riser after a strong debut season with Dallas. Risk: true 1B next to CeeDee Lamb — teammate WRs rarely both go top-12."},
 {r:24, n:"DeVonta Smith",p:"WR",t:"PHI",bye:10,gp:17,pts:167.8,yds:1210,td:8,opp:136,ppts:192.7,pyds:1134,ptd:6,popp:134, note:"Steps into the Eagles' clear WR1 role with A.J. Brown gone — Yahoo's analysts have him a top-25 player. Target ceiling he's never had before."},
-{r:25, n:"Jeremiyah Love",p:"RB",t:"ARI",bye:14,gp:16,pts:184.1,yds:1260,td:11,opp:219,ppts:228.7,pyds:1498,ptd:9,popp:238, note:"Now in Arizona and the market loves the fit — Underdog ADP 24. Home-run speed with a rising target role; classic year-two rookie breakout profile."},
+{r:25, n:"Jeremiyah Love",p:"RB",t:"ARI",bye:14,gp:16,pts:184.1,yds:1260,td:11,opp:219,ppts:228.7,pyds:1498,ptd:9,popp:238,rook:1, note:"Cardinals took the Notre Dame star third overall — the highest-drafted running back since Saquon Barkley. Projected as an every-down back from Day 1; elite talent with the workload to match right away."},
 {r:26, n:"Trey McBride",p:"TE",t:"ARI",bye:14,gp:17,pts:174.3,yds:1220,td:9,opp:148,ppts:207.2,pyds:1099,ptd:7,popp:175, note:"Target monster (145+ two straight years) who finally found the end zone in 2025. He and Bowers are a clear tier above every other TE."},
 {r:27, n:"Breece Hall",p:"RB",t:"NYJ",bye:13,gp:16,pts:167.9,yds:1220,td:8,opp:242,ppts:230.0,pyds:1571,ptd:9,popp:259, note:"Bounce-back candidate — Footballguys and Berry both have him ~RB13. The Jets' new staff has committed to him as a three-down back."},
 {r:28, n:"Rashee Rice",p:"WR",t:"KC",bye:5,gp:14,pts:174.9,yds:1210,td:11,opp:133,ppts:223.7,pyds:1125,ptd:11,popp:152, note:"Mahomes' clear WR1 when on the field — elite YAC profile and 11 TDs in 14 games last year. Durability is the only thing keeping him out of round one."},
@@ -223,7 +224,7 @@ const DATA=[
 {r:53, n:"Jameson Williams",p:"WR",t:"DET",bye:6,gp:16,pts:146.4,yds:1020,td:7,opp:118,ppts:185.2,pyds:1107,ptd:7,popp:99, note:"Averaged over 16 yards a catch for the third straight year. The big-play dependence makes him streaky week to week — great best ball pick."},
 {r:54, n:"Lamar Jackson",p:"QB",t:"BAL",bye:13,gp:16,pts:398.6,yds:5120,td:38,opp:484,ppts:324.6,pyds:4290,ptd:32,popp:449, note:"Back-to-back top-2 QB finishes. Yahoo and Yates rank him a top-32 overall pick — the rushing floor makes him matchup-proof."},
 {r:55, n:"D'Andre Swift",p:"RB",t:"CHI",bye:10,gp:15,pts:155.9,yds:1080,td:7,opp:214,ppts:205.2,pyds:1353,ptd:9,popp:233, note:"Ben Johnson kept him at 15+ touches/game all season. Monangai looms for early downs, but the receiving role keeps his PPR value stable."},
-{r:56, n:"Carnell Tate",p:"WR",t:"TEN",bye:9,gp:17,pts:111.6,yds:800,td:5,opp:104,ppts:148.4,pyds:906,ptd:5,popp:102, note:"Titans rookie who won the WR1 job by November. Cam Ward's favorite target down the stretch — the arrow points straight up."},
+{r:56, n:"Carnell Tate",p:"WR",t:"TEN",bye:9,gp:17,pts:111.6,yds:800,td:5,opp:104,ppts:148.4,pyds:906,ptd:5,popp:102,rook:1, note:"Titans took the Ohio State WR fourth overall — scouts call it the cleanest path to a true WR1 role in the class. Pairs with second-year QB Cam Ward; rookie receivers run hot and cold, but the Week 1 opportunity is real."},
 {r:57, n:"Christian Watson",p:"WR",t:"GB",bye:11,gp:15,pts:121.9,yds:840,td:6,opp:108,ppts:162.9,pyds:910,ptd:7,popp:86, note:"Career year once he finally stayed healthy — 6 TDs and 17+ yards a catch. Golden and Reed cap the target share; classic boom-bust WR3."},
 {r:58, n:"Quinshon Judkins",p:"RB",t:"CLE",bye:11,gp:17,pts:185.8,yds:1240,td:9,opp:228,ppts:198.2,pyds:1323,ptd:9,popp:289, note:"Cleveland's clear early-down hammer with a second-year leap coming. Fannin and Sampson cap the passing-game work — better in non-PPR."},
 {r:59, n:"Drake Maye",p:"QB",t:"NE",bye:11,gp:17,pts:352.4,yds:4380,td:28,opp:542,ppts:326.9,pyds:4569,ptd:32,popp:504, note:"Year-three leap incoming — now he gets A.J. Brown too. Karabell ranks him QB3; the rushing production makes the floor real."},
@@ -232,8 +233,8 @@ const DATA=[
 {r:62, n:"Rome Odunze",p:"WR",t:"CHI",bye:10,gp:17,pts:127.1,yds:920,td:6,opp:118,ppts:178.4,pyds:982,ptd:8,popp:98, note:"Year-three breakout candidate in Ben Johnson's offense. The talent has never been the question — it's the crowded Bears target tree."},
 {r:63, n:"Joe Burrow",p:"QB",t:"CIN",bye:6,gp:16,pts:368.2,yds:4620,td:34,opp:518,ppts:310.6,pyds:4349,ptd:35,popp:590, note:"When healthy, he's thrown for 4,500+ and 34+ TDs — Chase and Higgins are both back. The QB3/4 by consensus; health is the only question."},
 {r:64, n:"Jayden Daniels",p:"QB",t:"WAS",bye:7,gp:17,pts:382.4,yds:4890,td:32,opp:508,ppts:324.5,pyds:4383,ptd:29,popp:495, note:"Konami-code QB — 800+ rushing yards in back-to-back seasons. Yates ranks him QB3; the ceiling is weekly league-winner stuff."},
-{r:65, n:"Jadarian Price",p:"RB",t:"SEA",bye:11,gp:14,pts:124.6,yds:820,td:5,opp:162,ppts:174.5,pyds:1132,ptd:9,popp:215, note:"Traded to Seattle and immediately took the lead role in OTAs. Every source has him climbing — ADP 62 and rising; the breakout is priced in."},
-{r:66, n:"Jordyn Tyson",p:"WR",t:"NO",bye:8,gp:17,pts:108.4,yds:780,td:5,opp:102,ppts:140.9,pyds:860,ptd:4,popp:97, note:"Saints rookie who took over WR2 duties opposite Olave by midseason. Boone ranks him 65th overall — big believer bet on year two."},
+{r:65, n:"Jadarian Price",p:"RB",t:"SEA",bye:11,gp:14,pts:124.6,yds:820,td:5,opp:162,ppts:174.5,pyds:1132,ptd:9,popp:215,rook:1, note:"Seattle used the final pick of the first round on Love's Notre Dame backfield mate. With Kenneth Walker III gone to Kansas City, the lead job is wide open — the committee talk may not survive camp."},
+{r:66, n:"Jordyn Tyson",p:"WR",t:"NO",bye:8,gp:17,pts:108.4,yds:780,td:5,opp:102,ppts:140.9,pyds:860,ptd:4,popp:97,rook:1, note:"Saints spent the eighth pick on the best route-runner in the class. Higher ceiling than most rookie wideouts and more Year-1 variance; opposite Chris Olave, the target path is there."},
 {r:67, n:"Jalen Hurts",p:"QB",t:"PHI",bye:10,gp:15,pts:338.4,yds:4280,td:34,opp:488,ppts:322.5,pyds:4032,ptd:33,popp:488, note:"The tush push lives — double-digit rushing TDs every season. Losing A.J. Brown hurts the passing volume, but the rushing floor holds."},
 {r:68, n:"Brian Thomas Jr.",p:"WR",t:"JAC",bye:7,gp:16,pts:120.8,yds:860,td:6,opp:110,ppts:147.3,pyds:856,ptd:6,popp:86, note:"The 2024 breakout stalled in a broken Jaguars passing game. Every source still ranks him top-40 at WR on talent — a bounce-back bet."},
 {r:69, n:"Marvin Harrison Jr.",p:"WR",t:"ARI",bye:14,gp:15,pts:127.4,yds:900,td:6,opp:114,ppts:163.8,pyds:945,ptd:6,popp:103, note:"The pedigree keeps him drafted top-80 — the production says WR3 so far. Year three is the make-or-break season for the profile."},
@@ -243,7 +244,7 @@ const DATA=[
 {r:73, n:"Alec Pierce",p:"WR",t:"IND",bye:13,gp:17,pts:134.3,yds:940,td:6,opp:118,ppts:175.2,pyds:1049,ptd:7,popp:98, note:"Led the NFL in yards per catch and kept the deep role with Daniel Jones re-signed. Weekly volatility is the tradeoff for the ceiling games."},
 {r:74, n:"D.K. Metcalf",p:"WR",t:"PIT",bye:9,gp:16,pts:125.6,yds:900,td:6,opp:116,ppts:162.7,pyds:927,ptd:6,popp:99, note:"Second year in Pittsburgh with Aaron Rodgers back — the deep ball connection was real late in 2025. Volume is WR3; the TDs make him WR2."},
 {r:75, n:"Justin Herbert",p:"QB",t:"LAC",bye:7,gp:16,pts:318.4,yds:4120,td:28,opp:508,ppts:300.3,pyds:4318,ptd:28,popp:530, note:"Rushing uptick (400+ yards) plus the usual elite arm production. Consensus QB7-8 — the safest of the non-elite QB tier."},
-{r:76, n:"Makai Lemon",p:"WR",t:"PHI",bye:10,gp:17,pts:95.9,yds:720,td:4,opp:98,ppts:137.9,pyds:828,ptd:5,popp:90, note:"Traded to Philadelphia to fill the A.J. Brown void. Boone ranks him 61st overall — the slot role next to DeVonta is a real opportunity."},
+{r:76, n:"Makai Lemon",p:"WR",t:"PHI",bye:10,gp:17,pts:95.9,yds:720,td:4,opp:98,ppts:137.9,pyds:828,ptd:5,popp:90,rook:1, note:"First-round pick out of USC, drafted to help fill the A.J. Brown void. Works the slot next to DeVonta Smith — a real opportunity in a strong offense, with the usual rookie-WR caveats."},
 {r:77, n:"Jaylen Warren",p:"RB",t:"PIT",bye:9,gp:17,pts:128.9,yds:920,td:5,opp:186,ppts:171.5,pyds:1146,ptd:6,popp:188, note:"Finally the lead back in Pittsburgh and Footballguys jumped him to RB23. Efficient every year of his career; volume was the only missing piece."},
 {r:78, n:"Tucker Kraft",p:"TE",t:"GB",bye:11,gp:17,pts:115.2,yds:800,td:6,opp:104,ppts:139.4,pyds:749,ptd:6,popp:89, note:"Fully back from the ACL and Green Bay's offense runs through play-action to the TE. Every source has him top-8 at the position."},
 {r:79, n:"Dak Prescott",p:"QB",t:"DAL",bye:14,gp:15,pts:298.4,yds:3820,td:26,opp:462,ppts:306.0,pyds:4467,ptd:33,popp:582, note:"Lamb plus Pickens is the best WR duo he's ever had. Boring QB10 pricing for a guy who's finished top-5 twice in four years."},
@@ -277,7 +278,7 @@ const DATA=[
 {r:107, n:"Jared Goff",p:"QB",t:"DET",bye:6,gp:17,pts:298.4,yds:3820,td:26,opp:498,ppts:287.3,pyds:4347,ptd:32,popp:546, note:"Metronome QB1 production in the league's most stable offense. No rushing floor means he needs 300 yards to smash — fine QB12."},
 {r:108, n:"Kenneth Gainwell",p:"RB",t:"TB",bye:10,gp:17,pts:95.4,yds:680,td:4,opp:142,ppts:141.5,pyds:837,ptd:6,popp:111, note:"Signed with Tampa as the veteran complement to Irving. Karabell ranks him RB33 — passing-down work keeps him fantasy-relevant."},
 {r:109, n:"J.K. Dobbins",p:"RB",t:"DEN",bye:10,gp:14,pts:119.8,yds:780,td:5,opp:164,ppts:165.8,pyds:1155,ptd:7,popp:227, note:"Re-upped in Denver after leading the backfield in carries. Payton's rotation and the injury history are priced in at RB29-34."},
-{r:110, n:"KC Concepcion",p:"WR",t:"CLE",bye:11,gp:17,pts:99.6,yds:740,td:5,opp:102,ppts:117.4,pyds:730,ptd:3,popp:86, note:"Cleveland's rookie slot spark plug — return-game juice and 60+ catches. The Browns' passing volume makes the role bigger than it looks."},
+{r:110, n:"KC Concepcion",p:"WR",t:"CLE",bye:11,gp:17,pts:99.6,yds:740,td:5,opp:102,ppts:117.4,pyds:730,ptd:3,popp:86,rook:1, note:"First-round slot weapon out of Texas A&M with return-game juice. Cleveland's unsettled QB room caps the ceiling, but the passing volume could make the role bigger than it looks."},
 {r:111, n:"Matthew Stafford",p:"QB",t:"LAR",bye:11,gp:15,pts:288.4,yds:3680,td:24,opp:478,ppts:294.0,pyds:4225,ptd:34,popp:547, note:"Nacua and Adams caught 24 of his TDs — the weapons make the QB. Age 38; per-game QB12 whenever he suits up."},
 {r:112, n:"George Kittle",p:"TE",t:"SF",bye:8,gp:14,pts:109.6,yds:760,td:6,opp:96,ppts:136.2,pyds:721,ptd:6,popp:95, note:"Missed a month again but still elite per-snap. Age 32 with Evans now eating red-zone looks — TE1 floor, fading ceiling."},
 {r:113, n:"Travis Kelce",p:"TE",t:"KC",bye:5,gp:17,pts:111.6,yds:800,td:5,opp:108,ppts:147.2,pyds:784,ptd:5,popp:118, note:"One more year — announced this is the last ride. The 100-catch days are gone, but Mahomes still finds him 70+ times with red-zone looks."},
@@ -300,7 +301,7 @@ const DATA=[
 {r:130, n:"Khalil Shakir",p:"WR",t:"BUF",bye:7,gp:17,pts:98.6,yds:760,td:5,opp:104,ppts:137.3,pyds:764,ptd:4,popp:113, note:"Allen's most efficient target three years running, but D.J. Moore's arrival pushes him back to the slot-only role. Floor play."},
 {r:131, n:"Jalen Coker",p:"WR",t:"CAR",bye:5,gp:16,pts:93.4,yds:700,td:5,opp:94,ppts:124.2,pyds:695,ptd:5,popp:88, note:"Carved out the WR2 role opposite McMillan with 5 TDs. Undrafted pedigree, but the Panthers keep feeding him — trust the usage."},
 {r:132, n:"Dallas Goedert",p:"TE",t:"PHI",bye:10,gp:13,pts:90.6,yds:640,td:5,opp:88,ppts:146.2,pyds:688,ptd:8,popp:101, note:"With A.J. Brown gone the TE targets spike — when he plays. Hasn't finished a full season since 2021; TE1 production per game."},
-{r:133, n:"Omar Cooper Jr.",p:"WR",t:"NYJ",bye:13,gp:17,pts:85.8,yds:640,td:4,opp:92,ppts:97.4,pyds:563,ptd:3,popp:71, note:"Jets sophomore who won the WR2 job opposite Wilson. Geno's arrival raises everyone's floor — deep sleeper the sites keep ranking up."},
+{r:133, n:"Omar Cooper Jr.",p:"WR",t:"NYJ",bye:13,gp:17,pts:85.8,yds:640,td:4,opp:92,ppts:97.4,pyds:563,ptd:3,popp:71,rook:1, note:"Jets grabbed the Indiana WR late in the first round. Slots in behind Garrett Wilson with Geno Smith at quarterback — a first-round rookie with a runway to targets."},
 {r:134, n:"Tyrone Tracy Jr.",p:"RB",t:"NYG",bye:8,gp:15,pts:106.6,yds:740,td:4,opp:162,ppts:104.3,pyds:706,ptd:4,popp:118, note:"Skattebo's change-of-pace with proven starter tape from 2024. Valuable insurance in a Giants offense that finally moves the ball."},
 {r:135, n:"Rashid Shaheed",p:"WR",t:"SEA",bye:11,gp:16,pts:89.4,yds:660,td:4,opp:88,ppts:131.7,pyds:844,ptd:4,popp:77, note:"Signed with Seattle as the field-stretcher opposite JSN. Weekly dart throw — two or three league-winning weeks a year."},
 {r:136, n:"Stefon Diggs",p:"WR",t:"FA",bye:0,gp:15,pts:86.4,yds:680,td:4,opp:96,ppts:98.2,pyds:748,ptd:5,popp:109, note:"Still unsigned in July — production was fine (64 catches) but the market moved on. ADP will spike the moment he signs somewhere."},
@@ -308,11 +309,11 @@ const DATA=[
 {r:138, n:"C.J. Stroud",p:"QB",t:"HOU",bye:8,gp:15,pts:268.4,yds:3520,td:24,opp:462,ppts:260.7,pyds:4117,ptd:25,popp:551, note:"Two straight seasons the offense failed him; the new OC and healthy Collins reset the bet. QB20 price, QB8 talent."},
 {r:139, n:"Chig Okonkwo",p:"TE",t:"WAS",bye:7,gp:16,pts:73.4,yds:520,td:4,opp:72,ppts:99.8,pyds:567,ptd:3,popp:83, note:"Signed with Washington — Daniels' new move TE. Athletic profile finally matched production late last year."},
 {r:140, n:"Chris Rodriguez Jr.",p:"RB",t:"JAC",bye:7,gp:16,pts:101.4,yds:640,td:5,opp:142,ppts:92.3,pyds:596,ptd:5,popp:134, note:"Short-yardage hammer who vultured 5 TDs. Tuten's handcuff with standalone goal-line value in standard formats."},
-{r:141, n:"Denzel Boston",p:"WR",t:"CLE",bye:11,gp:17,pts:97.4,yds:720,td:5,opp:98,ppts:101.8,pyds:617,ptd:3,popp:75, note:"Big-bodied Browns rookie who won red-zone duties by midseason. TD-dependent now, but the profile screams year-two jump."},
+{r:141, n:"Denzel Boston",p:"WR",t:"CLE",bye:11,gp:17,pts:97.4,yds:720,td:5,opp:98,ppts:101.8,pyds:617,ptd:3,popp:75,rook:1, note:"Big-bodied Washington product with red-zone appeal. Lands in a crowded, unsettled Browns receiver room — a size-based bet with Year-1 touchdown upside."},
 {r:142, n:"Keaton Mitchell",p:"RB",t:"LAC",bye:7,gp:15,pts:79.6,yds:560,td:3,opp:112,ppts:64.7,pyds:478,ptd:2,popp:85, note:"Signed with the Chargers — home-run speed behind Hampton. Yates is the high ranker; one injury from league-winner status."},
 {r:143, n:"Oronde Gadsden II",p:"TE",t:"LAC",bye:7,gp:16,pts:77.6,yds:560,td:4,opp:78,ppts:99.0,pyds:564,ptd:4,popp:70, note:"Herbert's big-slot TE broke out as a rookie (50 catches). The Chargers' TE-heavy sets make this a real every-week role."},
 {r:144, n:"Brenton Strange",p:"TE",t:"JAC",bye:7,gp:16,pts:86.4,yds:610,td:4,opp:84,ppts:121.4,pyds:658,ptd:4,popp:92, note:"Jacksonville's every-down TE quietly hit 50 catches. Lawrence looks his way in the red zone — fringe TE1 with a healthy offense."},
-{r:145, n:"Jonah Coleman",p:"RB",t:"DEN",bye:10,gp:15,pts:85.4,yds:590,td:4,opp:126,ppts:24.1,pyds:152,ptd:1,popp:26, note:"Broncos rookie bowling ball — Payton compared him to a young Mark Ingram. The three-way rotation caps everyone until it doesn't."},
+{r:145, n:"Jonah Coleman",p:"RB",t:"DEN",bye:10,gp:15,pts:85.4,yds:590,td:4,opp:126,ppts:24.1,pyds:152,ptd:1,popp:26,rook:1, note:"Washington's compact, physical back, a third-round pick in Denver. Stuck in a crowded rotation with Dobbins and Harvey — a stash with the contact balance to like."},
 {r:146, n:"Isiah Pacheco",p:"RB",t:"DET",bye:6,gp:15,pts:105.4,yds:700,td:5,opp:148,ppts:105.4,pyds:718,ptd:4,popp:139, note:"Signed with Detroit as Gibbs' new running mate after Montgomery left. The angry-runs style fits — Montgomery's old TD role is up for grabs."},
 {r:147, n:"Jalen Nailor",p:"WR",t:"LV",bye:13,gp:16,pts:88.4,yds:650,td:5,opp:86,ppts:104.7,pyds:575,ptd:4,popp:65, note:"Signed with Vegas for the WR2 job next to Bech. Speed-and-TDs profile — the Raiders' new offense needs someone to take the top off."},
 {r:148, n:"Sam Darnold",p:"QB",t:"SEA",bye:11,gp:17,pts:262.8,yds:3480,td:24,opp:478,ppts:266.4,pyds:4220,ptd:28,popp:506, note:"Second year in Seattle post-reset — JSN makes the floor. Streaming QB2 with top-12 weeks."},
@@ -336,6 +337,7 @@ updateMaxes();
 let currentPos="ALL", currentSort="rank", currentSearch="";
 
 function bar(val,max,color){
+if(val==null)return '<div class="bar-cell"><span class="bar-val" style="color:#bbb">&mdash;</span></div>';
 const pct=Math.round((val/max)*100);
 return `<div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div><span class="bar-val">${val.toLocaleString()}</span></div>`;
 }
@@ -363,6 +365,7 @@ document.getElementById("table-body").innerHTML=rows.map((p,i)=>{
 const pc=PC[p.p]||{bg:"#f5f5f5",tx:"#333",bd:"#ccc"};
 const rankClass=p.r<=10?"elite":p.r<=25?"top":"";
 const v=MV(p);
+const rk=p.rook&&statMode==="last";
 const gpClass=v.gp>=16?"":"injured";
 const oppLbl=OPP[p.p]||"OPP";
 const tdPct=Math.round((v.td/maxTd)*100);
@@ -373,18 +376,18 @@ return `<div class="row" style="background:${bg}" onmouseover="this.style.backgr
 <div><span class="rank-num ${rankClass}">${p.r}</span></div>
 <div class="name-wrap">
 <div>
-<div class="player-name">${p.n}</div>
+<div class="player-name">${p.n}${p.rook?' <span class="rook-badge" title="2026 rookie — no NFL stats yet">R</span>':''}</div>
 <div class="player-team">${p.t}${noteHtml}</div>
 ${videoHtml}
 </div>
 </div>
 <div><span class="pos-badge" style="background:${pc.bg};color:${pc.tx};border:1px solid ${pc.bd}">${p.p}</span></div>
 <div class="gp-val" style="color:#999;font-weight:400">${p.bye?p.bye:"-"}</div>
-<div class="gp-val ${gpClass}">${v.gp}</div>
-${bar(v.pts,maxPts,"#e63946")}
-${bar(v.yds,maxYds,"#1a73e8")}
-<div class="td-cell"><div class="td-track"><div class="bar-fill" style="width:${tdPct}%;background:#27ae60"></div></div><span class="td-val">${v.td}</span></div>
-<div class="opp-cell"><span class="opp-lbl">${oppLbl}</span><span class="opp-val">${v.opp}</span></div>
+<div class="gp-val ${gpClass}">${rk?"&mdash;":v.gp}</div>
+${bar(rk?null:v.pts,maxPts,"#e63946")}
+${bar(rk?null:v.yds,maxYds,"#1a73e8")}
+<div class="td-cell"><div class="td-track"${rk?' style="display:none"':''}><div class="bar-fill" style="width:${rk?0:tdPct}%;background:#27ae60"></div></div><span class="td-val">${rk?"&mdash;":v.td}</span></div>
+<div class="opp-cell"><span class="opp-lbl">${oppLbl}</span><span class="opp-val">${rk?"&mdash;":v.opp}</span></div>
 </div>`;
 }).join("");
 }
@@ -439,7 +442,7 @@ const rows=DATA
 .sort((a,b)=>currentSort==="name"?a.n.localeCompare(b.n):currentSort==="pos"?a.p.localeCompare(b.p):currentSort==="pts"?b.pts-a.pts:currentSort==="yds"?b.yds-a.yds:currentSort==="td"?b.td-a.td:a.r-b.r);
 const esc=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
 const head=["Rank","Player","Team","Pos","Bye","2025 GP","2025 Half-PPR Pts","2025 Total Yards","2025 TDs","2025 CAR/TGT/ATT","2026 Proj Half-PPR Pts","2026 Proj Total Yards","2026 Proj TDs","2026 Proj CAR/TGT/ATT","Analyst Note"];
-const lines=[head.map(esc).join(",")].concat(rows.map(p=>[p.r,p.n,p.t,p.p,p.bye||"",p.gp,p.pts,p.yds,p.td,p.opp,p.ppts,p.pyds,p.ptd,p.popp,p.note||""].map(esc).join(",")));
+const lines=[head.map(esc).join(",")].concat(rows.map(p=>[p.r,p.n,p.t,p.p,p.bye||"",p.rook?"":p.gp,p.rook?"":p.pts,p.rook?"":p.yds,p.rook?"":p.td,p.rook?"":p.opp,p.ppts,p.pyds,p.ptd,p.popp,p.note||""].map(esc).join(",")));
 const blob=new Blob(["\uFEFF"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
 const a=document.createElement("a");a.href=URL.createObjectURL(blob);
 a.download="fantasymaxxing-2026-bestball-top150.csv";
