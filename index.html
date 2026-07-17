@@ -130,6 +130,20 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
 .footer-inner{flex-direction:column;text-align:center}
 .footer-links{justify-content:center}
 }
+.subscribe-band{background:linear-gradient(135deg,rgba(29,161,242,0.08) 0%,rgba(13,15,26,1) 65%);border:1px solid rgba(29,161,242,0.2);border-radius:24px;padding:48px;text-align:center}
+.subscribe-band .label{font-family:'Bebas Neue',sans-serif;font-size:11px;color:var(--blue);letter-spacing:3px;margin-bottom:10px}
+.subscribe-band h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,4.5vw,48px);letter-spacing:1px;line-height:1.05;margin-bottom:14px}
+.subscribe-band p{color:var(--gray);font-size:15px;max-width:520px;margin:0 auto 28px;line-height:1.6}
+.subscribe-form{display:flex;gap:12px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.subscribe-form input[type=email]{flex:1;min-width:220px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:14px 18px;color:#fff;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}
+.subscribe-form input[type=email]::placeholder{color:var(--gray)}
+.subscribe-form input[type=email]:focus{border-color:var(--blue)}
+.subscribe-form button{background:var(--blue);color:#fff;border:none;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s}
+.subscribe-form button:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(29,161,242,0.3)}
+.subscribe-note{font-size:12px;color:#556;margin-top:16px}
+.subscribe-success{display:none;color:#fff;font-size:17px;font-weight:600;padding:10px 0}
+.subscribe-success .chk{color:var(--blue);font-size:20px;margin-right:4px}
+@media(max-width:600px){.subscribe-band{padding:32px 22px}}
 </style>
 </head>
 <body>
@@ -137,6 +151,7 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   <a href="/" class="nav-logo">FANTASY<span>MAXXING</span></a>
   <ul class="nav-links">
     <li><a href="#news">News</a></li>
+    <li><a href="#subscribe">Newsletter</a></li>
     <li><a href="#rankings">Rankings</a></li>
     <li><a href="#draft-assistant">Draft Assistant</a></li>
     <li><a href="#watch">Social</a></li>
@@ -223,6 +238,22 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
       </div></li>
 
     </ol>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="subscribe">
+  <div class="section-inner">
+    <div class="subscribe-band">
+      <div class="label">FREE NEWSLETTER</div>
+      <h2>GET NEWS &amp; NOTES<br>IN YOUR INBOX</h2>
+      <p>The same rankings movement, injury news, and draft advice you see here &mdash; sent straight to your inbox through draft season. 100% free, no spam, unsubscribe anytime.</p>
+      <form class="subscribe-form" id="subscribeForm">
+        <input type="email" id="subscribeEmail" name="email" placeholder="you@email.com" required autocomplete="email"/>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="subscribe-success" id="subscribeSuccess"><span class="chk">&#x2713;</span>You're in. Watch your inbox &mdash; we don't guess, we maxx.</div>
+      <div class="subscribe-note">We'll only email you fantasy football content. No spam, ever.</div>
+    </div>
   </div>
 </section>
 <div class="divider"></div>
@@ -358,6 +389,24 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
     <div class="footer-copy">&copy; 2026 FantasyMaxxing. All rights reserved.</div>
   </div>
 </footer>
+<script>
+(function(){
+  var form=document.getElementById('subscribeForm');
+  if(!form)return;
+  var ENDPOINT="https://docs.google.com/forms/d/e/1FAIpQLSd_UKs8_vgbKqry05uaHMnQRPIswniU64OB8gU9NlI8pKmGgA/formResponse";
+  var FIELD="entry.1440600054";
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=document.getElementById('subscribeEmail').value.trim();
+    if(!email)return;
+    var body=new URLSearchParams();
+    body.append(FIELD,email);
+    fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:body}).catch(function(){});
+    form.style.display='none';
+    document.getElementById('subscribeSuccess').style.display='block';
+  });
+})();
+</script>
 <script async src="https://www.tiktok.com/embed.js"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
