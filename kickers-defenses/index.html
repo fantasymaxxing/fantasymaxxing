@@ -55,6 +55,47 @@ tbody tr{break-inside:avoid}
 .logo{font-size:24px}.subtitle{font-size:12px}
 }
 @media(max-width:640px){.note{display:none}.note-mob{display:none}}
+
+/* clickable defense name -> schedule popup.
+   LIGHT theme to match the page (body #fafaf8, white cards, ink #1a1a2e, accent #e63946).
+   Do NOT style this dark — the page has no dark mode. */
+.nm-btn{background:none;border:0;padding:0;color:inherit;font:inherit;font-weight:inherit;cursor:pointer;text-align:left;display:inline-flex;align-items:center;gap:5px}
+.nm-btn:hover,.nm-btn:focus-visible{color:#e63946;text-decoration:underline;outline:none}
+.nm-btn .cal{font-size:.82em;opacity:.4}
+.nm-btn:hover .cal{opacity:.9}
+#sched-modal{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px}
+#sched-modal[hidden]{display:none}
+.sched-backdrop{position:absolute;inset:0;background:rgba(26,26,46,.32)}
+.sched-card{position:relative;width:min(560px,100%);max-height:86vh;overflow-y:auto;
+background:#fff;border:1px solid #e8e8e8;border-radius:12px;
+box-shadow:0 16px 44px rgba(26,26,46,.22);padding:17px 18px 20px}
+.sched-x{position:absolute;top:8px;right:10px;background:none;border:0;color:#bbb;font-size:24px;line-height:1;cursor:pointer;padding:3px 8px;border-radius:6px}
+.sched-x:hover,.sched-x:focus-visible{color:#1a1a2e;background:#f2f2f0;outline:none}
+.sched-team{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;color:#1a1a2e;line-height:1.1;padding-right:34px}
+.sched-sub{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#888;margin:2px 0 14px}
+/* 6 across = exactly 3 even rows for 18 weeks (auto-fill wrapped 8/8/2) */
+.wks{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+@media(max-width:520px){.wks{grid-template-columns:repeat(3,1fr)}}
+.wk{background:#fafaf8;border:1px solid #e8e8e8;border-radius:6px;padding:6px 3px 5px;text-align:center}
+.wk .w{display:block;font-size:9px;letter-spacing:.5px;color:#aaa;text-transform:uppercase}
+.wk .o{display:block;font-size:12px;font-weight:700;color:#1a1a2e;white-space:nowrap}
+.wk .or{display:block;font-size:9px;font-weight:700;color:#999;margin-top:1px}
+.wk.away .o{font-weight:600}
+/* opponent's 2025 offence: top 10 = tough (red), bottom 10 = favourable (green) */
+.wk.tough{background:#fdecee;border-color:#f5b5bb}
+.wk.tough .o,.wk.tough .or{color:#e63946}
+.wk.soft{background:#eaf7ee;border-color:#a9ddb8}
+.wk.soft .o,.wk.soft .or{color:#1e7e34}
+.wk.bye{background:#e8eaf6;border-color:#7986cb}
+.wk.bye .o{color:#283593}
+.sched-legend{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-top:12px;padding-top:11px;border-top:1px solid #f0f0f0;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px}
+.sched-legend span{display:inline-flex;align-items:center;gap:5px}
+.sched-legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+.sw-tough{background:#fdecee;border:1px solid #f5b5bb}
+.sw-soft{background:#eaf7ee;border:1px solid #a9ddb8}
+.sw-bye{background:#e8eaf6;border:1px solid #7986cb}
+.lg-note{margin-left:auto;text-transform:none;letter-spacing:0;color:#aaa}
+@media print{.nm-btn .cal{display:none}#sched-modal{display:none!important}}
 </style>
 </head>
 <body>
@@ -94,61 +135,85 @@ Updated: <span id="updated"></span>
 </table>
 </div>
 
-<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Updated daily</div>
+<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Compiled July 24, 2026</div>
+</div>
+
+<div id="sched-modal" hidden>
+<div class="sched-backdrop" data-close="1"></div>
+<div class="sched-card" role="dialog" aria-modal="true" aria-labelledby="sched-team">
+<button type="button" class="sched-x" id="sched-x" aria-label="Close schedule">&times;</button>
+<div class="sched-team" id="sched-team"></div>
+<div class="sched-sub" id="sched-sub"></div>
+<div class="wks" id="sched-wks"></div>
+<div class="sched-legend">
+<span><i class="sw-tough"></i>Top 10 offense &mdash; tough</span>
+<span><i class="sw-soft"></i>Bottom 10 &mdash; favorable</span>
+<span><i class="sw-bye"></i>Bye</span>
+<span class="lg-note">#rank = 2025 points per game</span>
+</div>
+</div>
 </div>
 
 <script>
-// 2026 consensus — kickers (top 20) & team defenses (top 25).
-// Compiled from Footballguys, ESPN, FantasyPros & Yahoo positional rankings. pts = projected 2026 fantasy points.
+// 2026 consensus — kickers (top 20) & team defenses (top 25). Compiled 2026-07-24.
+// Sources: footballguys-kdst-2026-07-24.txt + cbs-kdst-2026-07-24.txt (Footballguys 18-expert consensus + CBS positional consensus),
+// equal weight, straight rank average. pts = Footballguys projected 2026 fantasy points. Byes from TEAM_BYE.
 const KICKERS=[
-{r:1,n:"Brandon Aubrey",t:"DAL",bye:14,pts:158,note:"Unanimous K1 — huge leg and a high-scoring Dallas offense. The only kicker worth reaching for a round early."},
-{r:2,n:"Ka'imi Fairbairn",t:"HOU",bye:8,pts:150,note:"Reliable leg attached to a top-10 scoring offense that stalls in the red zone — a recipe for kicker points."},
-{r:3,n:"Cameron Dicker",t:"LAC",bye:7,pts:148,note:"Elite accuracy and a Chargers offense that moves the ball. One of the safest weekly floors at the position."},
-{r:4,n:"Jason Myers",t:"SEA",bye:11,pts:143,note:"Steady veteran in a dome-adjacent home stadium; Seattle's offense keeps him in range."},
-{r:5,n:"Cam Little",t:"JAC",bye:7,pts:141,note:"Big-leg sophomore trending up — Jacksonville's improving offense should hand him plenty of chances."},
-{r:6,n:"Eddy Pineiro",t:"SF",bye:8,pts:140,note:"49ers' loaded offense drives deep; even in a committee-scoring attack the volume is there."},
-{r:7,n:"Tyler Loop",t:"BAL",bye:13,pts:138,note:"Took over a Baltimore offense that scores at will — high-upside if the accuracy holds."},
-{r:8,n:"Chris Boswell",t:"PIT",bye:9,pts:136,note:"Money in the clutch; Pittsburgh's field-goal-heavy tendencies are a kicker's best friend."},
-{r:9,n:"Harrison Butker",t:"KC",bye:5,pts:135,note:"Chiefs offense means constant scoring chances — a rock-solid set-and-forget option."},
-{r:10,n:"Jake Bates",t:"DET",bye:6,pts:133,note:"Big leg in Detroit's high-powered offense; touchback-or-field-goal upside every week."},
-{r:11,n:"Chase McLaughlin",t:"TB",bye:10,pts:132,note:"Automatic accuracy with Tampa; quietly one of the most consistent scorers in fantasy."},
-{r:12,n:"Cairo Santos",t:"CHI",bye:10,pts:131,note:"Bears' improving offense under a new staff should lift his opportunity ceiling."},
-{r:13,n:"Will Reichard",t:"MIN",bye:6,pts:130,note:"Strong leg in a dome; Minnesota's offense keeps him busy inside 50."},
-{r:14,n:"Evan McPherson",t:"CIN",bye:6,pts:129,note:"Big-leg kicker tied to a Burrow offense — elite ceiling when Cincinnati is rolling."},
-{r:15,n:"Wil Lutz",t:"DEN",bye:10,pts:127,note:"Payton's offense drives the field; plenty of medium-range attempts in Denver."},
-{r:16,n:"Andy Borregales",t:"NE",bye:11,pts:126,note:"Rookie leg on a rising Patriots offense — a sneaky late-round streamer."},
-{r:17,n:"Harrison Mevis",t:"LAR",bye:11,pts:125,note:"Big-leg kicker in a Rams offense that gets into scoring range often."},
-{r:18,n:"Jake Elliott",t:"PHI",bye:10,pts:124,note:"Veteran accuracy; Philadelphia's red-zone struggles can turn into field goals."},
-{r:19,n:"Blake Grupe",t:"IND",bye:13,pts:123,note:"Colts' offense with Taylor keeps drives alive — a fine bye-week fill-in."},
-{r:20,n:"Tyler Bass",t:"BUF",bye:7,pts:122,note:"Bounce-back candidate on the league's best offense; the leg and volume are both there."}
+{r:1,n:"Brandon Aubrey",t:"DAL",bye:14,pts:146.2,note:"Unanimous K1 — huge leg and a high-scoring Dallas offense. The only kicker worth reaching for a round early."},
+{r:2,n:"Ka'imi Fairbairn",t:"HOU",bye:8,pts:138.79,note:"Reliable leg attached to a top-10 scoring offense that stalls in the red zone — a recipe for kicker points."},
+{r:3,n:"Cameron Dicker",t:"LAC",bye:7,pts:140.58,note:"Elite accuracy and a Chargers offense that moves the ball. One of the safest weekly floors at the position."},
+{r:4,n:"Jason Myers",t:"SEA",bye:11,pts:140.6,note:"Steady veteran in a dome-adjacent home stadium; Seattle's offense keeps him in range."},
+{r:5,n:"Eddy Piñeiro",t:"SF",bye:8,pts:130.32,note:"49ers' loaded offense drives deep; even in a committee-scoring attack the volume is there."},
+{r:6,n:"Tyler Loop",t:"BAL",bye:13,pts:136,note:"Took over a Baltimore offense that scores at will — high-upside if the accuracy holds."},
+{r:7,n:"Cam Little",t:"JAC",bye:7,pts:131.7,note:"Big-leg sophomore trending up — Jacksonville's improving offense should hand him plenty of chances."},
+{r:8,n:"Chase McLaughlin",t:"TB",bye:10,pts:132.22,note:"Automatic accuracy with Tampa; quietly one of the most consistent scorers in fantasy."},
+{r:9,n:"Jake Bates",t:"DET",bye:6,pts:131.95,note:"Big leg in Detroit's high-powered offense; touchback-or-field-goal upside every week."},
+{r:10,n:"Will Reichard",t:"MIN",bye:6,pts:125.04,note:"Strong leg in a dome; Minnesota's offense keeps him busy inside 50."},
+{r:11,n:"Evan McPherson",t:"CIN",bye:6,pts:126.42,note:"Big-leg kicker tied to a Burrow offense — elite ceiling when Cincinnati is rolling."},
+{r:12,n:"Harrison Butker",t:"KC",bye:5,pts:124.75,note:"Chiefs offense means constant scoring chances — a rock-solid set-and-forget option."},
+{r:13,n:"Andy Borregales",t:"NE",bye:11,pts:125.48,note:"Rookie leg on a rising Patriots offense — a sneaky late-round streamer."},
+{r:14,n:"Chris Boswell",t:"PIT",bye:9,pts:125.49,note:"Money in the clutch; Pittsburgh's field-goal-heavy tendencies are a kicker's best friend."},
+{r:15,n:"Cairo Santos",t:"CHI",bye:10,pts:127.18,note:"Bears' improving offense under a new staff should lift his opportunity ceiling."},
+{r:16,n:"Harrison Mevis",t:"LAR",bye:11,pts:122.03,note:"Big-leg kicker in a Rams offense that gets into scoring range often."},
+{r:17,n:"Wil Lutz",t:"DEN",bye:10,pts:127.38,note:"Payton's offense drives the field; plenty of medium-range attempts in Denver."},
+{r:18,n:"Charlie Smyth",t:"NO",bye:8,pts:112.3,note:"Won the New Orleans job with a big leg, but the Saints stall out too often to trust him as more than a bye-week fill-in."},
+{r:19,n:"Jake Elliott",t:"PHI",bye:10,pts:119.62,note:"Veteran accuracy; Philadelphia's red-zone struggles can turn into field goals."},
+{r:20,n:"Tyler Bass",t:"BUF",bye:7,pts:109.32,note:"Bounce-back candidate on the league's best offense; the leg and volume are both there."}
 ];
 const DEFENSES=[
-{r:1,n:"Houston Texans",t:"HOU",bye:8,pts:138,note:"Consensus DST1 — elite pass rush and takeaway rate. The one defense worth drafting a round early."},
-{r:2,n:"Denver Broncos",t:"DEN",bye:10,pts:132,note:"Loaded secondary and a relentless front; a weekly sack-and-turnover threat."},
-{r:3,n:"Seattle Seahawks",t:"SEA",bye:11,pts:130,note:"Aggressive, ball-hawking unit at home; consistent points from pressure and picks."},
-{r:4,n:"Los Angeles Rams",t:"LAR",bye:11,pts:127,note:"Elite interior rush generates sacks in bunches — a top-tier streaming anchor."},
-{r:5,n:"Philadelphia Eagles",t:"PHI",bye:10,pts:125,note:"Deep, talented front seven; the pass rush alone keeps them a weekly top-6 unit."},
-{r:6,n:"Pittsburgh Steelers",t:"PIT",bye:9,pts:124,note:"Always around the ball under the same defensive staff — sacks and takeaways galore."},
-{r:7,n:"Minnesota Vikings",t:"MIN",bye:6,pts:123,note:"Aggressive blitzing scheme forces turnovers; high ceiling in good matchups."},
-{r:8,n:"Los Angeles Chargers",t:"LAC",bye:7,pts:121,note:"Harbaugh's defense is fast and physical; a rising unit with real upside."},
-{r:9,n:"New England Patriots",t:"NE",bye:11,pts:120,note:"Rebuilt front is disruptive; a sneaky top-10 defense on an improving team."},
-{r:10,n:"Jacksonville Jaguars",t:"JAC",bye:7,pts:119,note:"Playmaking secondary; the takeaways come in bunches when the pass rush shows up."},
-{r:11,n:"Green Bay Packers",t:"GB",bye:11,pts:118,note:"Young, fast defense that creates pressure; solid weekly floor at Lambeau."},
-{r:12,n:"Baltimore Ravens",t:"BAL",bye:13,pts:116,note:"Talent everywhere; the ceiling is top-3 when the pass rush is healthy."},
-{r:13,n:"Buffalo Bills",t:"BUF",bye:7,pts:115,note:"Opportunistic unit that plays with a lead — turnovers and garbage-time sacks."},
-{r:14,n:"Detroit Lions",t:"DET",bye:6,pts:114,note:"Aggressive scheme; when the pass rush clicks the takeaways follow."},
-{r:15,n:"Kansas City Chiefs",t:"KC",bye:5,pts:113,note:"Spagnuolo's defense always produces sacks and clutch stops in big games."},
-{r:16,n:"Cleveland Browns",t:"CLE",bye:11,pts:112,note:"Elite pass rush led by Garrett; the sack floor is among the highest in the league."},
-{r:17,n:"Chicago Bears",t:"CHI",bye:10,pts:111,note:"Young, ascending defense with playmakers; a strong stream in plus matchups."},
-{r:18,n:"New Orleans Saints",t:"NO",bye:8,pts:110,note:"Veteran unit that forces turnovers at home; matchup-dependent but capable."},
-{r:19,n:"Indianapolis Colts",t:"IND",bye:13,pts:109,note:"Interior pressure and a ball-hawking secondary; solid depth option."},
-{r:20,n:"San Francisco 49ers",t:"SF",bye:8,pts:108,note:"When healthy the front is elite; injury risk caps the weekly floor."},
-{r:21,n:"Atlanta Falcons",t:"ATL",bye:11,pts:107,note:"Improved pass rush; a matchup-based streamer with upside at home."},
-{r:22,n:"Tampa Bay Buccaneers",t:"TB",bye:10,pts:106,note:"Physical front seven; forces enough turnovers to be a weekly consideration."},
-{r:23,n:"New York Giants",t:"NYG",bye:8,pts:105,note:"Elite edge rush drives the sack total; boom-or-bust week to week."},
-{r:24,n:"Cincinnati Bengals",t:"CIN",bye:6,pts:104,note:"Talented but inconsistent; the ceiling is there in the right matchup."},
-{r:25,n:"Dallas Cowboys",t:"DAL",bye:14,pts:103,note:"Pass rush keeps them relevant; a fine bye-week or matchup streamer."}
+{r:1,n:"Houston Texans",t:"HOU",bye:8,pts:159.38,note:"Consensus DST1 — elite pass rush and takeaway rate. The one defense worth drafting a round early."},
+{r:2,n:"Denver Broncos",t:"DEN",bye:10,pts:150.88,note:"Loaded secondary and a relentless front; a weekly sack-and-turnover threat."},
+{r:3,n:"Seattle Seahawks",t:"SEA",bye:11,pts:148.82,note:"Aggressive, ball-hawking unit at home; consistent points from pressure and picks."},
+{r:4,n:"Pittsburgh Steelers",t:"PIT",bye:9,pts:137.89,note:"Always around the ball under the same defensive staff — sacks and takeaways galore."},
+{r:5,n:"Los Angeles Rams",t:"LAR",bye:11,pts:125.14,note:"Elite interior rush generates sacks in bunches — a top-tier streaming anchor."},
+{r:6,n:"Minnesota Vikings",t:"MIN",bye:6,pts:135.89,note:"Aggressive blitzing scheme forces turnovers; high ceiling in good matchups."},
+{r:7,n:"New England Patriots",t:"NE",bye:11,pts:127.84,note:"Rebuilt front is disruptive; a sneaky top-10 defense on an improving team."},
+{r:8,n:"Los Angeles Chargers",t:"LAC",bye:7,pts:132.24,note:"Harbaugh's defense is fast and physical; a rising unit with real upside."},
+{r:9,n:"Philadelphia Eagles",t:"PHI",bye:10,pts:122.68,note:"Deep, talented front seven; the pass rush alone carries the unit even when the secondary lapses."},
+{r:10,n:"Jacksonville Jaguars",t:"JAC",bye:7,pts:125.58,note:"Playmaking secondary; the takeaways come in bunches when the pass rush shows up."},
+{r:11,n:"Buffalo Bills",t:"BUF",bye:7,pts:126.38,note:"Opportunistic unit that plays with a lead — turnovers and garbage-time sacks."},
+{r:12,n:"Baltimore Ravens",t:"BAL",bye:13,pts:121.04,note:"Talent everywhere; the ceiling is top-3 when the pass rush is healthy."},
+{r:13,n:"Green Bay Packers",t:"GB",bye:11,pts:119.79,note:"Young, fast defense that creates pressure; solid weekly floor at Lambeau."},
+{r:14,n:"Chicago Bears",t:"CHI",bye:10,pts:129.44,note:"Young, ascending defense with playmakers; a strong stream in plus matchups."},
+{r:15,n:"Detroit Lions",t:"DET",bye:6,pts:121.04,note:"Aggressive scheme; when the pass rush clicks the takeaways follow."},
+{r:16,n:"Cleveland Browns",t:"CLE",bye:11,pts:119.16,note:"Elite pass rush led by Garrett; the sack floor is among the highest in the league."},
+{r:17,n:"Kansas City Chiefs",t:"KC",bye:5,pts:113.79,note:"Spagnuolo's defense always produces sacks and clutch stops in big games."},
+{r:18,n:"New Orleans Saints",t:"NO",bye:8,pts:123.89,note:"Veteran unit that forces turnovers at home; matchup-dependent but capable."},
+{r:19,n:"Atlanta Falcons",t:"ATL",bye:11,pts:119.74,note:"Improved pass rush; a matchup-based streamer with upside at home."},
+{r:20,n:"San Francisco 49ers",t:"SF",bye:8,pts:116.39,note:"When healthy the front is elite; injury risk caps the weekly floor."},
+{r:21,n:"New York Giants",t:"NYG",bye:8,pts:114.62,note:"Elite edge rush drives the sack total; boom-or-bust week to week."},
+{r:22,n:"Indianapolis Colts",t:"IND",bye:13,pts:115.14,note:"Interior pressure and a ball-hawking secondary; solid depth option."},
+{r:23,n:"Dallas Cowboys",t:"DAL",bye:14,pts:105.44,note:"Pass rush keeps them relevant; a fine bye-week or matchup streamer."},
+{r:24,n:"Tampa Bay Buccaneers",t:"TB",bye:10,pts:118.94,note:"Physical front seven; forces enough turnovers to be a weekly consideration."},
+{r:25,n:"Carolina Panthers",t:"CAR",bye:5,pts:106.84,note:"Young front seven is finally generating real pressure, though the unit still surrenders too much to start outside of plus matchups."}
 ];
+
+// 2026 schedule per team, index 0 = week 1. "v"=home, "@"=away, BYE = no game.
+const SCHED={ARI:"@LAC,vSEA,@SF,@NYG,vDET,@LAR,vDEN,@DAL,@SEA,vLAR,@KC,vWAS,vPHI,BYE,vNYJ,@NO,vLV,vSF",ATL:"@PIT,vCAR,@GB,@NO,vBAL,vCHI,vSF,@TB,vCIN,vKC,BYE,@MIN,vDET,@CLE,@WAS,vTB,vNO,@CAR",BAL:"@IND,vNO,@DAL,vTEN,@ATL,@CLE,vCIN,@BUF,vJAC,vLAC,@CAR,@HOU,BYE,vTB,@PIT,vCLE,@CIN,vPIT",BUF:"@HOU,vDET,vLAC,vNE,@LAR,@LV,BYE,vBAL,@MIN,@NYJ,vMIA,vKC,@NE,@GB,vCHI,@DEN,@MIA,vNYJ",CAR:"vCHI,@ATL,@CLE,vDET,BYE,@PHI,vTB,@GB,vDEN,@NO,vBAL,@TB,@MIN,vNO,vCIN,@PIT,vSEA,vATL",CHI:"@CAR,vMIN,vPHI,vNYJ,@GB,@ATL,vNE,@SEA,vTB,BYE,vNO,@DET,vJAC,@MIA,@BUF,vGB,vDET,@MIN",CIN:"vTB,@HOU,@PIT,vJAC,@MIA,BYE,@BAL,vTEN,@ATL,vPIT,@WAS,vNO,@CLE,vKC,@CAR,@IND,vBAL,vCLE",CLE:"@JAC,@TB,vCAR,vPIT,@NYJ,vBAL,@TEN,@PIT,@NO,vHOU,BYE,vLV,vCIN,vATL,@NYG,@BAL,vIND,@CIN",DAL:"@NYG,vWAS,vBAL,@HOU,vTB,@GB,@PHI,vARI,@IND,vSF,vTEN,vPHI,@SEA,BYE,@LAR,vJAC,vNYG,@WAS",DEN:"@KC,vJAC,vLAR,@SF,@LAC,vSEA,@ARI,vKC,@CAR,BYE,vLV,@PIT,vMIA,@NYJ,@LV,vBUF,@NE,vLAC",DET:"vNO,@BUF,vNYJ,@CAR,@ARI,BYE,vGB,vMIN,@MIA,vNE,vTB,vCHI,@ATL,vTEN,@MIN,vNYG,@CHI,@GB",GB:"@MIN,@NYJ,vATL,@TB,vCHI,vDAL,@DET,vCAR,@NE,vMIN,BYE,@LAR,@NO,vBUF,vMIA,@CHI,vHOU,vDET",HOU:"vBUF,vCIN,@IND,vDAL,@TEN,@JAC,vNYG,BYE,@LAC,@CLE,vIND,vBAL,@PIT,@WAS,vJAC,@PHI,@GB,vTEN",IND:"vBAL,@KC,vHOU,@WAS,@PIT,vTEN,@MIN,@JAC,vDAL,vMIA,@HOU,vNYG,BYE,@PHI,@TEN,vCIN,@CLE,vJAC",JAC:"vCLE,@DEN,vNE,@CIN,vPHI,vHOU,BYE,vIND,@BAL,@TEN,@NYG,vTEN,@CHI,vPIT,@HOU,@DAL,vWAS,@IND",KC:"vDEN,vIND,@MIA,@LV,BYE,vLAC,@SEA,@DEN,vNYJ,@ATL,vARI,@BUF,@LAR,@CIN,vNE,vSF,@LAC,vLV",LAC:"vARI,vLV,@BUF,@SEA,vDEN,@KC,BYE,@LAR,vHOU,@BAL,vNYJ,vNE,@TB,@LV,vSF,@MIA,vKC,@DEN",LAR:"vSF,vNYG,@DEN,@PHI,vBUF,vARI,@LV,vLAC,@WAS,@ARI,BYE,vGB,vKC,@SF,vDAL,@SEA,@TB,vSEA",LV:"vMIA,@LAC,@NO,vKC,@NE,vBUF,vLAR,@NYJ,@SF,vSEA,@DEN,@CLE,BYE,vLAC,vDEN,vTEN,@ARI,@KC",MIA:"@LV,@SF,vKC,@MIN,vCIN,BYE,@NYJ,vNE,vDET,@IND,@BUF,vNYJ,@DEN,vCHI,@GB,vLAC,vBUF,@NE",MIN:"vGB,@CHI,@TB,vMIA,@NO,BYE,vIND,@DET,vBUF,@GB,@SF,vATL,vCAR,@NE,vDET,vWAS,@NYJ,vCHI",NE:"@SEA,vPIT,@JAC,@BUF,vLV,vNYJ,@CHI,@MIA,vGB,@DET,BYE,@LAC,vBUF,vMIN,@KC,@NYJ,vDEN,vMIA",NO:"@DET,@BAL,vLV,vATL,vMIN,@NYG,vPIT,BYE,vCLE,vCAR,@CHI,@CIN,vGB,@CAR,@TB,vARI,@ATL,vTB",NYG:"vDAL,@LAR,vTEN,vARI,@WAS,vNO,@HOU,BYE,@PHI,vWAS,vJAC,@IND,vSF,@SEA,vCLE,@DET,@DAL,vPHI",NYJ:"@TEN,vGB,@DET,@CHI,vCLE,@NE,vMIA,vLV,@KC,vBUF,@LAC,@MIA,BYE,vDEN,@ARI,vNE,vMIN,@BUF",PHI:"vWAS,@TEN,@CHI,vLAR,@JAC,vCAR,vDAL,@WAS,vNYG,BYE,vPIT,@DAL,@ARI,vIND,vSEA,vHOU,@SF,@NYG",PIT:"vATL,@NE,vCIN,@CLE,vIND,@TB,@NO,vCLE,BYE,@CIN,@PHI,vDEN,vHOU,@JAC,vBAL,vCAR,@TEN,@BAL",SEA:"vNE,@ARI,@WAS,vLAC,vSF,@DEN,vKC,vCHI,vARI,@LV,BYE,@SF,vDAL,vNYG,@PHI,vLAR,@CAR,@LAR",SF:"@LAR,vMIA,vARI,vDEN,@SEA,vWAS,@ATL,BYE,vLV,@DAL,vMIN,vSEA,@NYG,vLAR,@LAC,@KC,vPHI,@ARI",TB:"@CIN,vCLE,vMIN,vGB,@DAL,vPIT,@CAR,vATL,@CHI,BYE,@DET,vCAR,vLAC,@BAL,vNO,@ATL,vLAR,@NO",TEN:"vNYJ,vPHI,@NYG,@BAL,vHOU,@IND,vCLE,@CIN,BYE,vJAC,@DAL,@JAC,vWAS,@DET,vIND,@LV,vPIT,@HOU",WAS:"@PHI,@DAL,vSEA,vIND,vNYG,@SF,BYE,vPHI,vLAR,@NYG,vCIN,@ARI,@TEN,vHOU,vATL,@MIN,@JAC,vDAL"};
+
+// 2025 opponent offence strength: TEAM:[rank, pointsPerGame]. Rank 1 = most PPG.
+// Computed from actual 2025 regular-season scores (see _scrape-2025-offense.js).
+const OFF={ARI:[23,20.9],ATL:[24,20.8],BAL:[11,24.9],BUF:[4,28.3],CAR:[27,18.3],CHI:[9,25.9],CIN:[12,24.4],CLE:[31,16.4],DAL:[7,27.7],DEN:[14,23.6],DET:[5,28.3],GB:[16,23],HOU:[13,23.8],IND:[8,27.4],JAC:[6,27.9],KC:[21,21.3],LAC:[20,21.6],LAR:[1,30.5],LV:[32,14.2],MIA:[25,20.4],MIN:[26,20.2],NE:[2,28.8],NO:[28,18],NYG:[17,22.4],NYJ:[29,17.6],PHI:[19,22.3],PIT:[15,23.4],SEA:[3,28.4],SF:[10,25.7],TB:[18,22.4],TEN:[30,16.7],WAS:[22,20.9]};
 
 let mode="K";
 function data(){return mode==="K"?KICKERS:DEFENSES;}
@@ -160,7 +225,7 @@ document.getElementById("tbody").innerHTML=data().map(x=>{
 const rc=x.r<=5?"elite":x.r<=10?"top":"";
 return `<tr>
 <td><span class="rk ${rc}">${x.r}</span></td>
-<td><div class="nm">${x.n}</div><div class="tm">${x.t}</div></td>
+<td>${isK?`<div class="nm">${x.n}</div>`:`<button type="button" class="nm nm-btn" data-team="${x.t}" aria-haspopup="dialog" title="Show 2026 schedule">${x.n}<span class="cal">&#128197;</span></button>`}<div class="tm">${x.t}</div></td>
 <td><span class="pos-badge ${isK?'k-badge':'d-badge'}">${isK?'K':'DST'}</span></td>
 <td class="bye">${x.bye}</td>
 <td class="pts">${x.pts.toFixed(1)}</td>
@@ -168,6 +233,35 @@ return `<tr>
 </tr>`;
 }).join("");
 document.getElementById("count").textContent=data().length+(isK?" kickers":" defenses");
+}
+
+const modal=document.getElementById("sched-modal");
+let schedOpener=null;
+
+function openSched(team){
+const x=DEFENSES.find(d=>d.t===team);
+const s=(SCHED[team]||"").split(",");
+if(!x||s.length<18) return;
+document.getElementById("sched-team").textContent=x.n;
+document.getElementById("sched-sub").textContent="2026 Schedule \u00b7 Bye Week "+x.bye;
+document.getElementById("sched-wks").innerHTML=s.map((g,i)=>{
+if(g==="BYE") return `<div class="wk bye"><span class="w">WK ${i+1}</span><span class="o">BYE</span><span class="or">&nbsp;</span></div>`;
+const away=g.charAt(0)==="@";
+const code=g.slice(1);
+const o=OFF[code];
+// Top 10 offence = tough matchup for our defence; bottom 10 = favourable.
+const cls=o?(o[0]<=10?" tough":o[0]>=23?" soft":""):"";
+const tip=o?`${code} 2025 offense: #${o[0]} of 32 (${o[1]} pts/gm)`:code;
+return `<div class="wk${away?" away":""}${cls}" title="${tip}"><span class="w">WK ${i+1}</span><span class="o">${away?"@":"vs "}${code}</span><span class="or">${o?"#"+o[0]:"&nbsp;"}</span></div>`;
+}).join("");
+modal.removeAttribute("hidden");
+document.getElementById("sched-x").focus();
+}
+
+function closeSched(){
+if(modal.hasAttribute("hidden")) return;
+modal.setAttribute("hidden","");
+if(schedOpener){schedOpener.focus();schedOpener=null;}
 }
 
 function exportCSV(){
@@ -187,7 +281,18 @@ document.querySelectorAll("#toggle button").forEach(x=>x.classList.toggle("activ
 render();
 }));
 document.getElementById("export-btn").addEventListener("click",exportCSV);
-document.getElementById("updated").textContent=new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+
+// Delegated so it survives every re-render (the mode toggle rebuilds the tbody).
+document.getElementById("tbody").addEventListener("click",e=>{
+const btn=e.target.closest(".nm-btn");
+if(!btn) return;
+schedOpener=btn;
+openSched(btn.dataset.team);
+});
+document.getElementById("sched-x").addEventListener("click",closeSched);
+modal.addEventListener("click",e=>{if(e.target.dataset.close)closeSched();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSched();});
+document.getElementById("updated").textContent="July 24, 2026"; // BAKED at compile time — do not switch back to new Date()
 render();
 </script>
 </body>
