@@ -135,7 +135,7 @@ Updated: <span id="updated"></span>
 </table>
 </div>
 
-<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Compiled July 24, 2026</div>
+<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Compiled July 28, 2026</div>
 </div>
 
 <div id="sched-modal" hidden>
@@ -155,7 +155,7 @@ Updated: <span id="updated"></span>
 </div>
 
 <script>
-// 2026 consensus — kickers (top 20) & team defenses (top 25). Compiled 2026-07-24.
+// 2026 consensus — kickers (top 20) & team defenses (top 25). Compiled 2026-07-28.
 // Sources: footballguys-kdst-2026-07-24.txt + cbs-kdst-2026-07-24.txt (Footballguys 18-expert consensus + CBS positional consensus),
 // equal weight, straight rank average. pts = Footballguys projected 2026 fantasy points. Byes from TEAM_BYE.
 const KICKERS=[
@@ -292,7 +292,7 @@ openSched(btn.dataset.team);
 document.getElementById("sched-x").addEventListener("click",closeSched);
 modal.addEventListener("click",e=>{if(e.target.dataset.close)closeSched();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSched();});
-document.getElementById("updated").textContent="July 24, 2026"; // BAKED at compile time — do not switch back to new Date()
+document.getElementById("updated").textContent="July 28, 2026"; // BAKED at compile time — do not switch back to new Date()
 render();
 </script>
 </body>
