@@ -86,27 +86,27 @@ section{padding:80px 24px}
 .social-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:28px;transition:border-color .25s}
 .social-card:hover{border-color:rgba(255,255,255,0.15)}
 .yt-card{border-top:2px solid #ff0000}
-.tt-card{border-top:2px solid #69c9d0}
+.ig-card{border-top:2px solid #e1306c}
 .x-card{border-top:2px solid #1da1f2}
 .social-card-header{display:flex;align-items:center;gap:12px;margin-bottom:22px}
 .social-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center}
 .social-icon.yt{background:rgba(255,0,0,0.12);color:#ff4444}
-.social-icon.tt{background:rgba(105,201,208,0.12);color:#69c9d0}
+.social-icon.ig{background:rgba(225,48,108,0.12);color:#e1306c}
 .social-icon.xsocial{background:rgba(29,161,242,0.12);color:#1da1f2}
 .social-name{font-weight:700;font-size:15px;line-height:1.2}
 .social-handle{font-size:12px;color:var(--gray)}
 .social-follow-btn{margin-left:auto;padding:7px 16px;border-radius:50px;font-size:12px;font-weight:700;text-decoration:none;transition:opacity .2s}
 .social-follow-btn:hover{opacity:.85}
 .yt-btn{background:#ff0000;color:#fff}
-.tt-btn{background:#69c9d0;color:#000}
+.ig-btn{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}
 .x-btn{background:#1da1f2;color:#fff}
 .yt-coming{text-align:center;padding:24px 16px;background:rgba(255,0,0,0.04);border-radius:12px}
 .yt-coming-icon{font-size:40px;margin-bottom:12px}
 .yt-coming-text{font-weight:700;font-size:16px;margin-bottom:8px}
 .yt-coming-sub{font-size:13px;color:var(--gray);line-height:1.6;max-width:320px;margin:0 auto 16px}
-.tt-embed-wrap{margin-bottom:12px;display:flex;justify-content:center;overflow:hidden;border-radius:12px}
-.tt-embed-wrap .tiktok-embed{border-radius:12px;overflow:hidden;margin:0 auto!important;min-width:0!important;max-width:100%!important}
-.tt-embed-wrap iframe{margin:0 auto!important;max-width:100%!important}
+.ig-embed-wrap{margin-bottom:12px;display:flex;justify-content:center;overflow:hidden;border-radius:12px}
+.ig-embed-wrap .instagram-media{border-radius:12px!important;overflow:hidden;margin:0 auto!important;min-width:0!important;max-width:100%!important;width:100%!important}
+.ig-embed-wrap iframe{margin:0 auto!important;max-width:100%!important}
 .social-more-link{font-size:13px;color:var(--blue);font-weight:600;text-decoration:none;display:inline-block;margin-top:8px}
 .social-more-link:hover{text-decoration:underline}
 .cta-banner{background:linear-gradient(135deg,var(--blue2),#0a5a8a);border-radius:20px;padding:52px 48px;text-align:center}
@@ -327,7 +327,7 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   <div class="section-inner">
     <div class="section-tag">Watch &amp; Follow</div>
     <h2 class="section-title">CONTENT ON EVERY<br>PLATFORM</h2>
-    <p class="section-desc">Fantasy breakdowns, player analysis, and winning tips across YouTube, TikTok, and X.</p>
+    <p class="section-desc">Fantasy breakdowns, player analysis, and winning tips across YouTube, Instagram, and X.</p>
     <div class="social-grid">
       <div class="social-card yt-card">
         <div class="social-card-header">
@@ -340,18 +340,16 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
         </div>
         <a href="https://www.youtube.com/@FantasyMaxxing" target="_blank" class="social-more-link">View more on YouTube &#x2192;</a>
       </div>
-      <div class="social-card tt-card">
+      <div class="social-card ig-card">
         <div class="social-card-header">
-          <div class="social-icon tt"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M19.6 3.3A4.9 4.9 0 0 1 14.8 0h-3.4v16.4a2.9 2.9 0 0 1-2.9 2.5 2.9 2.9 0 0 1-2.9-2.9 2.9 2.9 0 0 1 2.9-2.9c.3 0 .5 0 .8.1V9.7a6.3 6.3 0 0 0-.8-.1 6.3 6.3 0 0 0-6.3 6.3 6.3 6.3 0 0 0 6.3 6.3 6.3 6.3 0 0 0 6.3-6.3V8.1a8.2 8.2 0 0 0 4.8 1.5V6.2a4.9 4.9 0 0 1-3-.9z"/></svg></div>
-          <div><div class="social-name">TikTok</div><div class="social-handle">@fantasymaxxing</div></div>
-          <a href="https://www.tiktok.com/@fantasymaxxing" target="_blank" class="social-follow-btn tt-btn">Follow</a>
+          <div class="social-icon ig"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.7.2-2.1.3-.5.2-.9.4-1.2.8-.4.3-.6.7-.8 1.2-.1.4-.3 1-.3 2.1-.1 1.3-.1 1.7-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.7.3 2.1.2.5.4.9.8 1.2.3.4.7.6 1.2.8.4.1 1 .3 2.1.3 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.7-.2 2.1-.3.5-.2.9-.4 1.2-.8.4-.3.6-.7.8-1.2.1-.4.3-1 .3-2.1.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.7-.3-2.1-.2-.5-.4-.9-.8-1.2-.3-.4-.7-.6-1.2-.8-.4-.1-1-.3-2.1-.3-1.3-.1-1.7-.1-4.8-.1zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 8.1a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zm6.2-8.3a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg></div>
+          <div><div class="social-name">Instagram</div><div class="social-handle">@fantasymaxxing</div></div>
+          <a href="https://www.instagram.com/fantasymaxxing/" target="_blank" class="social-follow-btn ig-btn">Follow</a>
         </div>
-        <div class="tt-embed-wrap">
-          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@fantasymaxxing/video/7660671988398116109" data-video-id="7660671988398116109" style="max-width:100%;min-width:0;margin:0 auto">
-            <section><a target="_blank" href="https://www.tiktok.com/@fantasymaxxing">@fantasymaxxing</a></section>
-          </blockquote>
+        <div class="ig-embed-wrap">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DblYqyhoJlL/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:12px;margin:0 auto;max-width:100%;min-width:0;width:100%"></blockquote>
         </div>
-        <a href="https://www.tiktok.com/@fantasymaxxing" target="_blank" class="social-more-link">View more on TikTok &#x2192;</a>
+        <a href="https://www.instagram.com/fantasymaxxing/" target="_blank" class="social-more-link">View more on Instagram &#x2192;</a>
       </div>
       <div class="social-card x-card">
         <div class="social-card-header">
@@ -407,7 +405,7 @@ footer{border-top:1px solid rgba(255,255,255,0.06);padding:32px 24px;text-align:
   });
 })();
 </script>
-<script async src="https://www.tiktok.com/embed.js"></script>
+<script async src="https://www.instagram.com/embed.js"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 <!-- build 2026-07-06T21:00:30.8916458-04:00 -->
