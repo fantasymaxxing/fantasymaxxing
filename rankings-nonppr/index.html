@@ -115,7 +115,7 @@ body{background:#fff;padding:0}
 <div class="subtitle">2026 NON-PPR (STANDARD) RANKINGS — TOP 250</div> <a href="/" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#e63946;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;text-decoration:none;border-radius:4px;">&#8592; Home</a> <a href="/rankings/" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#1a1a2e;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;text-decoration:none;border-radius:4px;">PPR Top 250</a> <a href="/rankings-bestball/" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#1a1a2e;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;text-decoration:none;border-radius:4px;">Best Ball Top 150</a> <a href="/kickers-defenses/" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#1a1a2e;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;text-decoration:none;border-radius:4px;">K &amp; DST</a> <a href="/draft-assistant/" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#1a1a2e;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;text-decoration:none;border-radius:4px;">&#127919; Draft Assistant</a>
 </div>
 <div class="meta">
-<strong id="stat-src">Stats: 2025 NFL Season</strong>
+<strong id="stat-src">Projections: 2026 Season</strong>
 Updated: <span id="updated"></span>
 </div>
 </div>
@@ -129,7 +129,7 @@ Updated: <span id="updated"></span>
 <button class="pos-btn" data-pos="WR">WR</button>
 <button class="pos-btn" data-pos="TE">TE</button>
 </div>
-<div class="stat-toggle" id="stat-toggle"><button class="active" data-mode="last">2025 STATS</button><button class="proj" data-mode="proj">2026 PROJECTIONS<span class="new-chip">NEW</span></button></div>
+<div class="stat-toggle" id="stat-toggle"><button data-mode="last">2025 STATS</button><button class="proj active" data-mode="proj">2026 PROJECTIONS<span class="new-chip">NEW</span></button></div>
 </div>
 
 <div class="sort-row">
@@ -161,7 +161,7 @@ Updated: <span id="updated"></span>
 </div>
 
 <div class="summary" id="summary"></div>
-<div class="footer">FantasyMaxxing.com &nbsp;·&nbsp; 2026 Non-PPR Rankings &nbsp;·&nbsp; Based on 2025 NFL Season Stats &nbsp;·&nbsp; Updated daily</div>
+<div class="footer">FantasyMaxxing.com &nbsp;·&nbsp; 2026 Non-PPR Rankings &nbsp;·&nbsp; 2026 Projections &amp; 2025 Season Stats &nbsp;·&nbsp; Updated daily</div>
 </div>
 
 <script>
@@ -179,7 +179,7 @@ const DATA=[
 {r:8, n:"Amon-Ra St. Brown",p:"WR",t:"DET",bye:6,gp:17,pts:157.2,yds:1388,td:11,opp:155,ppts:202.4,pyds:1402,ptd:11,popp:180, note:"The safest player in round one. Four straight seasons averaging 18+ PPR pts/gm; elite volume and red-zone role with almost no downside.", video:"https://youtu.be/ZEks4uzolxU"},
 {r:9, n:"Ashton Jeanty",p:"RB",t:"LV",bye:13,gp:17,pts:228.4,yds:1680,td:14,opp:289,ppts:217.8,pyds:1522,ptd:11,popp:281, note:"Rough rookie year (RB15/gm, 3.7 YPC) but gets major O-line and coaching upgrades — buy-low if the new system clicks. Market has him back in round one.", video:"https://youtu.be/eLg4ddJDAaQ"},
 {r:10, n:"James Cook",p:"RB",t:"BUF",bye:7,gp:17,pts:253.6,yds:1780,td:16,opp:256,ppts:237.2,pyds:1685,ptd:12,popp:287, note:"Nearly matched Jonathan Taylor's workload last year (326-carry pace) and gets heavy goal-line work in one of the league's top offenses.", video:"https://youtu.be/lbP4qWMR1sw"},
-{r:11, n:"Chase Brown",p:"RB",t:"CIN",bye:6,gp:17,pts:183.8,yds:1480,td:11,opp:238,ppts:213.6,pyds:1470,ptd:11,popp:239, note:"Bell-cow when trusted — averaged 21.6 PPR pts/gm over his final 10 games last season once he took over Cincinnati's backfield."},
+{r:11, n:"Chase Brown",p:"RB",t:"CIN",bye:6,gp:17,pts:183.8,yds:1480,td:11,opp:238,ppts:213.6,pyds:1470,ptd:11,popp:239, note:"Bell-cow when trusted — averaged 21.6 PPR pts/gm over his final 10 games last season once he took over Cincinnati's backfield.", video:"https://youtu.be/1YSyqfekggY"},
 {r:12, n:"Devon Achane",p:"RB",t:"MIA",bye:6,gp:15,pts:197.3,yds:1640,td:13,opp:224,ppts:238.7,pyds:1765,ptd:11,popp:244, note:"RB5 in PPR last year despite a bottom-5 offense. New play-caller and QB situation could mean a real target decline in 2026."},
 {r:13, n:"CeeDee Lamb",p:"WR",t:"DAL",bye:14,gp:15,pts:129.6,yds:1290,td:8,opp:139,ppts:175.4,pyds:1311,ptd:8,popp:150, note:"17+ pts/gm ceiling if Dak stays healthy. Scored just 5 TDs on a 156-target pace last year — due for positive TD regression."},
 {r:14, n:"Derrick Henry",p:"RB",t:"BAL",bye:13,gp:17,pts:228.6,yds:1540,td:14,opp:265,ppts:254.9,pyds:1740,ptd:14,popp:314, note:"Ageless — RB7/gm last season. Losing key O-line pieces and a coordinator change are the real risks heading into 2026."},
@@ -428,7 +428,7 @@ WR:{bg:"#e3f2fd",tx:"#0d47a1",bd:"#42a5f5"},
 TE:{bg:"#f3e5f5",tx:"#4a148c",bd:"#ab47bc"},
 };
 const OPP={QB:"ATT",RB:"CAR",WR:"TGT",TE:"TGT"};
-let statMode="last";
+let statMode="proj";
 function MV(p){return statMode==="proj"?{gp:17,pts:p.ppts,yds:p.pyds,td:p.ptd,opp:p.popp}:{gp:p.gp,pts:p.pts,yds:p.yds,td:p.td,opp:p.opp};}
 let maxPts,maxYds,maxTd;
 function updateMaxes(){maxPts=Math.max(...DATA.map(d=>MV(d).pts));maxYds=Math.max(...DATA.map(d=>MV(d).yds));maxTd=Math.max(...DATA.map(d=>MV(d).td));}
