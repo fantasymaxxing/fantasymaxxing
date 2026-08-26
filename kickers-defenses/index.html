@@ -135,7 +135,7 @@ Updated: <span id="updated"></span>
 </table>
 </div>
 
-<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Compiled August 21, 2026</div>
+<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Compiled August 26, 2026</div>
 </div>
 
 <div id="sched-modal" hidden>
@@ -155,7 +155,7 @@ Updated: <span id="updated"></span>
 </div>
 
 <script>
-// 2026 consensus — kickers (top 20) & team defenses (top 25). Compiled 2026-08-21.
+// 2026 consensus — kickers (top 20) & team defenses (top 25). Compiled 2026-08-26.
 // Sources: footballguys-kdst-2026-07-24.txt + cbs-kdst-2026-07-24.txt (Footballguys 18-expert consensus + CBS positional consensus),
 // equal weight, straight rank average. pts = Footballguys projected 2026 fantasy points. Byes from TEAM_BYE.
 const KICKERS=[
@@ -177,8 +177,8 @@ const KICKERS=[
 {r:16,n:"Chris Boswell",t:"PIT",bye:9,pts:125.49,note:"Money in the clutch; Pittsburgh's field-goal-heavy tendencies are a kicker's best friend."},
 {r:17,n:"Harrison Mevis",t:"LAR",bye:11,pts:122.2,note:"Big-leg kicker in a Rams offense that gets into scoring range often."},
 {r:18,n:"Jake Elliott",t:"PHI",bye:10,pts:121.77,note:"Veteran accuracy; Philadelphia's red-zone struggles can turn into field goals."},
-{r:19,n:"Charlie Smyth",t:"NO",bye:8,pts:104.52,note:"Won the New Orleans job with a big leg, but the Saints stall out too often to trust him as more than a bye-week fill-in."},
-{r:20,n:"Tyler Bass",t:"BUF",bye:7,pts:112.6,note:"Bounce-back candidate on the league's best offense; the leg and volume are both there."}
+{r:19,n:"Tyler Bass",t:"BUF",bye:7,pts:112.6,note:"Bounce-back candidate on the league's best offense; the leg and volume are both there."},
+{r:20,n:"Trey Smack",t:"GB",bye:11,pts:114.83,note:"Rookie with a big leg who won the job the moment Green Bay released McManus. Real range on a scoring offense, with the usual first-year accuracy risk."}
 ];
 const DEFENSES=[
 {r:1,n:"Houston Texans",t:"HOU",bye:8,pts:159.98,note:"Consensus DST1 — elite pass rush and takeaway rate. The one defense worth drafting a round early."},
@@ -186,10 +186,10 @@ const DEFENSES=[
 {r:3,n:"Seattle Seahawks",t:"SEA",bye:11,pts:152.42,note:"Aggressive, ball-hawking unit at home; consistent points from pressure and picks."},
 {r:4,n:"Pittsburgh Steelers",t:"PIT",bye:9,pts:141.29,note:"Always around the ball under the same defensive staff — sacks and takeaways galore."},
 {r:5,n:"Los Angeles Rams",t:"LAR",bye:11,pts:130.24,note:"Elite interior rush generates sacks in bunches — a top-tier streaming anchor."},
-{r:6,n:"Minnesota Vikings",t:"MIN",bye:6,pts:136.49,note:"Aggressive blitzing scheme forces turnovers; high ceiling in good matchups."},
-{r:7,n:"Jacksonville Jaguars",t:"JAC",bye:7,pts:132.89,note:"Playmaking secondary; the takeaways come in bunches when the pass rush shows up."},
-{r:8,n:"New England Patriots",t:"NE",bye:11,pts:128.99,note:"Rebuilt front is disruptive; a sneaky top-10 defense on an improving team."},
-{r:9,n:"Los Angeles Chargers",t:"LAC",bye:7,pts:130.59,note:"Harbaugh's defense is fast and physical; a rising unit with real upside."},
+{r:6,n:"Jacksonville Jaguars",t:"JAC",bye:7,pts:132.89,note:"Playmaking secondary; the takeaways come in bunches when the pass rush shows up."},
+{r:7,n:"Minnesota Vikings",t:"MIN",bye:6,pts:136.49,note:"Aggressive blitzing scheme forces turnovers; high ceiling in good matchups."},
+{r:8,n:"Los Angeles Chargers",t:"LAC",bye:7,pts:130.59,note:"Harbaugh's defense is fast and physical; a rising unit with real upside."},
+{r:9,n:"New England Patriots",t:"NE",bye:11,pts:128.99,note:"Rebuilt front is disruptive; a sneaky top-10 defense on an improving team."},
 {r:10,n:"Philadelphia Eagles",t:"PHI",bye:10,pts:125.28,note:"Deep, talented front seven; the pass rush alone carries the unit even when the secondary lapses."},
 {r:11,n:"Buffalo Bills",t:"BUF",bye:7,pts:131.08,note:"Opportunistic unit that plays with a lead — turnovers and garbage-time sacks."},
 {r:12,n:"Baltimore Ravens",t:"BAL",bye:13,pts:125.38,note:"Talent everywhere; the ceiling is top-3 when the pass rush is healthy."},
@@ -292,7 +292,7 @@ openSched(btn.dataset.team);
 document.getElementById("sched-x").addEventListener("click",closeSched);
 modal.addEventListener("click",e=>{if(e.target.dataset.close)closeSched();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSched();});
-document.getElementById("updated").textContent="August 21, 2026"; // BAKED at compile time — do not switch back to new Date()
+document.getElementById("updated").textContent="August 26, 2026"; // BAKED at compile time — do not switch back to new Date()
 render();
 </script>
 </body>
