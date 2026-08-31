@@ -135,7 +135,7 @@ Updated: <span id="updated"></span>
 </table>
 </div>
 
-<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Compiled August 27, 2026</div>
+<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Compiled August 31, 2026</div>
 </div>
 
 <div id="sched-modal" hidden>
@@ -155,7 +155,7 @@ Updated: <span id="updated"></span>
 </div>
 
 <script>
-// 2026 consensus — kickers (top 20) & team defenses (top 25). Compiled 2026-08-27.
+// 2026 consensus — kickers (top 20) & team defenses (top 25). Compiled 2026-08-31.
 // Sources: footballguys-kdst-2026-07-24.txt + cbs-kdst-2026-07-24.txt (Footballguys 18-expert consensus + CBS positional consensus),
 // equal weight, straight rank average. pts = Footballguys projected 2026 fantasy points. Byes from TEAM_BYE.
 const KICKERS=[
@@ -164,9 +164,9 @@ const KICKERS=[
 {r:3,n:"Cameron Dicker",t:"LAC",bye:7,pts:140.58,note:"Elite accuracy and a Chargers offense that moves the ball. One of the safest weekly floors at the position."},
 {r:4,n:"Jason Myers",t:"SEA",bye:11,pts:140.6,note:"Steady veteran in a dome-adjacent home stadium; Seattle's offense keeps him in range."},
 {r:5,n:"Eddy Piñeiro",t:"SF",bye:8,pts:130.32,note:"49ers' loaded offense drives deep; even in a committee-scoring attack the volume is there."},
-{r:6,n:"Tyler Loop",t:"BAL",bye:13,pts:136,note:"Took over a Baltimore offense that scores at will — high-upside if the accuracy holds."},
-{r:7,n:"Cam Little",t:"JAC",bye:7,pts:131.7,note:"Big-leg sophomore trending up — Jacksonville's improving offense should hand him plenty of chances."},
-{r:8,n:"Chase McLaughlin",t:"TB",bye:10,pts:132.22,note:"Automatic accuracy with Tampa; quietly one of the most consistent scorers in fantasy."},
+{r:6,n:"Cam Little",t:"JAC",bye:7,pts:131.7,note:"Big-leg sophomore trending up — Jacksonville's improving offense should hand him plenty of chances."},
+{r:7,n:"Chase McLaughlin",t:"TB",bye:10,pts:132.22,note:"Automatic accuracy with Tampa; quietly one of the most consistent scorers in fantasy."},
+{r:8,n:"Tyler Loop",t:"BAL",bye:13,pts:136,note:"Took over a Baltimore offense that scores at will — high-upside if the accuracy holds."},
 {r:9,n:"Jake Bates",t:"DET",bye:6,pts:131.95,note:"Big leg in Detroit's high-powered offense; touchback-or-field-goal upside every week."},
 {r:10,n:"Will Reichard",t:"MIN",bye:6,pts:125.78,note:"Strong leg in a dome; Minnesota's offense keeps him busy inside 50."},
 {r:11,n:"Evan McPherson",t:"CIN",bye:6,pts:126.42,note:"Big-leg kicker tied to a Burrow offense — elite ceiling when Cincinnati is rolling."},
@@ -181,30 +181,30 @@ const KICKERS=[
 {r:20,n:"Trey Smack",t:"GB",bye:11,pts:114.83,note:"Rookie with a big leg who won the job the moment Green Bay released McManus. Real range on a scoring offense, with the usual first-year accuracy risk."}
 ];
 const DEFENSES=[
-{r:1,n:"Houston Texans",t:"HOU",bye:8,pts:158.98,note:"Consensus DST1 — elite pass rush and takeaway rate. The one defense worth drafting a round early."},
-{r:2,n:"Denver Broncos",t:"DEN",bye:10,pts:145.14,note:"Loaded secondary and a relentless front; a weekly sack-and-turnover threat."},
-{r:3,n:"Seattle Seahawks",t:"SEA",bye:11,pts:151.92,note:"Aggressive, ball-hawking unit at home; consistent points from pressure and picks."},
-{r:4,n:"Los Angeles Rams",t:"LAR",bye:11,pts:131.24,note:"Elite interior rush generates sacks in bunches — a top-tier streaming anchor."},
-{r:5,n:"Pittsburgh Steelers",t:"PIT",bye:9,pts:139.29,note:"Always around the ball under the same defensive staff — sacks and takeaways galore."},
+{r:1,n:"Houston Texans",t:"HOU",bye:8,pts:159.18,note:"Consensus DST1 — elite pass rush and takeaway rate. The one defense worth drafting a round early."},
+{r:2,n:"Denver Broncos",t:"DEN",bye:10,pts:142.84,note:"Loaded secondary and a relentless front; a weekly sack-and-turnover threat."},
+{r:3,n:"Seattle Seahawks",t:"SEA",bye:11,pts:152.12,note:"Aggressive, ball-hawking unit at home; consistent points from pressure and picks."},
+{r:4,n:"Los Angeles Rams",t:"LAR",bye:11,pts:133.68,note:"Elite interior rush generates sacks in bunches — a top-tier streaming anchor."},
+{r:5,n:"Pittsburgh Steelers",t:"PIT",bye:9,pts:139.09,note:"Always around the ball under the same defensive staff — sacks and takeaways galore."},
 {r:6,n:"Jacksonville Jaguars",t:"JAC",bye:7,pts:133.89,note:"Playmaking secondary; the takeaways come in bunches when the pass rush shows up."},
 {r:7,n:"Minnesota Vikings",t:"MIN",bye:6,pts:134.49,note:"Aggressive blitzing scheme forces turnovers; high ceiling in good matchups."},
 {r:8,n:"Los Angeles Chargers",t:"LAC",bye:7,pts:129.09,note:"Harbaugh's defense is fast and physical; a rising unit with real upside."},
-{r:9,n:"New England Patriots",t:"NE",bye:11,pts:128.49,note:"Rebuilt front is disruptive; a sneaky top-10 defense on an improving team."},
-{r:10,n:"Philadelphia Eagles",t:"PHI",bye:10,pts:123.78,note:"Deep, talented front seven; the pass rush alone carries the unit even when the secondary lapses."},
-{r:11,n:"Buffalo Bills",t:"BUF",bye:7,pts:128.58,note:"Opportunistic unit that plays with a lead — turnovers and garbage-time sacks."},
-{r:12,n:"Detroit Lions",t:"DET",bye:6,pts:124.54,note:"Aggressive scheme; when the pass rush clicks the takeaways follow."},
+{r:9,n:"New England Patriots",t:"NE",bye:11,pts:128.29,note:"Rebuilt front is disruptive; a sneaky top-10 defense on an improving team."},
+{r:10,n:"Philadelphia Eagles",t:"PHI",bye:10,pts:123.58,note:"Deep, talented front seven; the pass rush alone carries the unit even when the secondary lapses."},
+{r:11,n:"Buffalo Bills",t:"BUF",bye:7,pts:128.78,note:"Opportunistic unit that plays with a lead — turnovers and garbage-time sacks."},
+{r:12,n:"Detroit Lions",t:"DET",bye:6,pts:124.34,note:"Aggressive scheme; when the pass rush clicks the takeaways follow."},
 {r:13,n:"Green Bay Packers",t:"GB",bye:11,pts:120.39,note:"Young, fast defense that creates pressure; solid weekly floor at Lambeau."},
 {r:14,n:"Kansas City Chiefs",t:"KC",bye:5,pts:120.04,note:"Spagnuolo's defense always produces sacks and clutch stops in big games."},
-{r:15,n:"Baltimore Ravens",t:"BAL",bye:13,pts:119.88,note:"Talent everywhere; the ceiling is top-3 when the pass rush is healthy."},
+{r:15,n:"Baltimore Ravens",t:"BAL",bye:13,pts:119.68,note:"Talent everywhere; the ceiling is top-3 when the pass rush is healthy."},
 {r:16,n:"Chicago Bears",t:"CHI",bye:10,pts:129.44,note:"Young, ascending defense with playmakers; a strong stream in plus matchups."},
-{r:17,n:"Cleveland Browns",t:"CLE",bye:11,pts:119.62,note:"Elite pass rush led by Garrett; the sack floor is among the highest in the league."},
-{r:18,n:"New Orleans Saints",t:"NO",bye:8,pts:126.99,note:"Veteran unit that forces turnovers at home; matchup-dependent but capable."},
+{r:17,n:"Cleveland Browns",t:"CLE",bye:11,pts:119.82,note:"Elite pass rush led by Garrett; the sack floor is among the highest in the league."},
+{r:18,n:"New Orleans Saints",t:"NO",bye:8,pts:127.19,note:"Veteran unit that forces turnovers at home; matchup-dependent but capable."},
 {r:19,n:"Atlanta Falcons",t:"ATL",bye:11,pts:120.84,note:"Improved pass rush; a matchup-based streamer with upside at home."},
 {r:20,n:"New York Giants",t:"NYG",bye:8,pts:117.22,note:"Elite edge rush drives the sack total; boom-or-bust week to week."},
-{r:21,n:"Tampa Bay Buccaneers",t:"TB",bye:10,pts:122.04,note:"Physical front seven; forces enough turnovers to be a weekly consideration."},
-{r:22,n:"Dallas Cowboys",t:"DAL",bye:14,pts:108.04,note:"Pass rush keeps them relevant; a fine bye-week or matchup streamer."},
-{r:23,n:"Indianapolis Colts",t:"IND",bye:13,pts:117.14,note:"Interior pressure and a ball-hawking secondary; solid depth option."},
-{r:24,n:"Cincinnati Bengals",t:"CIN",bye:6,pts:110.8,note:"Sources split hard on them, 23rd at Footballguys and 25th at CBS. The pass rush can produce, but the offense scores fast and leaves this unit on the field."},
+{r:21,n:"Dallas Cowboys",t:"DAL",bye:14,pts:107.84,note:"Pass rush keeps them relevant; a fine bye-week or matchup streamer."},
+{r:22,n:"Tampa Bay Buccaneers",t:"TB",bye:10,pts:122.04,note:"Physical front seven; forces enough turnovers to be a weekly consideration."},
+{r:23,n:"Indianapolis Colts",t:"IND",bye:13,pts:116.94,note:"Interior pressure and a ball-hawking secondary; solid depth option."},
+{r:24,n:"Cincinnati Bengals",t:"CIN",bye:6,pts:111,note:"Sources split hard on them, 23rd at Footballguys and 25th at CBS. The pass rush can produce, but the offense scores fast and leaves this unit on the field."},
 {r:25,n:"Carolina Panthers",t:"CAR",bye:5,pts:106.44,note:"Young front seven is finally generating real pressure, though the unit still surrenders too much to start outside of plus matchups."}
 ];
 
@@ -292,7 +292,7 @@ openSched(btn.dataset.team);
 document.getElementById("sched-x").addEventListener("click",closeSched);
 modal.addEventListener("click",e=>{if(e.target.dataset.close)closeSched();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSched();});
-document.getElementById("updated").textContent="August 27, 2026"; // BAKED at compile time — do not switch back to new Date()
+document.getElementById("updated").textContent="August 31, 2026"; // BAKED at compile time — do not switch back to new Date()
 render();
 </script>
 </body>
