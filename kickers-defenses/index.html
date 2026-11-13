@@ -135,7 +135,7 @@ Updated: <span id="updated"></span>
 </table>
 </div>
 
-<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Compiled November 6, 2026</div>
+<div class="footer">FantasyMaxxing.com &nbsp;&middot;&nbsp; 2026 Kicker &amp; Defense Rankings &nbsp;&middot;&nbsp; AI-compiled from the top fantasy sources &nbsp;&middot;&nbsp; Compiled November 13, 2026</div>
 </div>
 
 <div id="sched-modal" hidden>
@@ -155,57 +155,57 @@ Updated: <span id="updated"></span>
 </div>
 
 <script>
-// 2026 consensus — kickers (top 20) & team defenses (top 25). Compiled 2026-11-06.
+// 2026 consensus — kickers (top 20) & team defenses (top 25). Compiled 2026-11-13.
 // Sources: footballguys-kdst-2026-07-24.txt + cbs-kdst-2026-07-24.txt (Footballguys 18-expert consensus + CBS positional consensus),
 // equal weight, straight rank average. pts = Footballguys projected 2026 fantasy points. Byes from TEAM_BYE.
 const KICKERS=[
-{r:1,n:"Evan McPherson",t:"CIN",bye:6,pts:78.13},
-{r:2,n:"Eddy Piñeiro",t:"SF",bye:8,pts:76.61},
-{r:3,n:"Cam Little",t:"JAC",bye:7,pts:74.69},
-{r:4,n:"Brandon Aubrey",t:"DAL",bye:14,pts:67.06},
-{r:5,n:"Jake Bates",t:"DET",bye:6,pts:76.48},
-{r:6,n:"Cairo Santos",t:"CHI",bye:10,pts:68.63},
-{r:7,n:"Ka'imi Fairbairn",t:"HOU",bye:8,pts:70.77},
-{r:8,n:"Tyler Bass",t:"BUF",bye:7,pts:77.31},
-{r:9,n:"Jason Myers",t:"SEA",bye:11,pts:63.84},
-{r:10,n:"Harrison Butker",t:"KC",bye:5,pts:74.65},
-{r:11,n:"Chase McLaughlin",t:"TB",bye:10,pts:62.33},
-{r:12,n:"Andy Borregales",t:"NE",bye:11,pts:65.01},
-{r:13,n:"Wil Lutz",t:"DEN",bye:10,pts:64.33},
-{r:14,n:"Trey Smack",t:"GB",bye:11,pts:63.62},
-{r:15,n:"Cameron Dicker",t:"LAC",bye:7,pts:61.54},
-{r:16,n:"Will Reichard",t:"MIN",bye:6,pts:65.04},
-{r:17,n:"Chris Boswell",t:"PIT",bye:9,pts:59.98},
-{r:18,n:"Matt Gay",t:"LV",bye:13,pts:60.26},
-{r:19,n:"Spencer Shrader",t:"IND",bye:13,pts:58.76},
-{r:20,n:"Ryan Fitzgerald",t:"CAR",bye:5,pts:68.55}
+{r:1,n:"Evan McPherson",t:"CIN",bye:6,pts:71.02},
+{r:2,n:"Cam Little",t:"JAC",bye:7,pts:69.27},
+{r:3,n:"Brandon Aubrey",t:"DAL",bye:14,pts:58.99},
+{r:4,n:"Cairo Santos",t:"CHI",bye:10,pts:60.6},
+{r:5,n:"Ka'imi Fairbairn",t:"HOU",bye:8,pts:64.72},
+{r:6,n:"Tyler Bass",t:"BUF",bye:7,pts:71.36},
+{r:7,n:"Eddy Piñeiro",t:"SF",bye:8,pts:68.75},
+{r:8,n:"Jake Bates",t:"DET",bye:6,pts:67.01},
+{r:9,n:"Andy Borregales",t:"NE",bye:11,pts:57.93},
+{r:10,n:"Chase McLaughlin",t:"TB",bye:10,pts:55.9},
+{r:11,n:"Jason Myers",t:"SEA",bye:11,pts:55.83},
+{r:12,n:"Harrison Butker",t:"KC",bye:5,pts:65.93},
+{r:13,n:"Trey Smack",t:"GB",bye:11,pts:56.74},
+{r:14,n:"Wil Lutz",t:"DEN",bye:10,pts:56.71},
+{r:15,n:"Will Reichard",t:"MIN",bye:6,pts:60.04},
+{r:16,n:"Chris Boswell",t:"PIT",bye:9,pts:60.9},
+{r:17,n:"Ryan Fitzgerald",t:"CAR",bye:5,pts:63.15},
+{r:18,n:"Spencer Shrader",t:"IND",bye:13,pts:51.45},
+{r:19,n:"Cameron Dicker",t:"LAC",bye:7,pts:54.06},
+{r:20,n:"Dominic Zvada",t:"NYG",bye:8,pts:57.63}
 ];
 const DEFENSES=[
-{r:1,n:"Houston Texans",t:"HOU",bye:8,pts:85.81},
-{r:2,n:"Seattle Seahawks",t:"SEA",bye:11,pts:77.04},
-{r:3,n:"Jacksonville Jaguars",t:"JAC",bye:7,pts:85.94},
-{r:4,n:"Denver Broncos",t:"DEN",bye:10,pts:77.53},
-{r:5,n:"Pittsburgh Steelers",t:"PIT",bye:9,pts:70.65},
-{r:6,n:"Minnesota Vikings",t:"MIN",bye:6,pts:76.22},
-{r:7,n:"New England Patriots",t:"NE",bye:11,pts:70.22},
-{r:8,n:"San Francisco 49ers",t:"SF",bye:8,pts:78.72},
-{r:9,n:"Los Angeles Rams",t:"LAR",bye:11,pts:64.44},
-{r:10,n:"Green Bay Packers",t:"GB",bye:11,pts:66.61},
-{r:11,n:"Kansas City Chiefs",t:"KC",bye:5,pts:72.36},
-{r:12,n:"Detroit Lions",t:"DET",bye:6,pts:74.35},
-{r:13,n:"Cincinnati Bengals",t:"CIN",bye:6,pts:79.71},
-{r:14,n:"Cleveland Browns",t:"CLE",bye:11,pts:66.51},
-{r:15,n:"Buffalo Bills",t:"BUF",bye:7,pts:73.09},
-{r:16,n:"Chicago Bears",t:"CHI",bye:10,pts:66.56},
-{r:17,n:"Baltimore Ravens",t:"BAL",bye:13,pts:63.35},
-{r:18,n:"Los Angeles Chargers",t:"LAC",bye:7,pts:67.01},
-{r:19,n:"Philadelphia Eagles",t:"PHI",bye:10,pts:59.32},
-{r:20,n:"Tampa Bay Buccaneers",t:"TB",bye:10,pts:64.32},
-{r:21,n:"New Orleans Saints",t:"NO",bye:8,pts:66.92},
-{r:22,n:"Atlanta Falcons",t:"ATL",bye:11,pts:64.45},
-{r:23,n:"Dallas Cowboys",t:"DAL",bye:14,pts:57.18},
-{r:24,n:"Carolina Panthers",t:"CAR",bye:5,pts:68.24},
-{r:25,n:"New York Giants",t:"NYG",bye:8,pts:63.44}
+{r:1,n:"Houston Texans",t:"HOU",bye:8,pts:77.07},
+{r:2,n:"Denver Broncos",t:"DEN",bye:10,pts:71.28},
+{r:3,n:"Seattle Seahawks",t:"SEA",bye:11,pts:66.29},
+{r:4,n:"Jacksonville Jaguars",t:"JAC",bye:7,pts:74.45},
+{r:5,n:"Los Angeles Rams",t:"LAR",bye:11,pts:60.52},
+{r:6,n:"San Francisco 49ers",t:"SF",bye:8,pts:72.65},
+{r:7,n:"Pittsburgh Steelers",t:"PIT",bye:9,pts:68.59},
+{r:8,n:"Minnesota Vikings",t:"MIN",bye:6,pts:68.24},
+{r:9,n:"Green Bay Packers",t:"GB",bye:11,pts:62.94},
+{r:10,n:"New England Patriots",t:"NE",bye:11,pts:60.09},
+{r:11,n:"Cincinnati Bengals",t:"CIN",bye:6,pts:74.5},
+{r:12,n:"Tampa Bay Buccaneers",t:"TB",bye:10,pts:63.13},
+{r:13,n:"Kansas City Chiefs",t:"KC",bye:5,pts:65.68},
+{r:14,n:"Detroit Lions",t:"DET",bye:6,pts:66.82},
+{r:15,n:"Cleveland Browns",t:"CLE",bye:11,pts:59.56},
+{r:16,n:"Baltimore Ravens",t:"BAL",bye:13,pts:57.53},
+{r:17,n:"Chicago Bears",t:"CHI",bye:10,pts:59.1},
+{r:18,n:"Buffalo Bills",t:"BUF",bye:7,pts:65.85},
+{r:19,n:"Los Angeles Chargers",t:"LAC",bye:7,pts:60.47},
+{r:20,n:"Philadelphia Eagles",t:"PHI",bye:10,pts:48.5},
+{r:21,n:"Las Vegas Raiders",t:"LV",bye:13,pts:53.95},
+{r:22,n:"Atlanta Falcons",t:"ATL",bye:11,pts:58.74},
+{r:23,n:"New Orleans Saints",t:"NO",bye:8,pts:58.48},
+{r:24,n:"Carolina Panthers",t:"CAR",bye:5,pts:62.64},
+{r:25,n:"New York Jets",t:"NYJ",bye:13,pts:53.49}
 ];
 
 // 2026 schedule per team, index 0 = week 1. "v"=home, "@"=away, BYE = no game.
@@ -292,11 +292,8 @@ openSched(btn.dataset.team);
 document.getElementById("sched-x").addEventListener("click",closeSched);
 modal.addEventListener("click",e=>{if(e.target.dataset.close)closeSched();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSched();});
-document.getElementById("updated").textContent="November 6, 2026"; // BAKED at compile time — do not switch back to new Date()
+document.getElementById("updated").textContent="November 13, 2026"; // BAKED at compile time — do not switch back to new Date()
 render();
 </script>
 </body>
 </html>
-
-<!-- build 2026-11-06T15:08:44.4122724Z -->
-<!-- build 2026-11-06T16:07:42.3581040Z -->
